@@ -19,8 +19,6 @@ class ForgotPasswordActivity : AppCompatActivity(), View.OnClickListener {
     }
 
     override fun onClick(v: View?) {
-        when (v!!.id) {
-            R.id.tvSignUp -> changeActivityTo(Intent(this, RegisterActivity::class.java))
-        }
+
     }
 }
