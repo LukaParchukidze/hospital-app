@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">Hospital App</string>
+    <string name="email_edittext_hint"><font size="16">Email</font></string>
+    <string name="password_edittext_hint"><font size="16">Password</font></string>
 </resources>
