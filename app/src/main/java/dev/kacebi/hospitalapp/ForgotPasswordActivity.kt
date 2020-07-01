@@ -12,18 +12,6 @@ class ForgotPasswordActivity : AppCompatActivity(), View.OnClickListener {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_forgot_password)
-
-        setUpSignUpTextView()
-        setUpListeners()
-    }
-
-    private fun setUpSignUpTextView() {
-        tvSignUp.setSpannableText("${getString(R.string.no_account)} ", Color.BLACK)
-        tvSignUp.setSpannableText(getString(R.string.sign_up), ContextCompat.getColor(this, R.color.colorPrimary))
-    }
-
-    private fun setUpListeners() {
-        tvSignUp.setOnClickListener(this)
     }
 
     private fun changeActivityTo(intent: Intent) {
