@@ -2,4 +2,12 @@
     <string name="app_name">Hospital App</string>
     <string name="email_edittext_hint"><font size="16">Email</font></string>
     <string name="password_edittext_hint"><font size="16">Password</font></string>
+    <string name="no_account">Don\'t have an account?</string>
+    <string name="sign_up">Sign Up</string>
+    <string name="forgot_password">Forgot password?</string>
+    <string name="log_in">Log In</string>
+    <string name="password">Password</string>
+    <string name="email">Email</string>
+    <string name="send_instructions">Send Instructions</string>
+    <string name="we_need_your_email">We just need your registered Email to send password reset instruction</string>
 </resources>
