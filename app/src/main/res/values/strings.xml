@@ -2,6 +2,8 @@
     <string name="app_name">Hospital App</string>
     <string name="email_edittext_hint"><font size="16">Email</font></string>
     <string name="password_edittext_hint"><font size="16">Password</font></string>
+    <string name="firstname_edittext_hint"><font size="16">First Name</font></string>
+    <string name="lastname_edittext_hint"><font size="16">Last Name</font></string>
     <string name="no_account">Don\'t have an account?</string>
     <string name="sign_up">Sign Up</string>
     <string name="forgot_password">Forgot password?</string>
