@@ -1,12 +1,10 @@
-package dev.kacebi.hospitalapp
+package dev.kacebi.hospitalapp.ui.authentication
 
 import android.content.Intent
-import android.graphics.Color
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
-import androidx.core.content.ContextCompat
-import kotlinx.android.synthetic.main.activity_forgot_password.*
+import dev.kacebi.hospitalapp.R
 
 class ForgotPasswordActivity : AppCompatActivity(), View.OnClickListener {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -19,8 +17,6 @@ class ForgotPasswordActivity : AppCompatActivity(), View.OnClickListener {
     }
 
     override fun onClick(v: View?) {
-        when (v!!.id) {
-            R.id.tvSignUp -> changeActivityTo(Intent(this, RegisterActivity::class.java))
-        }
+
     }
 }

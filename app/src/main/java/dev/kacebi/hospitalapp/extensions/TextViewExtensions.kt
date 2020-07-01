@@ -1,4 +1,4 @@
-package dev.kacebi.hospitalapp
+package dev.kacebi.hospitalapp.extensions
 
 import android.text.Spannable
 import android.text.SpannableString

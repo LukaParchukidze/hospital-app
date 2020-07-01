@@ -1,0 +1,127 @@
+{
+  "project_info": {
+    "project_number": "749317475588",
+    "firebase_url": "https://k-tbc-bootcamp.firebaseio.com",
+    "project_id": "k-tbc-bootcamp",
+    "storage_bucket": "k-tbc-bootcamp.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:749317475588:android:4423f2334ea6506b781451",
+        "android_client_info": {
+          "package_name": "com.example.lecture_31_test"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "749317475588-2ttkf36f3of698hejkk26k2tfhlfo3pk.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyABB5eWGHnRU3v9D7Ywdng_rwl8YuX4LAs"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "749317475588-2ttkf36f3of698hejkk26k2tfhlfo3pk.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:749317475588:android:7768d808607ca3e2781451",
+        "android_client_info": {
+          "package_name": "com.example.moviedatabase"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "749317475588-2ttkf36f3of698hejkk26k2tfhlfo3pk.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyABB5eWGHnRU3v9D7Ywdng_rwl8YuX4LAs"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "749317475588-2ttkf36f3of698hejkk26k2tfhlfo3pk.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:749317475588:android:4521cea740696643781451",
+        "android_client_info": {
+          "package_name": "com.example.testfinal"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "749317475588-2ttkf36f3of698hejkk26k2tfhlfo3pk.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyABB5eWGHnRU3v9D7Ywdng_rwl8YuX4LAs"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "749317475588-2ttkf36f3of698hejkk26k2tfhlfo3pk.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:749317475588:android:5fd6b0a7cbc93694781451",
+        "android_client_info": {
+          "package_name": "dev.kacebi.hospitalapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "749317475588-2ttkf36f3of698hejkk26k2tfhlfo3pk.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyABB5eWGHnRU3v9D7Ywdng_rwl8YuX4LAs"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "749317475588-2ttkf36f3of698hejkk26k2tfhlfo3pk.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
