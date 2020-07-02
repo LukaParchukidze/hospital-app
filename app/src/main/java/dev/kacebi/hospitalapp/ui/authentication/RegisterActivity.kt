@@ -1,20 +1,17 @@
 package dev.kacebi.hospitalapp.ui.authentication
 
-//    0. Change Email Regex +
-//    0.5 Tools Functions +
-//    1. Re-Password must be added
-//    2. Birth Date Calendar
-//    3. Gender (RadioGroup > RadioButtons)
-//    4. Sign Up conditions check
-//    5. Choose Image (Camera and Gallery)
-//    6. ScrollView in Register XML
 
-import androidx.appcompat.app.AppCompatActivity
+import android.app.DatePickerDialog
+import android.app.DatePickerDialog.OnDateSetListener
+import android.graphics.Color
 import android.os.Bundle
 import android.view.View
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
 import dev.kacebi.hospitalapp.App
 import dev.kacebi.hospitalapp.R
+import dev.kacebi.hospitalapp.extensions.setSpannableText
 import dev.kacebi.hospitalapp.tools.Tools
 import kotlinx.android.synthetic.main.activity_register.*
 import kotlinx.coroutines.CoroutineScope
@@ -22,19 +19,30 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.tasks.await
 import kotlinx.coroutines.withContext
+import java.text.SimpleDateFormat
+import java.util.*
+
 
 class RegisterActivity : AppCompatActivity(), View.OnClickListener {
+
+    private val calendar = Calendar.getInstance()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_register)
 
 //        l@k.com 123123
-        setListeners()
+        init()
     }
 
-    private fun setListeners() {
-        registerButton.setOnClickListener(this)
+    private fun init(){
+        // Calendar (Get Date function)
+        pickDate()
+
+        // Sign Up TextView on the bottom
+        setUpSignUpTextView()
+        // OnClickListeners Initialization
+        setListeners()
     }
 
     private fun register() {
@@ -73,20 +81,74 @@ class RegisterActivity : AppCompatActivity(), View.OnClickListener {
             }
     }
 
+
+    // Get Date Function
+    private fun pickDate() {
+        val dateSetListener =
+            OnDateSetListener { view, year, monthOfYear, dayOfMonth ->
+                calendar.set(Calendar.YEAR, year)
+                calendar.set(Calendar.MONTH, monthOfYear)
+                calendar.set(Calendar.DAY_OF_MONTH, dayOfMonth)
+                updateDateInView()
+            }
+
+        chooseDate.setOnClickListener {
+            DatePickerDialog(
+                this@RegisterActivity,
+                R.style.DatePickerDialogTheme,
+                dateSetListener,
+                // set DatePickerDialog to point to today's date when it loads up
+                calendar.get(Calendar.YEAR),
+                calendar.get(Calendar.MONTH),
+                calendar.get(Calendar.DAY_OF_MONTH)
+            ).show()
+        }
+    }
+
+    // Update UI After Getting Date Function
+    private fun updateDateInView() {
+        val dateFormat = "dd/MM/yyyy"
+        val sdf = SimpleDateFormat(dateFormat, Locale.US)
+        selectedDateTextView.text = sdf.format(calendar.time)
+    }
+
+    // Setup Sign Up TextView on the bottom of View
+    private fun setUpSignUpTextView() {
+        signInTextView.setSpannableText("${getString(R.string.have_an_accout)} ", Color.BLACK)
+        signInTextView.setSpannableText(
+            getString(R.string.log_in),
+            ContextCompat.getColor(
+                this,
+                R.color.colorPrimary
+            )
+        )
+    }
+
     private fun testEmail() {
-        val email = emailRegisterEditText
-        val password = passwordRegisterEditText
         val firstName = firstNameEditText
         val lastName = lastNameEditText
+        val email = emailRegisterEditText
+        val password = passwordRegisterEditText
+        val rePassword = rePasswordRegisterEditText
 
-        Tools.showToast(this,"${Tools.isFieldsNotEmpty(arrayOf(email,password,firstName,lastName))}")
+        Tools.showToast(
+            this,
+            "${Tools.isFieldsNotEmpty(arrayOf(firstName, lastName, email, password, rePassword))}"
+        )
 //        Tools.showToast(this, Tools.isEmailValid(email).toString())
+    }
+
+    // OnClickListeners Initialization
+    private fun setListeners() {
+        registerButton.setOnClickListener(this)
+        signInTextView.setOnClickListener(this)
     }
 
     override fun onClick(v: View?) {
         when (v!!.id) {
 //            R.id.registerButton -> register()
             R.id.registerButton -> testEmail()
+            R.id.signInTextView -> Tools.startActivity(this, LoginActivity())
         }
     }
 }

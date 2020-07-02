@@ -12,4 +12,11 @@
         <item name="android:textSize">12sp</item>
     </style>
 
+    <style name="DatePickerDialogTheme" parent="Theme.AppCompat.Light.Dialog">
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <!--  უშუალოდ დიალოგის ფერები-->
+        <item name="colorAccent">@color/colorPrimary</item>
+    </style>
+
 </resources>

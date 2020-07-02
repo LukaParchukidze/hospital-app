@@ -1,8 +1,11 @@
 package dev.kacebi.hospitalapp.tools
 
+import android.app.Activity
 import android.content.Context
+import android.content.Intent
 import android.widget.EditText
 import android.widget.Toast
+import dev.kacebi.hospitalapp.ui.authentication.LoginActivity
 import java.util.regex.Pattern.compile
 
 object Tools {
@@ -49,6 +52,11 @@ object Tools {
             return false
         }
         return true
+    }
+
+    fun startActivity(context: Context, activity: Activity){
+        val intent = Intent(context, activity::class.java)
+        context.startActivity(intent)
     }
 
 }

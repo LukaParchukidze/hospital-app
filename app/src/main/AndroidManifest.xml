@@ -11,14 +11,14 @@
         android:name=".App"
         android:theme="@style/AppTheme">
         <activity android:name="dev.kacebi.hospitalapp.ui.authentication.LoginActivity">
-
+        </activity>
+        <activity android:name="dev.kacebi.hospitalapp.ui.authentication.RegisterActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name="dev.kacebi.hospitalapp.ui.authentication.RegisterActivity" />
         <activity android:name="dev.kacebi.hospitalapp.ui.authentication.ForgotPasswordActivity" />
         <activity android:name=".splash.SplashActivity" />
     </application>
