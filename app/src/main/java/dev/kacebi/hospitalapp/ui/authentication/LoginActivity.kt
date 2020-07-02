@@ -32,7 +32,8 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener {
         signUpTextView.setSpannableText("${getString(R.string.no_account)} ", Color.BLACK)
         signUpTextView.setSpannableText(
             getString(R.string.sign_up),
-            ContextCompat.getColor(this,
+            ContextCompat.getColor(
+                this,
                 R.color.colorPrimary
             )
         )
@@ -49,49 +50,61 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener {
     }
 
     private fun login() {
-        val email = emailLoginEditText.text.toString()
-        val password = passwordLoginEditText.text.toString()
+        val email = emailLoginEditText
+        val password = passwordLoginEditText
 
-        if (!Tools.isEmailValid(email) || password.length < 6) {
-            Toast.makeText(this, "Please appropriately fill in the fields", Toast.LENGTH_SHORT)
-                .show()
-            return
-        }
+        if (Tools.isFieldsNotEmpty(arrayOf(email, password))) {
+            val isEmailValid = Tools.isEmailValid(email)
+            val isPasswordValid = Tools.isPasswordValid(password)
 
-        App.firebase.signInWithEmailAndPassword(email, password)
-            .addOnCompleteListener(this) { task ->
-                CoroutineScope(Dispatchers.IO).launch {
-                    if (task.isSuccessful) {
-                        d("isSuccessful", " YES")
-                        val uid = App.firebase.currentUser!!.uid
+            if (isEmailValid && isPasswordValid) {
+                App.firebase.signInWithEmailAndPassword(
+                    email.text.toString(),
+                    password.text.toString()
+                )
+                    .addOnCompleteListener(this) { task ->
+                        CoroutineScope(Dispatchers.IO).launch {
+                            if (task.isSuccessful) {
+                                d("isSuccessful", " YES")
+                                val uid = App.firebase.currentUser!!.uid
 
-                        val userType = App.dbRef.document(uid).get().await()["user_type"]
-                        withContext(Dispatchers.Main) {
-                            if (userType == "patient") {
-                                Toast.makeText(
-                                    this@LoginActivity,
-                                    "Patient Here",
-                                    Toast.LENGTH_LONG
-                                )
-                                    .show()
+                                val userType = App.dbRef.document(uid).get().await()["user_type"]
+                                withContext(Dispatchers.Main) {
+                                    if (userType == "patient") {
+                                        Toast.makeText(
+                                            this@LoginActivity,
+                                            "Patient Here",
+                                            Toast.LENGTH_LONG
+                                        )
+                                            .show()
+                                    } else {
+                                        Toast.makeText(
+                                            this@LoginActivity,
+                                            "Doctor Here",
+                                            Toast.LENGTH_LONG
+                                        )
+                                            .show()
+                                    }
+                                }
                             } else {
-                                Toast.makeText(this@LoginActivity, "Doctor Here", Toast.LENGTH_LONG)
-                                    .show()
+                                withContext(Dispatchers.Main) {
+                                    Toast.makeText(
+                                        this@LoginActivity,
+                                        "Log in was unsuccessful",
+                                        Toast.LENGTH_LONG
+                                    )
+                                        .show()
+                                }
+
                             }
                         }
-                    } else {
-                        withContext(Dispatchers.Main) {
-                            Toast.makeText(
-                                this@LoginActivity,
-                                "Log in was unsuccessful",
-                                Toast.LENGTH_LONG
-                            )
-                                .show()
-                        }
-
                     }
-                }
-            }
+            } else
+                return
+        }
+
+        Tools.showToast(this, "Oops, I am Here")
+
     }
 
     override fun onClick(v: View?) {
