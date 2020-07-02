@@ -7,14 +7,12 @@ import android.app.DatePickerDialog.OnDateSetListener
 import android.content.Intent
 import android.graphics.Bitmap
 import android.graphics.Color
-import android.graphics.Matrix
 import android.os.Bundle
 import android.provider.MediaStore
 import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
-import androidx.exifinterface.media.ExifInterface
 import com.bumptech.glide.Glide
 import dev.kacebi.hospitalapp.App
 import dev.kacebi.hospitalapp.R
@@ -26,7 +24,6 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.tasks.await
 import kotlinx.coroutines.withContext
-import java.io.IOException
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -35,6 +32,7 @@ class RegisterActivity : AppCompatActivity(), View.OnClickListener {
 
     companion object {
         const val REQUEST_CODE_CAMERA = 10
+        const val REQUEST_CODE_GALLERY = 20
     }
 
     private val calendar = Calendar.getInstance()
@@ -43,7 +41,6 @@ class RegisterActivity : AppCompatActivity(), View.OnClickListener {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_register)
 
-//        l@k.com 123123
         init()
 
     }
@@ -61,6 +58,11 @@ class RegisterActivity : AppCompatActivity(), View.OnClickListener {
         // Open Camera
         uploadPicture.setOnClickListener {
             openCamera()
+        }
+
+        // Open Gallery
+        cameraCircleImageView.setOnClickListener {
+            openGallery()
         }
     }
 
@@ -108,6 +110,18 @@ class RegisterActivity : AppCompatActivity(), View.OnClickListener {
             startActivityForResult(takePictureIntent, REQUEST_CODE_CAMERA)
         else
             Tools.showToast(this, "Unable to open Camera")
+    }
+
+    // Open Gallery Function
+    private fun openGallery() {
+        val gallery = Intent();
+        gallery.type = "image/*";
+        gallery.action = Intent.ACTION_GET_CONTENT;
+
+        startActivityForResult(
+            Intent.createChooser(gallery, "Select Picture"),
+            REQUEST_CODE_GALLERY
+        )
     }
 
     // Get Date Function
@@ -190,6 +204,12 @@ class RegisterActivity : AppCompatActivity(), View.OnClickListener {
             cameraCircleImageView.setImageBitmap(takenImage)
         } else {
             super.onActivityResult(requestCode, resultCode, data)
+        }
+        // Get Image from Gallery
+        if (requestCode == REQUEST_CODE_GALLERY && resultCode == RESULT_OK && data != null) {
+            val imageUri = data.data
+
+            Glide.with(this).load(imageUri).into(cameraCircleImageView)
         }
     }
 }

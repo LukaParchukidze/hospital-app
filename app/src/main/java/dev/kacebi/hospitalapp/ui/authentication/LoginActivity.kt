@@ -8,7 +8,9 @@ import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
-import dev.kacebi.hospitalapp.*
+import com.google.firebase.firestore.SetOptions
+import dev.kacebi.hospitalapp.App
+import dev.kacebi.hospitalapp.R
 import dev.kacebi.hospitalapp.extensions.setSpannableText
 import dev.kacebi.hospitalapp.tools.Tools
 import kotlinx.android.synthetic.main.activity_login.*
@@ -17,6 +19,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.tasks.await
 import kotlinx.coroutines.withContext
+import java.util.*
 
 class LoginActivity : AppCompatActivity(), View.OnClickListener {
 
