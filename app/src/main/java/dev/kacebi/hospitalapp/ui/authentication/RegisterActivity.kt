@@ -1,14 +1,21 @@
 package dev.kacebi.hospitalapp.ui.authentication
 
 
+import android.app.Activity
 import android.app.DatePickerDialog
 import android.app.DatePickerDialog.OnDateSetListener
+import android.content.Intent
+import android.graphics.Bitmap
 import android.graphics.Color
+import android.graphics.Matrix
 import android.os.Bundle
+import android.provider.MediaStore
 import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
+import androidx.exifinterface.media.ExifInterface
+import com.bumptech.glide.Glide
 import dev.kacebi.hospitalapp.App
 import dev.kacebi.hospitalapp.R
 import dev.kacebi.hospitalapp.extensions.setSpannableText
@@ -19,11 +26,16 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.tasks.await
 import kotlinx.coroutines.withContext
+import java.io.IOException
 import java.text.SimpleDateFormat
 import java.util.*
 
 
 class RegisterActivity : AppCompatActivity(), View.OnClickListener {
+
+    companion object {
+        const val REQUEST_CODE_CAMERA = 10
+    }
 
     private val calendar = Calendar.getInstance()
 
@@ -33,16 +45,23 @@ class RegisterActivity : AppCompatActivity(), View.OnClickListener {
 
 //        l@k.com 123123
         init()
+
     }
 
-    private fun init(){
+    private fun init() {
         // Calendar (Get Date function)
         pickDate()
 
         // Sign Up TextView on the bottom
         setUpSignUpTextView()
+
         // OnClickListeners Initialization
         setListeners()
+
+        // Open Camera
+        uploadPicture.setOnClickListener {
+            openCamera()
+        }
     }
 
     private fun register() {
@@ -81,6 +100,15 @@ class RegisterActivity : AppCompatActivity(), View.OnClickListener {
             }
     }
 
+    // Open Camera Function
+    private fun openCamera() {
+        val takePictureIntent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
+
+        if (takePictureIntent.resolveActivity(this.packageManager) != null)
+            startActivityForResult(takePictureIntent, REQUEST_CODE_CAMERA)
+        else
+            Tools.showToast(this, "Unable to open Camera")
+    }
 
     // Get Date Function
     private fun pickDate() {
@@ -124,6 +152,7 @@ class RegisterActivity : AppCompatActivity(), View.OnClickListener {
         )
     }
 
+    // For Test
     private fun testEmail() {
         val firstName = firstNameEditText
         val lastName = lastNameEditText
@@ -149,6 +178,18 @@ class RegisterActivity : AppCompatActivity(), View.OnClickListener {
 //            R.id.registerButton -> register()
             R.id.registerButton -> testEmail()
             R.id.signInTextView -> Tools.startActivity(this, LoginActivity())
+        }
+    }
+
+
+    // Get image and set to ImageView
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        // Get Image from Camera
+        if (requestCode == REQUEST_CODE_CAMERA && resultCode == Activity.RESULT_OK) {
+            val takenImage = data!!.extras!!.get("data") as Bitmap
+            cameraCircleImageView.setImageBitmap(takenImage)
+        } else {
+            super.onActivityResult(requestCode, resultCode, data)
         }
     }
 }
