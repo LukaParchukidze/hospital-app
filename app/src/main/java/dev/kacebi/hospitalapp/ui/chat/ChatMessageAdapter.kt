@@ -2,10 +2,14 @@ package dev.kacebi.hospitalapp.ui.chat
 
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
+import android.graphics.drawable.BitmapDrawable
+import android.graphics.drawable.Drawable
 import android.util.Log.d
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.content.ContextCompat
+import androidx.core.graphics.drawable.toDrawable
 import androidx.recyclerview.widget.RecyclerView
 import com.google.firebase.storage.FirebaseStorage
 import dev.kacebi.hospitalapp.R
@@ -27,13 +31,17 @@ class ChatMessageAdapter(
     RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     private val storageRef = FirebaseStorage.getInstance().reference
-    private val bitmapMap = mutableMapOf<Int, Bitmap>()
+    private val drawableMap = mutableMapOf<Int, Drawable>()
 
     companion object {
         const val FROM_LAYOUT_MESSAGE = 0
         const val FROM_LAYOUT_IMAGE = 1
         const val TO_LAYOUT_MESSAGE = 2
         const val TO_LAYOUT_IMAGE = 3
+    }
+
+    override fun getItemId(position: Int): Long {
+        return position.toLong()
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
@@ -110,14 +118,17 @@ class ChatMessageAdapter(
         fun onBind() {
             message = messages[adapterPosition]
 
-
+            if (drawableMap.containsKey(adapterPosition)) {
+                itemView.ivChatImageFrom.setImageDrawable(drawableMap[adapterPosition])
+                return
+            }
             CoroutineScope(Dispatchers.IO).launch {
                 val byteArray =
                     storageRef.child(message.imageUri).getBytes(1024 * 1024L).await()
-                val bitmap = BitmapFactory.decodeByteArray(byteArray, 0, byteArray.size)
-                bitmapMap[adapterPosition] = bitmap
+                val bitmapDrawable = BitmapDrawable(itemView.context.resources, BitmapFactory.decodeByteArray(byteArray, 0, byteArray.size))
+                drawableMap[adapterPosition] = bitmapDrawable
                 withContext(Dispatchers.Main) {
-                    itemView.ivChatImageFrom.setImageBitmap(bitmap)
+                    itemView.ivChatImageFrom.setImageDrawable(bitmapDrawable)
                     itemView.tvImageDateFrom.text = message.date
                     d("adapterPosition", message.imageUri)
                 }
@@ -146,13 +157,17 @@ class ChatMessageAdapter(
         fun onBind() {
             message = messages[adapterPosition]
 
+            if (drawableMap.containsKey(adapterPosition)) {
+                itemView.ivChatImageTo.setImageDrawable(drawableMap[adapterPosition])
+                return
+            }
             CoroutineScope(Dispatchers.IO).launch {
                 val byteArray =
                     storageRef.child(message.imageUri).getBytes(1024 * 1024L).await()
-                val bitmap = BitmapFactory.decodeByteArray(byteArray, 0, byteArray.size)
-                bitmapMap[adapterPosition] = bitmap
+                val bitmapDrawable = BitmapDrawable(itemView.context.resources, BitmapFactory.decodeByteArray(byteArray, 0, byteArray.size))
+                drawableMap[adapterPosition] = bitmapDrawable
                 withContext(Dispatchers.Main) {
-                    itemView.ivChatImageTo.setImageBitmap(bitmap)
+                    itemView.ivChatImageTo.setImageDrawable(bitmapDrawable)
                     itemView.ivImageProfilePicture.setImageBitmap(toIdProfileImage)
                     itemView.tvImageDateTo.text = message.date
                     d("adapterPosition", message.imageUri)
