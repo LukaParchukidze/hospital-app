@@ -9,7 +9,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.content.ContextCompat
-import androidx.core.graphics.drawable.toDrawable
 import androidx.recyclerview.widget.RecyclerView
 import com.google.firebase.storage.FirebaseStorage
 import dev.kacebi.hospitalapp.R
@@ -122,6 +121,7 @@ class ChatMessageAdapter(
                 itemView.ivChatImageFrom.setImageDrawable(drawableMap[adapterPosition])
                 return
             }
+            itemView.ivChatImageFrom.setImageResource(R.drawable.ic_launcher_background)
             CoroutineScope(Dispatchers.IO).launch {
                 val byteArray =
                     storageRef.child(message.imageUri).getBytes(1024 * 1024L).await()
@@ -161,6 +161,7 @@ class ChatMessageAdapter(
                 itemView.ivChatImageTo.setImageDrawable(drawableMap[adapterPosition])
                 return
             }
+            itemView.ivChatImageTo.setImageResource(R.drawable.ic_launcher_background)
             CoroutineScope(Dispatchers.IO).launch {
                 val byteArray =
                     storageRef.child(message.imageUri).getBytes(1024 * 1024L).await()
