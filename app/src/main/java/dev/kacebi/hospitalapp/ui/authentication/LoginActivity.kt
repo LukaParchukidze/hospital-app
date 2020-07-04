@@ -8,18 +8,17 @@ import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
-import com.google.firebase.firestore.SetOptions
 import dev.kacebi.hospitalapp.App
 import dev.kacebi.hospitalapp.R
 import dev.kacebi.hospitalapp.extensions.setSpannableText
 import dev.kacebi.hospitalapp.tools.Tools
+import dev.kacebi.hospitalapp.ui.chat.ChatActivity
 import kotlinx.android.synthetic.main.activity_login.*
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.tasks.await
 import kotlinx.coroutines.withContext
-import java.util.*
 
 class LoginActivity : AppCompatActivity(), View.OnClickListener {
 
@@ -80,6 +79,7 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener {
                                             Toast.LENGTH_LONG
                                         )
                                             .show()
+                                        startActivity(Intent(this@LoginActivity, ChatActivity::class.java))
                                     } else {
                                         Toast.makeText(
                                             this@LoginActivity,
@@ -87,6 +87,7 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener {
                                             Toast.LENGTH_LONG
                                         )
                                             .show()
+                                        startActivity(Intent(this@LoginActivity, ChatActivity::class.java))
                                     }
                                 }
                             } else {
@@ -105,8 +106,6 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener {
             } else
                 return
         }
-
-        Tools.showToast(this, "Oops, I am Here")
 
     }
 
