@@ -4,10 +4,14 @@ import android.app.Activity
 import android.content.Intent
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
+import android.net.Uri
 import android.os.Bundle
 import android.view.animation.AnimationUtils
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
+import androidx.core.net.toFile
+import androidx.core.net.toUri
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.ChildEventListener
@@ -23,14 +27,19 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.tasks.await
 import kotlinx.coroutines.withContext
+import java.io.File
 
 class ChatActivity : AppCompatActivity() {
+
+    companion object {
+        const val BUFFER_SIZE = 1024 * 1024 * 5L
+    }
 
     private lateinit var messages: MutableList<ChatMessageModel>
     private lateinit var adapter: ChatMessageAdapter
 
     private val fromId = FirebaseAuth.getInstance().currentUser!!.uid
-    private val toId = "khqI5bCWxyYjJm1iTxgtTop8skA2" //intentidan unda amovigot ID
+    private val toId = "0sMujlihWpciZgiHtQcqRgkbDj82" //intentidan unda amovigot ID
 
     private val fromUserMessagesDatabase =
         FirebaseDatabase.getInstance().getReference("/user_messages/$fromId/$toId")
@@ -84,6 +93,7 @@ class ChatActivity : AppCompatActivity() {
                 it.startAnimation(AnimationUtils.loadAnimation(this, R.anim.click))
                 val messageModel =
                     ChatMessageModel(fromId = fromId, toId = toId, message = message)
+                etChat.text.clear()
                 CoroutineScope(Dispatchers.IO).launch {
                     fromUserMessagesDatabase.push().setValue(messageModel)
                     toUserMessagesDatabase.push().setValue(messageModel)
@@ -108,7 +118,6 @@ class ChatActivity : AppCompatActivity() {
 
             override fun onChildAdded(snapshot: DataSnapshot, previousChildName: String?) {
                 messages.add(snapshot.getValue(ChatMessageModel::class.java)!!)
-                etChat.text.clear()
                 adapter.notifyItemInserted(messages.size - 1)
                 rvChat.scrollToPosition(messages.size - 1)
             }
@@ -135,17 +144,21 @@ class ChatActivity : AppCompatActivity() {
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         if (resultCode == Activity.RESULT_OK && requestCode == RegisterActivity.REQUEST_CODE_GALLERY && data != null) {
-            val imageUri = data.data
-            val push = fromUserMessagesDatabase.push()
-            val path = "/sent_photos/${push.key}/${imageUri!!.lastPathSegment}"
+            val imageUri = data.data!!
+            val imageSize = File(imageUri.path!!).length()
 
-            CoroutineScope(Dispatchers.IO).launch {
-                storageRef.child(path).putFile(imageUri).await()
-                push.setValue(ChatMessageModel(fromId = fromId, toId = toId, imageUri = path))
-                toUserMessagesDatabase.push()
-                    .setValue(ChatMessageModel(fromId = fromId, toId = toId, imageUri = path))
+            if (imageSize <= BUFFER_SIZE) {
+                val push = fromUserMessagesDatabase.push()
+                val path = "/sent_photos/${push.key}/${imageUri.lastPathSegment}"
+                CoroutineScope(Dispatchers.IO).launch {
+                    storageRef.child(path).putFile(imageUri).await()
+                    push.setValue(ChatMessageModel(fromId = fromId, toId = toId, imageUri = path))
+                    toUserMessagesDatabase.push()
+                        .setValue(ChatMessageModel(fromId = fromId, toId = toId, imageUri = path))
+                }
+            } else {
+                Toast.makeText(this, "The file limit is 5 MB", Toast.LENGTH_LONG).show()
             }
-
         }
     }
 

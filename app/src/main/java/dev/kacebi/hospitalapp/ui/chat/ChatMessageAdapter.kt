@@ -127,7 +127,7 @@ class ChatMessageAdapter(
             itemView.ivChatImageFrom.setImageResource(R.drawable.ic_launcher_background)
             CoroutineScope(Dispatchers.IO).launch {
                 val byteArray =
-                    storageRef.child(message.imageUri).getBytes(1024 * 1024L).await()
+                    storageRef.child(message.imageUri).getBytes(ChatActivity.BUFFER_SIZE).await()
                 val bitmapDrawable = BitmapDrawable(itemView.context.resources, BitmapFactory.decodeByteArray(byteArray, 0, byteArray.size))
                 drawableMap[adapterPosition] = bitmapDrawable
                 withContext(Dispatchers.Main) {
@@ -169,7 +169,7 @@ class ChatMessageAdapter(
             itemView.ivChatImageTo.setImageResource(R.drawable.ic_launcher_background)
             CoroutineScope(Dispatchers.IO).launch {
                 val byteArray =
-                    storageRef.child(message.imageUri).getBytes(1024 * 1024L).await()
+                    storageRef.child(message.imageUri).getBytes(ChatActivity.BUFFER_SIZE).await()
                 val bitmapDrawable = BitmapDrawable(itemView.context.resources, BitmapFactory.decodeByteArray(byteArray, 0, byteArray.size))
                 drawableMap[adapterPosition] = bitmapDrawable
                 withContext(Dispatchers.Main) {
