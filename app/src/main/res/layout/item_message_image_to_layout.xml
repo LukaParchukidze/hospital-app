@@ -19,16 +19,23 @@
             app:civ_border_color="@android:color/black"
             app:civ_border_width="1dp" />
 
-        <ImageView
-            android:id="@+id/ivChatImageTo"
+        <androidx.cardview.widget.CardView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="start"
             android:layout_marginStart="10dp"
-            android:adjustViewBounds="true"
-            android:maxWidth="180dp"
-            android:maxHeight="180dp" />
+            app:cardCornerRadius="12dp">
 
+            <ImageView
+                android:id="@+id/ivChatImageTo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="start"
+
+                android:adjustViewBounds="true"
+                android:maxWidth="250dp"
+                android:maxHeight="250dp" />
+
+        </androidx.cardview.widget.CardView>
 
     </LinearLayout>
 

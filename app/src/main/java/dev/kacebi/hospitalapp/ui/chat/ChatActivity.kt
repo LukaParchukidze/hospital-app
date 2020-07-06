@@ -5,7 +5,9 @@ import android.content.Intent
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.os.Bundle
+import android.view.animation.AnimationUtils
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.Toolbar
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.ChildEventListener
@@ -27,12 +29,13 @@ class ChatActivity : AppCompatActivity() {
     private lateinit var messages: MutableList<ChatMessageModel>
     private lateinit var adapter: ChatMessageAdapter
 
-    private val fromID = FirebaseAuth.getInstance().currentUser!!.uid
-    private val toId = "khqI5bCWxyYjJm1iTxgtTop8skA2"
+    private val fromId = FirebaseAuth.getInstance().currentUser!!.uid
+    private val toId = "khqI5bCWxyYjJm1iTxgtTop8skA2" //intentidan unda amovigot ID
+
     private val fromUserMessagesDatabase =
-        FirebaseDatabase.getInstance().getReference("/user_messages/$fromID/$toId")
+        FirebaseDatabase.getInstance().getReference("/user_messages/$fromId/$toId")
     private val toUserMessagesDatabase =
-        FirebaseDatabase.getInstance().getReference("/user_messages/$toId/$fromID")
+        FirebaseDatabase.getInstance().getReference("/user_messages/$toId/$fromId")
 
     private val storageRef = FirebaseStorage.getInstance().reference
 
@@ -40,6 +43,18 @@ class ChatActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_chat)
 
+        setUpToolbar("Dr. Yle")
+        setUpAdapter()
+        setUpListeners()
+    }
+
+    private fun setUpToolbar(title: String) {
+        setSupportActionBar(toolbar as Toolbar?)
+        supportActionBar!!.title = title
+        supportActionBar!!.setDisplayHomeAsUpEnabled(true)
+    }
+
+    private fun setUpAdapter() {
         rvChat.layoutManager = LinearLayoutManager(this)
         messages = mutableListOf()
 
@@ -47,19 +62,28 @@ class ChatActivity : AppCompatActivity() {
             val byteArray = storageRef.child("$toId.png").getBytes(1024 * 1024L).await()
             val toIdProfileImage: Bitmap =
                 BitmapFactory.decodeByteArray(byteArray, 0, byteArray.size)
-            adapter = ChatMessageAdapter(messages, fromID, toIdProfileImage)
+            adapter = ChatMessageAdapter(messages, fromId, toIdProfileImage, object: ChatImageOnClick {
+                override fun onClick(adapterPosition: Int) {
+                    val intent = Intent(this@ChatActivity, ZoomChatImageActivity::class.java).apply {
+                        putExtra("adapterPosition", adapterPosition)
+                    }
+                    startActivity(intent)
+                }
+
+            })
             withContext(Dispatchers.Main) {
                 rvChat.adapter = adapter
             }
         }
+    }
 
-
-
+    private fun setUpListeners() {
         btnChat.setOnClickListener {
             val message = etChat.text.toString()
             if (message.isNotEmpty()) {
+                it.startAnimation(AnimationUtils.loadAnimation(this, R.anim.click))
                 val messageModel =
-                    ChatMessageModel(fromId = fromID, toId = toId, message = message)
+                    ChatMessageModel(fromId = fromId, toId = toId, message = message)
                 CoroutineScope(Dispatchers.IO).launch {
                     fromUserMessagesDatabase.push().setValue(messageModel)
                     toUserMessagesDatabase.push().setValue(messageModel)
@@ -68,6 +92,7 @@ class ChatActivity : AppCompatActivity() {
         }
 
         btnChatImage.setOnClickListener {
+            it.startAnimation(AnimationUtils.loadAnimation(this, R.anim.click))
             openGallery()
         }
 
@@ -116,9 +141,9 @@ class ChatActivity : AppCompatActivity() {
 
             CoroutineScope(Dispatchers.IO).launch {
                 storageRef.child(path).putFile(imageUri).await()
-                push.setValue(ChatMessageModel(fromId = fromID, toId = toId, imageUri = path))
+                push.setValue(ChatMessageModel(fromId = fromId, toId = toId, imageUri = path))
                 toUserMessagesDatabase.push()
-                    .setValue(ChatMessageModel(fromId = fromID, toId = toId, imageUri = path))
+                    .setValue(ChatMessageModel(fromId = fromId, toId = toId, imageUri = path))
             }
 
         }

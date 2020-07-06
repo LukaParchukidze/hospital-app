@@ -25,18 +25,21 @@ import kotlinx.coroutines.withContext
 class ChatMessageAdapter(
     private val messages: MutableList<ChatMessageModel>,
     private val fromId: String,
-    private val toIdProfileImage: Bitmap
+    private val toIdProfileImage: Bitmap,
+    private val chatImageOnClick: ChatImageOnClick
 ) :
     RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     private val storageRef = FirebaseStorage.getInstance().reference
-    private val drawableMap = mutableMapOf<Int, Drawable>()
+
 
     companion object {
         const val FROM_LAYOUT_MESSAGE = 0
         const val FROM_LAYOUT_IMAGE = 1
         const val TO_LAYOUT_MESSAGE = 2
         const val TO_LAYOUT_IMAGE = 3
+
+        val drawableMap = mutableMapOf<Int, Drawable>()
     }
 
     override fun getItemId(position: Int): Long {
@@ -129,8 +132,10 @@ class ChatMessageAdapter(
                 drawableMap[adapterPosition] = bitmapDrawable
                 withContext(Dispatchers.Main) {
                     itemView.ivChatImageFrom.setImageDrawable(bitmapDrawable)
+                    itemView.ivChatImageFrom.setOnClickListener {
+                        chatImageOnClick.onClick(adapterPosition)
+                    }
                     itemView.tvImageDateFrom.text = message.date
-                    d("adapterPosition", message.imageUri)
                 }
             }
         }
@@ -169,9 +174,11 @@ class ChatMessageAdapter(
                 drawableMap[adapterPosition] = bitmapDrawable
                 withContext(Dispatchers.Main) {
                     itemView.ivChatImageTo.setImageDrawable(bitmapDrawable)
+                    itemView.ivChatImageTo.setOnClickListener {
+                        chatImageOnClick.onClick(adapterPosition)
+                    }
                     itemView.ivImageProfilePicture.setImageBitmap(toIdProfileImage)
                     itemView.tvImageDateTo.text = message.date
-                    d("adapterPosition", message.imageUri)
                 }
             }
         }

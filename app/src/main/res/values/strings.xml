@@ -15,4 +15,6 @@
     <string name="send_instructions">Send Instructions</string>
     <string name="we_need_your_email">We just need your registered Email to send password reset instruction</string>
     <string name="date_default_text">--/--/----</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>
