@@ -60,7 +60,7 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener {
             val isPasswordValid = Tools.isPasswordValid(password)
 
             if (isEmailValid && isPasswordValid) {
-                App.firebase.signInWithEmailAndPassword(
+                App.auth.signInWithEmailAndPassword(
                     email.text.toString(),
                     password.text.toString()
                 )
@@ -68,9 +68,9 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener {
                         CoroutineScope(Dispatchers.IO).launch {
                             if (task.isSuccessful) {
                                 d("isSuccessful", " YES")
-                                val uid = App.firebase.currentUser!!.uid
+                                val uid = App.auth.currentUser!!.uid
 
-                                val userType = App.dbRef.document(uid).get().await()["user_type"]
+                                val userType = App.dbUsersRef.document(uid).get().await()["user_type"]
                                 withContext(Dispatchers.Main) {
                                     if (userType == "patient") {
                                         Toast.makeText(

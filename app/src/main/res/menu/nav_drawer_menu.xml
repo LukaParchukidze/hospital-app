@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/miUserProfile"
+            android:icon="@drawable/ic_profile"
+            android:title="User Profile" />
+        <item
+            android:id="@+id/miAppointments"
+            android:icon="@drawable/ic_appointments"
+            android:title="Appointments" />
+        <item
+            android:id="@+id/miMessages"
+            android:icon="@drawable/ic_messages"
+            android:title="Messages" />
+        <item
+            android:id="@+id/miSignOut"
+            android:icon="@drawable/ic_log_out"
+            android:title="Sign Out" />
+    </group>
+</menu>

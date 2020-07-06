@@ -69,12 +69,12 @@ class RegisterActivity : AppCompatActivity(), View.OnClickListener {
     private fun register() {
         val email = emailRegisterEditText.text.toString()
         val password = passwordRegisterEditText.text.toString()
-        App.firebase.createUserWithEmailAndPassword(email, password)
+        App.auth.createUserWithEmailAndPassword(email, password)
             .addOnCompleteListener(this) { task ->
                 CoroutineScope(Dispatchers.IO).launch {
                     if (task.isSuccessful) {
-                        val uid = App.firebase.currentUser!!.uid
-                        App.dbRef.document(uid).set(
+                        val uid = App.auth.currentUser!!.uid
+                        App.dbUsersRef.document(uid).set(
                             mapOf(
                                 "uid" to uid,
                                 "email" to email,
