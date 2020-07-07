@@ -11,7 +11,6 @@ import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import dev.kacebi.hospitalapp.App
 import dev.kacebi.hospitalapp.R
-import kotlinx.android.synthetic.main.fragment_doctors.*
 import kotlinx.android.synthetic.main.fragment_doctors.view.*
 import kotlinx.android.synthetic.main.fragment_doctors.view.doctorsOverviewsRecyclerView
 import kotlinx.android.synthetic.main.fragment_home.view.specialtiesRecyclerView
@@ -46,9 +45,9 @@ class DoctorsFragment : Fragment() {
         itemView.specialtiesRecyclerView.layoutManager =
             LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
         CoroutineScope(Dispatchers.IO).launch {
-            val specialtiesQS = App.dbSpecialtiesRef.get().await()
+            val specialtiesQS = App.dbSpecialties.get().await()
             for (specialtyQDS in specialtiesQS) {
-                val specialty = App.dbSpecialtiesRef.document(specialtyQDS.id).get().await()
+                val specialty = App.dbSpecialties.document(specialtyQDS.id).get().await()
                     .toObject(SpecialtyModel::class.java)!!
                 specialties.add(specialty)
             }
@@ -65,15 +64,14 @@ class DoctorsFragment : Fragment() {
         itemView.doctorsOverviewsProgressBar.visibility = View.VISIBLE
         CoroutineScope(Dispatchers.IO).launch {
             val querySnapshot =
-                App.dbUsersRef.whereEqualTo("specialty", "audiologist").get().await()
+                App.dbDoctors.whereEqualTo("specialty", "audiologist").get().await()
             for (document in querySnapshot.documents) {
                 val doctorOverview = DoctorOverviewModel(
                     full_name = document["full_name"] as String,
                     specialty = document["specialty"] as String
                 )
-                d("bullshit", doctorOverview.toString())
                 val byteArray =
-                    App.storageRef.child(document.id + ".png").getBytes(1024 * 1024L).await()
+                    App.storage.child(document.id + ".png").getBytes(1024 * 1024L).await()
                 val bitmapDrawable = BitmapDrawable(resources, BitmapFactory.decodeByteArray(byteArray, 0, byteArray.size))
                 doctorOverview.drawable = bitmapDrawable
                 doctorsOverviews.add(doctorOverview)

@@ -7,7 +7,8 @@ import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import androidx.fragment.app.Fragment
-import com.google.firebase.firestore.QuerySnapshot
+import com.google.firebase.firestore.ktx.firestore
+import com.google.firebase.ktx.Firebase
 import dev.kacebi.hospitalapp.App
 import dev.kacebi.hospitalapp.R
 import kotlinx.android.synthetic.main.activity_patient_dashboard.*

@@ -13,13 +13,16 @@ class App: Application() {
         val auth by lazy {
             FirebaseAuth.getInstance()
         }
-        val dbUsersRef by lazy {
+        val dbUsers by lazy {
             Firebase.firestore.collection("users")
         }
-        val dbSpecialtiesRef by lazy {
+        val dbDoctors by lazy {
+            Firebase.firestore.collection("doctors")
+        }
+        val dbSpecialties by lazy {
             Firebase.firestore.collection("specialties")
         }
-        val storageRef by lazy {
+        val storage by lazy {
             FirebaseStorage.getInstance().reference
         }
         lateinit var instance: App

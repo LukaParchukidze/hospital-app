@@ -8,7 +8,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.google.firebase.storage.FirebaseStorage
 import dev.kacebi.hospitalapp.App
 import dev.kacebi.hospitalapp.R
 import kotlinx.android.synthetic.main.fragment_home.view.*
@@ -41,10 +40,10 @@ class HomeFragment : Fragment() {
         itemView.specialtiesRecyclerView.layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
         itemView.specialtiesProgressBar.visibility = View.VISIBLE
         CoroutineScope(Dispatchers.IO).launch {
-            val specialtiesQS = App.dbSpecialtiesRef.get().await()
+            val specialtiesQS = App.dbSpecialties.get().await()
             for (specialtyQDS in specialtiesQS) {
-                val specialty = App.dbSpecialtiesRef.document(specialtyQDS.id).get().await().toObject(SpecialtyModel::class.java)
-                val byteArray = App.storageRef.child(specialty!!.uri).getBytes(1024 * 1024L).await()
+                val specialty = App.dbSpecialties.document(specialtyQDS.id).get().await().toObject(SpecialtyModel::class.java)
+                val byteArray = App.storage.child(specialty!!.uri).getBytes(1024 * 1024L).await()
                 val bitmapDrawable = BitmapDrawable(resources, BitmapFactory.decodeByteArray(byteArray, 0, byteArray.size))
                 specialty.drawable = bitmapDrawable
                 specialties.add(specialty)

@@ -70,7 +70,7 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener {
                                 d("isSuccessful", " YES")
                                 val uid = App.auth.currentUser!!.uid
 
-                                val userType = App.dbUsersRef.document(uid).get().await()["user_type"]
+                                val userType = App.dbUsers.document(uid).get().await()["user_type"]
                                 withContext(Dispatchers.Main) {
                                     if (userType == "patient") {
                                         Toast.makeText(

@@ -74,7 +74,7 @@ class RegisterActivity : AppCompatActivity(), View.OnClickListener {
                 CoroutineScope(Dispatchers.IO).launch {
                     if (task.isSuccessful) {
                         val uid = App.auth.currentUser!!.uid
-                        App.dbUsersRef.document(uid).set(
+                        App.dbUsers.document(uid).set(
                             mapOf(
                                 "uid" to uid,
                                 "email" to email,
