@@ -1,31 +1,27 @@
 package dev.kacebi.hospitalapp.ui.dashboard
 
 import android.os.Bundle
-import android.util.Log.d
 import android.view.MenuItem
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import androidx.fragment.app.Fragment
-import com.google.firebase.firestore.ktx.firestore
-import com.google.firebase.ktx.Firebase
-import dev.kacebi.hospitalapp.App
 import dev.kacebi.hospitalapp.R
+import dev.kacebi.hospitalapp.ui.dashboard.doctors.DoctorsFragment
+import dev.kacebi.hospitalapp.ui.dashboard.home.HomeFragment
+import dev.kacebi.hospitalapp.ui.dashboard.search.SearchDoctorsFragment
 import kotlinx.android.synthetic.main.activity_patient_dashboard.*
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.tasks.await
 
 class PatientDashboardActivity : AppCompatActivity() {
 
     private lateinit var toggle: ActionBarDrawerToggle
-//    private val storageRef = FirebaseStorage.getInstance().reference
-//    private val specialties = mutableListOf<SpecialtyModel>()
-//    private lateinit var adapter: SpecialtiesAdapter
 
-    private val homeFragment = HomeFragment()
-    private val doctorsFragment = DoctorsFragment()
+    val homeFragment =
+        HomeFragment()
+    val doctorsFragment =
+        DoctorsFragment()
+    val searchDoctorsFragment =
+        SearchDoctorsFragment()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -38,6 +34,7 @@ class PatientDashboardActivity : AppCompatActivity() {
 
         supportFragmentManager.beginTransaction()
             .add(R.id.dashboardFragmentContainer, doctorsFragment).hide(doctorsFragment).commit()
+        supportFragmentManager.beginTransaction().add(R.id.dashboardFragmentContainer, searchDoctorsFragment).hide(searchDoctorsFragment).commit()
         supportFragmentManager.beginTransaction().add(R.id.dashboardFragmentContainer, homeFragment)
             .commit()
     }
@@ -65,15 +62,16 @@ class PatientDashboardActivity : AppCompatActivity() {
     private fun setUpBottomNavigation() {
         bottomNavigation.setOnNavigationItemSelectedListener {
             when (it.itemId) {
-                R.id.miHome -> goToFragment(homeFragment, doctorsFragment)
-                R.id.miDoctors -> goToFragment(doctorsFragment, homeFragment)
+                R.id.miHome -> goToFragment(homeFragment, doctorsFragment, searchDoctorsFragment)
+                R.id.miDoctors -> goToFragment(doctorsFragment, homeFragment, searchDoctorsFragment)
+                R.id.miSearchDoctors -> goToFragment(searchDoctorsFragment, homeFragment, doctorsFragment)
             }
             true
         }
     }
 
-    private fun goToFragment(fragment1: Fragment, fragment2: Fragment) {
-        supportFragmentManager.beginTransaction().show(fragment1).hide(fragment2).commit()
+    fun goToFragment(fragment1: Fragment, fragment2: Fragment, fragment3: Fragment) {
+        supportFragmentManager.beginTransaction().show(fragment1).hide(fragment2).hide(fragment3).commit()
     }
 
 }
