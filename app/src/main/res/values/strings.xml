@@ -23,4 +23,5 @@
     <string name="doctors">Doctors</string>
     <string name="search">Search</string>
     <string name="read_more">Read More</string>
+    <string name="author">Author:</string>
 </resources>

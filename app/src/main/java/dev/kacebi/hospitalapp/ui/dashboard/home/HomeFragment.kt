@@ -1,8 +1,13 @@
 package dev.kacebi.hospitalapp.ui.dashboard.home
 
+import android.app.Activity
+import android.content.Context
+import android.content.Intent
 import android.graphics.BitmapFactory
 import android.graphics.drawable.BitmapDrawable
 import android.os.Bundle
+import android.os.Parcelable
+import android.util.Log.d
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -15,6 +20,7 @@ import dev.kacebi.hospitalapp.ui.dashboard.PatientDashboardActivity
 import dev.kacebi.hospitalapp.ui.dashboard.home.specialties.SpecialtyModel
 import dev.kacebi.hospitalapp.ui.dashboard.home.specialties.SpecialtyOnClick
 import dev.kacebi.hospitalapp.ui.dashboard.doctors.SpecialtiesAdapter
+import dev.kacebi.hospitalapp.ui.dashboard.home.news.NewsActivity
 import dev.kacebi.hospitalapp.ui.dashboard.home.news.NewsModel
 import dev.kacebi.hospitalapp.ui.dashboard.home.news.NewsViewPagerAdapter
 import dev.kacebi.hospitalapp.ui.dashboard.home.specialties.SpecialtiesWithIconsAdapter
@@ -28,6 +34,7 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.tasks.await
 import kotlinx.coroutines.withContext
 import me.relex.circleindicator.CircleIndicator
+import java.util.ArrayList
 
 
 class HomeFragment : Fragment() {
@@ -69,9 +76,10 @@ class HomeFragment : Fragment() {
                 newsModel.add(news)
             }
 
+            d("newsModel", "$newsModel")
             newsAdapter =
                 NewsViewPagerAdapter(
-                    newsModel
+                    newsModel, this@HomeFragment
                 )
 
             withContext(Dispatchers.Main) {
@@ -87,6 +95,12 @@ class HomeFragment : Fragment() {
         }
     }
 
+    fun startNewsActivity(position: Int) {
+        val intent = Intent((activity as PatientDashboardActivity), NewsActivity::class.java)
+        d("position","Start position: $position")
+        intent.putExtra("position",position)
+        activity!!.startActivity(intent)
+    }
 
     private fun setUpSpecialtiesRecyclerView(itemView: View) {
         itemView.specialtiesRecyclerView.layoutManager =

@@ -1,6 +1,7 @@
 package dev.kacebi.hospitalapp.ui.dashboard
 
 import android.os.Bundle
+import android.util.Log.d
 import android.view.MenuItem
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AppCompatActivity
@@ -29,7 +30,6 @@ class PatientDashboardActivity : AppCompatActivity() {
 
         setUpToolbar()
         setUpDrawerMenu()
-//        setUpViewPager()
         setUpBottomNavigation()
 
         supportFragmentManager.beginTransaction()

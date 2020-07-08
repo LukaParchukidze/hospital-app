@@ -6,10 +6,10 @@ import android.view.ViewGroup
 import androidx.viewpager.widget.PagerAdapter
 import com.bumptech.glide.Glide
 import dev.kacebi.hospitalapp.R
-import dev.kacebi.hospitalapp.ui.dashboard.home.news.NewsModel
+import dev.kacebi.hospitalapp.ui.dashboard.home.HomeFragment
 import kotlinx.android.synthetic.main.item_news_layout.view.*
 
-class NewsViewPagerAdapter(private val news: MutableList<NewsModel>) : PagerAdapter() {
+class NewsViewPagerAdapter(private val news: MutableList<NewsModel>,private val fragment: HomeFragment) : PagerAdapter() {
 
     override fun getCount() = news.size
 
@@ -24,10 +24,14 @@ class NewsViewPagerAdapter(private val news: MutableList<NewsModel>) : PagerAdap
 
         Glide.with(itemView.context)
             .load(model.drawable)
-            .into(itemView!!.newsImageView)
+            .into(itemView!!.newsAdapterImageView)
 
-        itemView.newsTitleTextView.text = model.title
-        itemView.newsDescriptionTextView.text = model.description
+        itemView.newsAdapterTitleTextView.text = model.title
+        itemView.newsAdapterDescriptionTextView.text = model.description
+
+        itemView.newsAdapterReadMore.setOnClickListener {
+            fragment.startNewsActivity(position)
+        }
 
         container.addView(itemView)
         return itemView

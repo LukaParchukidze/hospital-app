@@ -7,7 +7,7 @@
     android:background="#000000">
 
     <ImageView
-        android:id="@+id/newsImageView"
+        android:id="@+id/newsAdapterImageView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:alpha="0.5"
@@ -22,7 +22,7 @@
         android:paddingEnd="15dp">
 
         <TextView
-            android:id="@+id/newsTitleTextView"
+            android:id="@+id/newsAdapterTitleTextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="5dp"
@@ -31,7 +31,7 @@
             android:textStyle="bold" />
 
         <TextView
-            android:id="@+id/newsDescriptionTextView"
+            android:id="@+id/newsAdapterDescriptionTextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="5dp"
@@ -40,7 +40,7 @@
             android:textColor="#FFFFFF" />
 
         <TextView
-            android:id="@+id/newsReadMore"
+            android:id="@+id/newsAdapterReadMore"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="end"
