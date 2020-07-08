@@ -3,11 +3,10 @@ package dev.kacebi.hospitalapp.ui.dashboard.home
 import android.graphics.BitmapFactory
 import android.graphics.drawable.BitmapDrawable
 import android.os.Bundle
-import android.util.Log.d
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import dev.kacebi.hospitalapp.App
 import dev.kacebi.hospitalapp.R
@@ -25,6 +24,8 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.tasks.await
 import kotlinx.coroutines.withContext
+import me.relex.circleindicator.CircleIndicator
+
 
 class HomeFragment : Fragment() {
 
@@ -42,6 +43,7 @@ class HomeFragment : Fragment() {
             itemView = inflater.inflate(R.layout.fragment_home, container, false)
             setUpSpecialtiesRecyclerView(itemView!!)
             setUpNewsViePager(itemView!!)
+
         }
         return itemView
     }
@@ -64,13 +66,19 @@ class HomeFragment : Fragment() {
                 newsModel.add(news)
             }
 
-            newsAdapter = NewsViewPagerAdapter(newsModel)
+            newsAdapter =
+                NewsViewPagerAdapter(
+                    newsModel
+                )
 
             withContext(Dispatchers.Main) {
                 newsViewPager.adapter = newsAdapter
                 itemView.newsProgressBar.visibility = View.GONE
 
-                newsViewPager.autoScroll(3000)
+                newsViewPager.autoScroll(5000)
+
+                val indicator = indicator as CircleIndicator
+                indicator.setViewPager(newsViewPager)
             }
 
         }
@@ -98,7 +106,8 @@ class HomeFragment : Fragment() {
             adapter =
                 SpecialtiesWithIconsAdapter(
                     specialties,
-                    object : SpecialtyOnClick {
+                    object :
+                        SpecialtyOnClick {
                         override fun onClick(adapterPosition: Int) {
                             val activity = (activity as PatientDashboardActivity)
                             activity.goToFragment(

@@ -43,9 +43,10 @@ class SearchDoctorsFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         searchDoctorsEditText.addTextChangedListener(textWatcher)
         searchDoctorsRecyclerView.layoutManager = LinearLayoutManager(context)
-        adapter = DoctorsOverviewsAdapter(
-            doctorsOverviews
-        )
+        adapter =
+            DoctorsOverviewsAdapter(
+                doctorsOverviews
+            )
         searchDoctorsRecyclerView.adapter = adapter
 
         super.onViewCreated(view, savedInstanceState)

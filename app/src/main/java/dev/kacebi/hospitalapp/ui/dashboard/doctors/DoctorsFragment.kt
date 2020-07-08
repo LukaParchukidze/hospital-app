@@ -115,7 +115,10 @@ class DoctorsFragment : Fragment() {
                 }
             }
         } else {
-            doctorsOverviewsAdapter = DoctorsOverviewsAdapter(doctorsOverviews[specialty]!!)
+            doctorsOverviewsAdapter =
+                DoctorsOverviewsAdapter(
+                    doctorsOverviews[specialty]!!
+                )
             itemView.doctorsOverviewsRecyclerView.adapter = doctorsOverviewsAdapter
         }
     }
