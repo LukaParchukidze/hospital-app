@@ -1,12 +1,10 @@
-package dev.kacebi.hospitalapp.ui.dashboard.home
+package dev.kacebi.hospitalapp.ui.dashboard.home.specialties
 
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import dev.kacebi.hospitalapp.R
-import dev.kacebi.hospitalapp.ui.dashboard.SpecialtyModel
-import dev.kacebi.hospitalapp.ui.dashboard.SpecialtyOnClick
 import kotlinx.android.synthetic.main.item_specialties_with_icons_layout.view.*
 
 class SpecialtiesWithIconsAdapter(

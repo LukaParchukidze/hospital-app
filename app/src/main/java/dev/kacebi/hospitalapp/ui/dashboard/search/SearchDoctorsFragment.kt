@@ -15,8 +15,8 @@ import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import dev.kacebi.hospitalapp.App
 import dev.kacebi.hospitalapp.R
-import dev.kacebi.hospitalapp.ui.dashboard.DoctorOverviewModel
-import dev.kacebi.hospitalapp.ui.dashboard.DoctorsOverviewsAdapter
+import dev.kacebi.hospitalapp.ui.dashboard.doctors.DoctorOverviewModel
+import dev.kacebi.hospitalapp.ui.dashboard.doctors.DoctorsOverviewsAdapter
 import kotlinx.android.synthetic.main.fragment_search_doctors.*
 import kotlinx.coroutines.*
 import kotlinx.coroutines.tasks.await

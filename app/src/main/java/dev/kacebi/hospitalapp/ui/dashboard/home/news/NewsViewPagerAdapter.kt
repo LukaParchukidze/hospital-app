@@ -1,4 +1,4 @@
-package dev.kacebi.hospitalapp.ui.dashboard.home
+package dev.kacebi.hospitalapp.ui.dashboard.home.news
 
 import android.view.LayoutInflater
 import android.view.View
@@ -6,7 +6,7 @@ import android.view.ViewGroup
 import androidx.viewpager.widget.PagerAdapter
 import com.bumptech.glide.Glide
 import dev.kacebi.hospitalapp.R
-import dev.kacebi.hospitalapp.ui.dashboard.home.NewsModel
+import dev.kacebi.hospitalapp.ui.dashboard.home.news.NewsModel
 import kotlinx.android.synthetic.main.item_news_layout.view.*
 
 class NewsViewPagerAdapter(private val news: MutableList<NewsModel>) : PagerAdapter() {

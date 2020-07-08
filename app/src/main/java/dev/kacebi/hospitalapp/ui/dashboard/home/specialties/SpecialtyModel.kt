@@ -1,4 +1,4 @@
-package dev.kacebi.hospitalapp.ui.dashboard
+package dev.kacebi.hospitalapp.ui.dashboard.home.specialties
 
 import android.graphics.drawable.Drawable
 

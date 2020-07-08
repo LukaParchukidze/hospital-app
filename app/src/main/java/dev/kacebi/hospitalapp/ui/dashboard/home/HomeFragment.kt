@@ -12,9 +12,12 @@ import dev.kacebi.hospitalapp.App
 import dev.kacebi.hospitalapp.R
 import dev.kacebi.hospitalapp.extensions.autoScroll
 import dev.kacebi.hospitalapp.ui.dashboard.PatientDashboardActivity
-import dev.kacebi.hospitalapp.ui.dashboard.SpecialtyModel
-import dev.kacebi.hospitalapp.ui.dashboard.SpecialtyOnClick
+import dev.kacebi.hospitalapp.ui.dashboard.home.specialties.SpecialtyModel
+import dev.kacebi.hospitalapp.ui.dashboard.home.specialties.SpecialtyOnClick
 import dev.kacebi.hospitalapp.ui.dashboard.doctors.SpecialtiesAdapter
+import dev.kacebi.hospitalapp.ui.dashboard.home.news.NewsModel
+import dev.kacebi.hospitalapp.ui.dashboard.home.news.NewsViewPagerAdapter
+import dev.kacebi.hospitalapp.ui.dashboard.home.specialties.SpecialtiesWithIconsAdapter
 import kotlinx.android.synthetic.main.activity_patient_dashboard.*
 import kotlinx.android.synthetic.main.fragment_doctors.specialtiesRecyclerView
 import kotlinx.android.synthetic.main.fragment_home.*

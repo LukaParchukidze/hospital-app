@@ -7,8 +7,8 @@ import android.view.ViewGroup
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import dev.kacebi.hospitalapp.R
-import dev.kacebi.hospitalapp.ui.dashboard.SpecialtyModel
-import dev.kacebi.hospitalapp.ui.dashboard.SpecialtyOnClick
+import dev.kacebi.hospitalapp.ui.dashboard.home.specialties.SpecialtyModel
+import dev.kacebi.hospitalapp.ui.dashboard.home.specialties.SpecialtyOnClick
 
 class SpecialtiesAdapter(
     private val specialties: MutableList<SpecialtyModel>,
