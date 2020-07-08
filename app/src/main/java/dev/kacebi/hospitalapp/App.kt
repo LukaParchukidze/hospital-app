@@ -22,6 +22,9 @@ class App: Application() {
         val dbSpecialties by lazy {
             Firebase.firestore.collection("specialties")
         }
+        val dbNews by lazy {
+            Firebase.firestore.collection("news")
+        }
         val storage by lazy {
             FirebaseStorage.getInstance().reference
         }

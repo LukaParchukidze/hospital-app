@@ -3,6 +3,7 @@ package dev.kacebi.hospitalapp.ui.dashboard.home
 import android.graphics.BitmapFactory
 import android.graphics.drawable.BitmapDrawable
 import android.os.Bundle
+import android.util.Log.d
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -10,12 +11,14 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
 import dev.kacebi.hospitalapp.App
 import dev.kacebi.hospitalapp.R
+import dev.kacebi.hospitalapp.extensions.autoScroll
 import dev.kacebi.hospitalapp.ui.dashboard.PatientDashboardActivity
 import dev.kacebi.hospitalapp.ui.dashboard.SpecialtyModel
 import dev.kacebi.hospitalapp.ui.dashboard.SpecialtyOnClick
 import dev.kacebi.hospitalapp.ui.dashboard.doctors.SpecialtiesAdapter
 import kotlinx.android.synthetic.main.activity_patient_dashboard.*
-import kotlinx.android.synthetic.main.fragment_doctors.*
+import kotlinx.android.synthetic.main.fragment_doctors.specialtiesRecyclerView
+import kotlinx.android.synthetic.main.fragment_home.*
 import kotlinx.android.synthetic.main.fragment_home.view.*
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -28,6 +31,8 @@ class HomeFragment : Fragment() {
     private var itemView: View? = null
     private val specialties = mutableListOf<SpecialtyModel>()
     private lateinit var adapter: SpecialtiesWithIconsAdapter
+    private lateinit var newsAdapter: NewsViewPagerAdapter
+    private val newsModel = mutableListOf<NewsModel>()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -36,22 +41,57 @@ class HomeFragment : Fragment() {
         if (itemView == null) {
             itemView = inflater.inflate(R.layout.fragment_home, container, false)
             setUpSpecialtiesRecyclerView(itemView!!)
+            setUpNewsViePager(itemView!!)
         }
         return itemView
     }
 
+    private fun setUpNewsViePager(itemView: View) {
+        itemView.newsProgressBar.visibility = View.VISIBLE
+
+        CoroutineScope(Dispatchers.IO).launch {
+            val newsQS = App.dbNews.get().await()
+            for (item in newsQS) {
+                val news = App.dbNews.document(item.id).get().await().toObject(
+                    NewsModel::class.java
+                )
+                val byteArray = App.storage.child(news!!.image_uri).getBytes(1024 * 1024L).await()
+                val bitmapDrawable = BitmapDrawable(
+                    resources,
+                    BitmapFactory.decodeByteArray(byteArray, 0, byteArray.size)
+                )
+                news.drawable = bitmapDrawable
+                newsModel.add(news)
+            }
+
+            newsAdapter = NewsViewPagerAdapter(newsModel)
+
+            withContext(Dispatchers.Main) {
+                newsViewPager.adapter = newsAdapter
+                itemView.newsProgressBar.visibility = View.GONE
+
+                newsViewPager.autoScroll(3000)
+            }
+
+        }
+    }
 
 
     private fun setUpSpecialtiesRecyclerView(itemView: View) {
-        itemView.specialtiesRecyclerView.layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
+        itemView.specialtiesRecyclerView.layoutManager =
+            LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
         itemView.specialtiesProgressBar.visibility = View.VISIBLE
         CoroutineScope(Dispatchers.IO).launch {
             val specialtiesQS = App.dbSpecialties.get().await()
             for (specialtyQDS in specialtiesQS) {
                 val specialty = App.dbSpecialties.document(specialtyQDS.id).get().await().toObject(
-                    SpecialtyModel::class.java)
+                    SpecialtyModel::class.java
+                )
                 val byteArray = App.storage.child(specialty!!.uri).getBytes(1024 * 1024L).await()
-                val bitmapDrawable = BitmapDrawable(resources, BitmapFactory.decodeByteArray(byteArray, 0, byteArray.size))
+                val bitmapDrawable = BitmapDrawable(
+                    resources,
+                    BitmapFactory.decodeByteArray(byteArray, 0, byteArray.size)
+                )
                 specialty.drawable = bitmapDrawable
                 specialties.add(specialty)
             }
@@ -61,12 +101,21 @@ class HomeFragment : Fragment() {
                     object : SpecialtyOnClick {
                         override fun onClick(adapterPosition: Int) {
                             val activity = (activity as PatientDashboardActivity)
-                            activity.goToFragment(activity.doctorsFragment, activity.homeFragment, activity.searchDoctorsFragment)
+                            activity.goToFragment(
+                                activity.doctorsFragment,
+                                activity.homeFragment,
+                                activity.searchDoctorsFragment
+                            )
                             activity.doctorsFragment.getDoctorsIndex = adapterPosition
                             SpecialtiesAdapter.click = adapterPosition
                             activity.doctorsFragment.adapter.notifyDataSetChanged()
-                            activity.doctorsFragment.setUpDoctorsRecyclerview(activity.doctorsFragment.itemView!!, specialties[adapterPosition].specialty)
-                            activity.doctorsFragment.specialtiesRecyclerView.scrollToPosition(adapterPosition)
+                            activity.doctorsFragment.setUpDoctorsRecyclerview(
+                                activity.doctorsFragment.itemView!!,
+                                specialties[adapterPosition].specialty
+                            )
+                            activity.doctorsFragment.specialtiesRecyclerView.scrollToPosition(
+                                adapterPosition
+                            )
                             activity.bottomNavigation.selectedItemId = R.id.miDoctors
                         }
 

@@ -75,7 +75,6 @@ class DoctorsFragment : Fragment() {
                                 specialties[adapterPosition].specialty
                             )
                         }
-
                     }
                 )
             withContext(Dispatchers.Main) {
