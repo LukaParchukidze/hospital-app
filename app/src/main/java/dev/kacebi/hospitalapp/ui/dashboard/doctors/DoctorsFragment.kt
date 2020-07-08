@@ -16,17 +16,15 @@ import dev.kacebi.hospitalapp.ui.dashboard.SpecialtyModel
 import dev.kacebi.hospitalapp.ui.dashboard.SpecialtyOnClick
 import kotlinx.android.synthetic.main.fragment_doctors.view.*
 import kotlinx.android.synthetic.main.fragment_home.view.specialtiesRecyclerView
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
+import kotlinx.coroutines.*
 import kotlinx.coroutines.tasks.await
-import kotlinx.coroutines.withContext
 
 class DoctorsFragment : Fragment() {
 
     var itemView: View? = null
     private val specialties = mutableListOf<SpecialtyModel>()
     lateinit var adapter: SpecialtiesAdapter
+    private var jobDoctors: Job? = null
 
     private val doctorsOverviews = mutableMapOf<String, MutableList<DoctorOverviewModel>>()
     private lateinit var doctorsOverviewsAdapter: DoctorsOverviewsAdapter
@@ -87,7 +85,7 @@ class DoctorsFragment : Fragment() {
         if (doctorsOverviews[specialty]!!.size == 0) {
             itemView.doctorsOverviewsProgressBar.visibility = View.VISIBLE
             itemView.doctorsOverviewsRecyclerView.swapAdapter(null, true)
-            CoroutineScope(Dispatchers.IO).launch {
+            jobDoctors = CoroutineScope(Dispatchers.IO).launch {
                 val querySnapshot =
                     App.dbDoctors.whereEqualTo("specialty", specialty).get().await()
                 for (document in querySnapshot.documents) {
