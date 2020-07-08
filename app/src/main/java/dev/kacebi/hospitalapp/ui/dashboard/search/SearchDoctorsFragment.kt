@@ -7,6 +7,7 @@ import android.os.Handler
 import android.os.Looper
 import android.text.Editable
 import android.text.TextWatcher
+import android.util.Log.d
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -17,11 +18,9 @@ import dev.kacebi.hospitalapp.R
 import dev.kacebi.hospitalapp.ui.dashboard.DoctorOverviewModel
 import dev.kacebi.hospitalapp.ui.dashboard.DoctorsOverviewsAdapter
 import kotlinx.android.synthetic.main.fragment_search_doctors.*
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
+import kotlinx.coroutines.*
 import kotlinx.coroutines.tasks.await
-import kotlinx.coroutines.withContext
+import java.lang.Runnable
 
 
 class SearchDoctorsFragment : Fragment() {
@@ -29,6 +28,7 @@ class SearchDoctorsFragment : Fragment() {
     var itemView: View? = null
     private lateinit var adapter: DoctorsOverviewsAdapter
     private val doctorsOverviews = mutableListOf<DoctorOverviewModel>()
+    private var jobDoctors: Job? = null
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -47,6 +47,7 @@ class SearchDoctorsFragment : Fragment() {
             doctorsOverviews
         )
         searchDoctorsRecyclerView.adapter = adapter
+        adapter.notifyDataSetChanged()
 
         super.onViewCreated(view, savedInstanceState)
     }
@@ -57,22 +58,30 @@ class SearchDoctorsFragment : Fragment() {
             doctorsOverviews.clear()
             adapter.notifyDataSetChanged()
 
-            CoroutineScope(Dispatchers.IO).launch {
+            if (jobDoctors != null)
+                jobDoctors!!.cancel()
+
+            jobDoctors = CoroutineScope(Dispatchers.IO).launch {
                 val querySnapshot = App.dbDoctors.get().await()
+                d("outsideXXX", "YES")
                 for (document in querySnapshot.documents) {
-                    if (document.get("full_name").toString().contains(search)) {
-                        val doctor = document.toObject(DoctorOverviewModel::class.java)
-                        val byteArray =
-                            App.storage.child(document.id + ".png").getBytes(1024 * 1024L).await()
-                        val bitmapDrawable = BitmapDrawable(
-                            resources,
-                            BitmapFactory.decodeByteArray(byteArray, 0, byteArray.size)
-                        )
-                        doctor!!.drawable = bitmapDrawable
-                        doctorsOverviews.add(doctor)
+                    if (jobDoctors!!.isActive) {
+                        if (document.get("full_name").toString().contains(search)) {
+                            val doctor = document.toObject(DoctorOverviewModel::class.java)
+                            val byteArray =
+                                App.storage.child(document.id + ".png").getBytes(1024 * 1024L)
+                                    .await()
+                            val bitmapDrawable = BitmapDrawable(
+                                resources,
+                                BitmapFactory.decodeByteArray(byteArray, 0, byteArray.size)
+                            )
+                            doctor!!.drawable = bitmapDrawable
+                            doctorsOverviews.add(doctor)
+                        }
                     }
                 }
                 withContext(Dispatchers.Main) {
+                    d("outsideXXX", "NO")
                     searchDoctorsProgressBar.visibility = View.GONE
                     adapter.notifyDataSetChanged()
                 }
