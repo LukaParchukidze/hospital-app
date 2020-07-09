@@ -1,14 +1,16 @@
 package dev.kacebi.hospitalapp.ui.dashboard.doctors
 
+import android.content.Intent
 import android.graphics.BitmapFactory
 import android.graphics.drawable.BitmapDrawable
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log.d
 import android.view.View
+import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import dev.kacebi.hospitalapp.App
 import dev.kacebi.hospitalapp.R
+import dev.kacebi.hospitalapp.ui.chat.ChatActivity
 import kotlinx.android.synthetic.main.activity_doctor_information.*
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -21,14 +23,20 @@ class DoctorInformationActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_doctor_information)
 
-        val doctorId = intent.extras?.getString("doctorId")
-        val lastName = intent.extras?.getString("lastName")
+        val doctorId = intent.extras!!.getString("doctorId")!!
+        val lastName = intent.extras!!.getString("lastName")!!
         setSupportActionBar(toolbar as Toolbar?)
         supportActionBar!!.title = "Dr. $lastName"
         supportActionBar!!.setDisplayHomeAsUpEnabled(true)
 
-        if (doctorId != null)
-            getDoctor(doctorId)
+        getDoctor(doctorId)
+
+        messageDoctorButton.setOnClickListener {
+            val intent = Intent(this@DoctorInformationActivity, ChatActivity::class.java)
+            intent.putExtra("doctorId", doctorId)
+            intent.putExtra("lastName", lastName)
+            startActivity(intent)
+        }
     }
 
     private fun getDoctor(doctorId: String) {

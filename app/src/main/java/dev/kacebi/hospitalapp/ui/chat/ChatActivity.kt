@@ -6,6 +6,7 @@ import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.net.Uri
 import android.os.Bundle
+import android.util.Log.d
 import android.view.animation.AnimationUtils
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
@@ -14,10 +15,7 @@ import androidx.core.net.toFile
 import androidx.core.net.toUri
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.database.ChildEventListener
-import com.google.firebase.database.DataSnapshot
-import com.google.firebase.database.DatabaseError
-import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.database.*
 import com.google.firebase.storage.FirebaseStorage
 import dev.kacebi.hospitalapp.R
 import dev.kacebi.hospitalapp.ui.authentication.RegisterActivity
@@ -39,12 +37,10 @@ class ChatActivity : AppCompatActivity() {
     private lateinit var adapter: ChatMessageAdapter
 
     private val fromId = FirebaseAuth.getInstance().currentUser!!.uid
-    private val toId = "0sMujlihWpciZgiHtQcqRgkbDj82" //intentidan unda amovigot ID
+    private lateinit var toId: String
 
-    private val fromUserMessagesDatabase =
-        FirebaseDatabase.getInstance().getReference("/user_messages/$fromId/$toId")
-    private val toUserMessagesDatabase =
-        FirebaseDatabase.getInstance().getReference("/user_messages/$toId/$fromId")
+    private lateinit var fromUserMessagesDatabase: DatabaseReference
+    private lateinit var toUserMessagesDatabase: DatabaseReference
 
     private val storageRef = FirebaseStorage.getInstance().reference
 
@@ -52,7 +48,14 @@ class ChatActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_chat)
 
-        setUpToolbar("Dr. Yle")
+        toId = intent.extras!!.getString("doctorId")!!
+        fromUserMessagesDatabase =
+            FirebaseDatabase.getInstance().getReference("/user_messages/$fromId/$toId")
+        toUserMessagesDatabase =
+            FirebaseDatabase.getInstance().getReference("/user_messages/$toId/$fromId")
+
+        val lastName = intent.extras!!.getString("lastName")!!
+        setUpToolbar("Dr. $lastName")
         setUpAdapter()
         setUpListeners()
     }
