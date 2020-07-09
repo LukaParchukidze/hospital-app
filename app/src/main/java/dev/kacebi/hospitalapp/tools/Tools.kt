@@ -3,9 +3,20 @@ package dev.kacebi.hospitalapp.tools
 import android.app.Activity
 import android.content.Context
 import android.content.Intent
+import android.view.View
 import android.widget.EditText
 import android.widget.Toast
+import androidx.core.content.ContextCompat
+import com.google.android.material.snackbar.Snackbar
+import dev.kacebi.hospitalapp.App
+import dev.kacebi.hospitalapp.R
 import dev.kacebi.hospitalapp.ui.authentication.LoginActivity
+import dev.kacebi.hospitalapp.ui.dashboard.DoctorDashboardActivity
+import dev.kacebi.hospitalapp.ui.dashboard.PatientDashboardActivity
+import kotlinx.android.synthetic.main.activity_login.*
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.tasks.await
+import kotlinx.coroutines.withContext
 import java.util.regex.Pattern.compile
 
 object Tools {
@@ -34,11 +45,11 @@ object Tools {
         return Toast.makeText(context, text, Toast.LENGTH_SHORT).show()
     }
 
-    fun isFieldsNotEmpty(editTextArray: Array<EditText>): Boolean{
+    fun isFieldsNotEmpty(editTextArray: Array<EditText>): Boolean {
         var result = true
 
-        for(editText in editTextArray){
-            if(editText.text.isEmpty()){
+        for (editText in editTextArray) {
+            if (editText.text.isEmpty()) {
                 editText.error = "Empty Field"
                 result = false
             }
@@ -47,16 +58,43 @@ object Tools {
     }
 
     fun isPasswordValid(passwordEditText: EditText): Boolean {
-        if(passwordEditText.text.toString().length < 6){
+        if (passwordEditText.text.toString().length < 6) {
             passwordEditText.error = "Minimum size: 6"
             return false
         }
         return true
     }
 
-    fun startActivity(context: Context, activity: Activity){
+    fun startActivity(context: Context, activity: Activity, isFinished: Boolean) {
         val intent = Intent(context, activity::class.java)
+
+        if (isFinished)
+            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK)
+
         context.startActivity(intent)
+
+        (context as Activity).overridePendingTransition(
+            android.R.anim.fade_in,
+            android.R.anim.fade_out
+        )
     }
 
+    fun showSnackbar(context: Context, rootView: View, message: String, actionText: String) {
+        val snackbar = Snackbar.make(
+            rootView,
+            message,
+            Snackbar.LENGTH_INDEFINITE
+        )
+        snackbar.setAction(actionText) {
+            snackbar.dismiss()
+        }
+        snackbar.setActionTextColor(
+            ContextCompat.getColor(
+                context,
+                R.color.snackbar_action_text_color
+            )
+        )
+
+        snackbar.show()
+    }
 }

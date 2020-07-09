@@ -16,7 +16,7 @@ import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import dev.kacebi.hospitalapp.App
 import dev.kacebi.hospitalapp.R
-import dev.kacebi.hospitalapp.ui.dashboard.DoctorInformationActivity
+import dev.kacebi.hospitalapp.ui.dashboard.doctors.DoctorInformationActivity
 import dev.kacebi.hospitalapp.ui.dashboard.PatientDashboardActivity
 import dev.kacebi.hospitalapp.ui.dashboard.doctors.DoctorOverviewModel
 import dev.kacebi.hospitalapp.ui.dashboard.doctors.DoctorsOverviewsAdapter

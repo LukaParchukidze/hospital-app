@@ -1,4 +1,4 @@
-package dev.kacebi.hospitalapp.ui.dashboard
+package dev.kacebi.hospitalapp.ui.dashboard.doctors
 
 import android.graphics.BitmapFactory
 import android.graphics.drawable.BitmapDrawable
@@ -7,7 +7,6 @@ import android.os.Bundle
 import android.util.Log.d
 import android.view.View
 import androidx.appcompat.widget.Toolbar
-import com.google.firebase.firestore.SetOptions
 import dev.kacebi.hospitalapp.App
 import dev.kacebi.hospitalapp.R
 import kotlinx.android.synthetic.main.activity_doctor_information.*

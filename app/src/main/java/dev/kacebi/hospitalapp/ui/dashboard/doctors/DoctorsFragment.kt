@@ -1,10 +1,7 @@
 package dev.kacebi.hospitalapp.ui.dashboard.doctors
 
 import android.content.Intent
-import android.graphics.BitmapFactory
-import android.graphics.drawable.BitmapDrawable
 import android.os.Bundle
-import android.util.Log.d
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -12,7 +9,6 @@ import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import dev.kacebi.hospitalapp.App
 import dev.kacebi.hospitalapp.R
-import dev.kacebi.hospitalapp.ui.dashboard.DoctorInformationActivity
 import dev.kacebi.hospitalapp.ui.dashboard.PatientDashboardActivity
 import dev.kacebi.hospitalapp.ui.dashboard.home.specialties.SpecialtyModel
 import dev.kacebi.hospitalapp.ui.dashboard.home.specialties.SpecialtyOnClick

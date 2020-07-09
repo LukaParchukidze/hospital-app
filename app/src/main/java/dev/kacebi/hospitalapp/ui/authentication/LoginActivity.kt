@@ -1,18 +1,16 @@
 package dev.kacebi.hospitalapp.ui.authentication
 
-import android.content.Intent
 import android.graphics.Color
 import android.os.Bundle
-import android.util.Log.d
 import android.view.View
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import dev.kacebi.hospitalapp.App
 import dev.kacebi.hospitalapp.R
 import dev.kacebi.hospitalapp.extensions.setSpannableText
 import dev.kacebi.hospitalapp.tools.Tools
-import dev.kacebi.hospitalapp.ui.chat.ChatActivity
+import dev.kacebi.hospitalapp.ui.dashboard.DoctorDashboardActivity
+import dev.kacebi.hospitalapp.ui.dashboard.PatientDashboardActivity
 import kotlinx.android.synthetic.main.activity_login.*
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -26,29 +24,14 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
 
-        setUpSignUpTextView()
         setListeners()
-    }
-
-    private fun setUpSignUpTextView() {
-        signUpTextView.setSpannableText("${getString(R.string.no_account)} ", Color.BLACK)
-        signUpTextView.setSpannableText(
-            getString(R.string.sign_up),
-            ContextCompat.getColor(
-                this,
-                R.color.colorPrimary
-            )
-        )
+        setUpSignUpTextView()
     }
 
     private fun setListeners() {
         forgotPasswordTextView.setOnClickListener(this)
         signUpTextView.setOnClickListener(this)
         loginButton.setOnClickListener(this)
-    }
-
-    private fun changeActivityTo(intent: Intent) {
-        startActivity(intent)
     }
 
     private fun login() {
@@ -67,57 +50,57 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener {
                     .addOnCompleteListener(this) { task ->
                         CoroutineScope(Dispatchers.IO).launch {
                             if (task.isSuccessful) {
-                                d("isSuccessful", " YES")
                                 val uid = App.auth.currentUser!!.uid
-
                                 val userType = App.dbUsers.document(uid).get().await()["user_type"]
+
                                 withContext(Dispatchers.Main) {
-                                    if (userType == "patient") {
-                                        Toast.makeText(
+                                    if (userType != null) {
+                                        Tools.startActivity(
                                             this@LoginActivity,
-                                            "Patient Here",
-                                            Toast.LENGTH_LONG
+                                            PatientDashboardActivity(), true
                                         )
-                                            .show()
-                                        startActivity(Intent(this@LoginActivity, ChatActivity::class.java))
                                     } else {
-                                        Toast.makeText(
+                                        Tools.startActivity(
                                             this@LoginActivity,
-                                            "Doctor Here",
-                                            Toast.LENGTH_LONG
+                                            DoctorDashboardActivity(), true
                                         )
-                                            .show()
-                                        startActivity(Intent(this@LoginActivity, ChatActivity::class.java))
                                     }
                                 }
                             } else {
                                 withContext(Dispatchers.Main) {
-                                    Toast.makeText(
+                                    Tools.showSnackbar(
                                         this@LoginActivity,
-                                        "Log in was unsuccessful",
-                                        Toast.LENGTH_LONG
+                                        login_root_layout,
+                                        "Credentials was incorrect",
+                                        "Close"
                                     )
-                                        .show()
                                 }
-
                             }
                         }
                     }
             } else
                 return
         }
+    }
 
+    private fun setUpSignUpTextView() {
+        signUpTextView.setSpannableText("${getString(R.string.no_account)} ", Color.BLACK)
+        signUpTextView.setSpannableText(
+            getString(R.string.sign_up),
+            ContextCompat.getColor(
+                this,
+                R.color.colorPrimary
+            )
+        )
     }
 
     override fun onClick(v: View?) {
         when (v!!.id) {
-            R.id.forgotPasswordTextView -> changeActivityTo(
-                Intent(
-                    this,
-                    ForgotPasswordActivity::class.java
-                )
+            R.id.forgotPasswordTextView -> Tools.startActivity(
+                this@LoginActivity,
+                ForgotPasswordActivity(), true
             )
-            R.id.signUpTextView -> changeActivityTo(Intent(this, RegisterActivity::class.java))
+            R.id.signUpTextView -> Tools.startActivity(this@LoginActivity, RegisterActivity(), true)
             R.id.loginButton -> login()
         }
     }
