@@ -1,12 +1,9 @@
 package dev.kacebi.hospitalapp.ui.dashboard.home
 
-import android.app.Activity
-import android.content.Context
 import android.content.Intent
 import android.graphics.BitmapFactory
 import android.graphics.drawable.BitmapDrawable
 import android.os.Bundle
-import android.os.Parcelable
 import android.util.Log.d
 import android.view.LayoutInflater
 import android.view.View
@@ -34,7 +31,6 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.tasks.await
 import kotlinx.coroutines.withContext
 import me.relex.circleindicator.CircleIndicator
-import java.util.ArrayList
 
 
 class HomeFragment : Fragment() {
@@ -52,13 +48,13 @@ class HomeFragment : Fragment() {
         if (itemView == null) {
             itemView = inflater.inflate(R.layout.fragment_home, container, false)
             setUpSpecialtiesRecyclerView(itemView!!)
-            setUpNewsViePager(itemView!!)
+            setUpNewsViewPager(itemView!!)
 
         }
         return itemView
     }
 
-    private fun setUpNewsViePager(itemView: View) {
+    private fun setUpNewsViewPager(itemView: View) {
         itemView.newsProgressBar.visibility = View.VISIBLE
 
         CoroutineScope(Dispatchers.IO).launch {
@@ -67,13 +63,15 @@ class HomeFragment : Fragment() {
                 val news = App.dbNews.document(item.id).get().await().toObject(
                     NewsModel::class.java
                 )
-                val byteArray = App.storage.child(news!!.image_uri).getBytes(1024 * 1024L).await()
-                val bitmapDrawable = BitmapDrawable(
-                    resources,
-                    BitmapFactory.decodeByteArray(byteArray, 0, byteArray.size)
-                )
-                news.drawable = bitmapDrawable
-                newsModel.add(news)
+//                val byteArray = App.storage.child(news!!.image_uri).getBytes(1024 * 1024L).await()
+//                val bitmapDrawable = BitmapDrawable(
+//                    resources,
+//                    BitmapFactory.decodeByteArray(byteArray, 0, byteArray.size)
+//                )
+//                news.drawable = bitmapDrawable
+                if (news != null) {
+                    newsModel.add(news)
+                }
             }
 
             d("newsModel", "$newsModel")
@@ -111,13 +109,13 @@ class HomeFragment : Fragment() {
             for (specialtyQDS in specialtiesQS) {
                 val specialty = App.dbSpecialties.document(specialtyQDS.id).get().await().toObject(
                     SpecialtyModel::class.java
-                )
-                val byteArray = App.storage.child(specialty!!.uri).getBytes(1024 * 1024L).await()
-                val bitmapDrawable = BitmapDrawable(
-                    resources,
-                    BitmapFactory.decodeByteArray(byteArray, 0, byteArray.size)
-                )
-                specialty.drawable = bitmapDrawable
+                )!!
+//                val byteArray = App.storage.child(specialty!!.uri).getBytes(1024 * 1024L).await()
+//                val bitmapDrawable = BitmapDrawable(
+//                    resources,
+//                    BitmapFactory.decodeByteArray(byteArray, 0, byteArray.size)
+//                )
+//                specialty.drawable = bitmapDrawable
                 specialties.add(specialty)
             }
             adapter =

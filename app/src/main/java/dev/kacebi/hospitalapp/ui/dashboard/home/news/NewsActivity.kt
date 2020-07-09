@@ -43,18 +43,18 @@ class NewsActivity : AppCompatActivity() {
             news = App.dbNews.document("news${position + 1}").get().await().toObject(
                 NewsModel::class.java
             )
-            val byteArray = App.storage.child(news!!.image_uri).getBytes(1024 * 1024L).await()
-            val bitmapDrawable = BitmapDrawable(
-                resources,
-                BitmapFactory.decodeByteArray(byteArray, 0, byteArray.size)
-            )
-            news!!.drawable = bitmapDrawable
+//            val byteArray = App.storage.child(news!!.image_uri).getBytes(1024 * 1024L).await()
+//            val bitmapDrawable = BitmapDrawable(
+//                resources,
+//                BitmapFactory.decodeByteArray(byteArray, 0, byteArray.size)
+//            )
+//            news!!.drawable = bitmapDrawable
 
 
             withContext(Dispatchers.Main) {
-                Glide.with(this@NewsActivity)
-                    .load(news!!.drawable)
-                    .into(newsImageView)
+//                Glide.with(this@NewsActivity)
+//                    .load(news!!.drawable)
+//                    .into(newsImageView)
 
                 newsTitleTextView.text = news!!.title
                 newsDescriptionTextView.text = news!!.description.replace("\\n", "\n")

@@ -100,13 +100,13 @@ class DoctorsFragment : Fragment() {
                             last_name = document["last_name"] as String,
                             specialty = document["specialty"] as String
                         )
-                    val byteArray =
-                        App.storage.child(document.id + ".png").getBytes(1024 * 1024L).await()
-                    val bitmapDrawable = BitmapDrawable(
-                        resources,
-                        BitmapFactory.decodeByteArray(byteArray, 0, byteArray.size)
-                    )
-                    doctorOverview.drawable = bitmapDrawable
+//                    val byteArray =
+//                        App.storage.child(document.id + ".png").getBytes(1024 * 1024L).await()
+//                    val bitmapDrawable = BitmapDrawable(
+//                        resources,
+//                        BitmapFactory.decodeByteArray(byteArray, 0, byteArray.size)
+//                    )
+//                    doctorOverview.drawable = bitmapDrawable
                     doctorsOverviews[specialty]!!.add(doctorOverview)
                 }
                 doctorsOverviewsAdapter =

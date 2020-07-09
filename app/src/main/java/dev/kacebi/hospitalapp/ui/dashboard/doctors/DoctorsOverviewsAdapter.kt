@@ -35,7 +35,7 @@ class DoctorsOverviewsAdapter(
         fun onBind() {
             doctorOverview = doctorsOverviews[adapterPosition]
 
-            itemView.doctorOverviewImage.setImageDrawable(doctorOverview.drawable)
+//            itemView.doctorOverviewImage.setImageDrawable(doctorOverview.drawable)
             itemView.doctorOverviewFullName.text = doctorOverview.full_name
             itemView.specialtyOverview.text = doctorOverview.specialty
 
