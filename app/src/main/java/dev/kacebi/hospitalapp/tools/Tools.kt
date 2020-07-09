@@ -5,7 +5,9 @@ import android.content.Context
 import android.content.Intent
 import android.view.View
 import android.widget.EditText
+import android.widget.TextView
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import com.google.android.material.snackbar.Snackbar
 import dev.kacebi.hospitalapp.App
@@ -96,5 +98,12 @@ object Tools {
         )
 
         snackbar.show()
+    }
+
+    fun setSupportActionBar(activity: AppCompatActivity, title: String){
+        activity.setSupportActionBar(activity.findViewById(R.id.toolbar))
+        activity.findViewById<TextView>(R.id.toolbarTitle).text = title
+        activity.supportActionBar!!.setDisplayShowTitleEnabled(false)
+        activity.supportActionBar!!.setDisplayHomeAsUpEnabled(true)
     }
 }

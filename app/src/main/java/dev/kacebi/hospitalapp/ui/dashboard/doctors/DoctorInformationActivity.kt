@@ -10,8 +10,10 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import dev.kacebi.hospitalapp.App
 import dev.kacebi.hospitalapp.R
+import dev.kacebi.hospitalapp.tools.Tools
 import dev.kacebi.hospitalapp.ui.chat.ChatActivity
 import kotlinx.android.synthetic.main.activity_doctor_information.*
+import kotlinx.android.synthetic.main.toolbar_layout.*
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -19,15 +21,15 @@ import kotlinx.coroutines.tasks.await
 import kotlinx.coroutines.withContext
 
 class DoctorInformationActivity : AppCompatActivity() {
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_doctor_information)
 
         val doctorId = intent.extras!!.getString("doctorId")!!
         val lastName = intent.extras!!.getString("lastName")!!
-        setSupportActionBar(toolbar as Toolbar?)
-        supportActionBar!!.title = "Dr. $lastName"
-        supportActionBar!!.setDisplayHomeAsUpEnabled(true)
+
+        Tools.setSupportActionBar(this,"Dr. $lastName")
 
         getDoctor(doctorId)
 

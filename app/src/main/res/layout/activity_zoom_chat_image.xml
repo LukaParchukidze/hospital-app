@@ -7,7 +7,6 @@
     tools:context=".ui.chat.ZoomChatImageActivity">
 
     <include
-        android:id="@+id/toolbar"
         layout="@layout/toolbar_layout" />
 
     <com.github.chrisbanes.photoview.PhotoView

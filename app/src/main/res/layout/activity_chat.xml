@@ -7,7 +7,6 @@
     tools:context=".ui.chat.ChatActivity">
 
     <include
-        android:id="@+id/toolbar"
         layout="@layout/toolbar_layout" />
 
     <androidx.recyclerview.widget.RecyclerView

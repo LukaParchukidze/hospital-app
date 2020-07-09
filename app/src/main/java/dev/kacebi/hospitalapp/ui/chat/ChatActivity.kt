@@ -4,22 +4,19 @@ import android.app.Activity
 import android.content.Intent
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
-import android.net.Uri
 import android.os.Bundle
-import android.util.Log.d
 import android.view.animation.AnimationUtils
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import androidx.appcompat.widget.Toolbar
-import androidx.core.net.toFile
-import androidx.core.net.toUri
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.*
 import com.google.firebase.storage.FirebaseStorage
 import dev.kacebi.hospitalapp.R
+import dev.kacebi.hospitalapp.tools.Tools
 import dev.kacebi.hospitalapp.ui.authentication.RegisterActivity
 import kotlinx.android.synthetic.main.activity_chat.*
+import kotlinx.android.synthetic.main.toolbar_layout.*
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -32,6 +29,8 @@ class ChatActivity : AppCompatActivity() {
     companion object {
         const val BUFFER_SIZE = 1024 * 1024 * 5L
     }
+
+    private lateinit var lastName: String
 
     private lateinit var messages: MutableList<ChatMessageModel>
     private lateinit var adapter: ChatMessageAdapter
@@ -54,16 +53,12 @@ class ChatActivity : AppCompatActivity() {
         toUserMessagesDatabase =
             FirebaseDatabase.getInstance().getReference("/user_messages/$toId/$fromId")
 
-        val lastName = intent.extras!!.getString("lastName")!!
-        setUpToolbar("Dr. $lastName")
+        lastName = intent.extras!!.getString("lastName")!!
+
+        Tools.setSupportActionBar(this,lastName)
+
         setUpAdapter()
         setUpListeners()
-    }
-
-    private fun setUpToolbar(title: String) {
-        setSupportActionBar(toolbar as Toolbar?)
-        supportActionBar!!.title = title
-        supportActionBar!!.setDisplayHomeAsUpEnabled(true)
     }
 
     private fun setUpAdapter() {
@@ -74,15 +69,18 @@ class ChatActivity : AppCompatActivity() {
             val byteArray = storageRef.child("$toId.png").getBytes(1024 * 1024L).await()
             val toIdProfileImage: Bitmap =
                 BitmapFactory.decodeByteArray(byteArray, 0, byteArray.size)
-            adapter = ChatMessageAdapter(messages, fromId, toIdProfileImage, object: ChatImageOnClick {
-                override fun onClick(adapterPosition: Int) {
-                    val intent = Intent(this@ChatActivity, ZoomChatImageActivity::class.java).apply {
-                        putExtra("adapterPosition", adapterPosition)
+            adapter =
+                ChatMessageAdapter(messages, fromId, toIdProfileImage, object : ChatImageOnClick {
+                    override fun onClick(adapterPosition: Int) {
+                        val intent =
+                            Intent(this@ChatActivity, ZoomChatImageActivity::class.java).apply {
+                                putExtra("adapterPosition", adapterPosition)
+                                putExtra("lastname", lastName)
+                            }
+                        startActivity(intent)
                     }
-                    startActivity(intent)
-                }
 
-            })
+                })
             withContext(Dispatchers.Main) {
                 rvChat.adapter = adapter
             }

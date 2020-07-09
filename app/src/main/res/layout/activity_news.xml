@@ -8,7 +8,6 @@
     tools:context=".ui.dashboard.home.news.NewsActivity">
 
     <include
-        android:id="@+id/toolbar"
         layout="@layout/toolbar_layout" />
 
     <FrameLayout
