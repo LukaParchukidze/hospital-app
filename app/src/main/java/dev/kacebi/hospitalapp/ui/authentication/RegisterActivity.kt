@@ -191,7 +191,7 @@ class RegisterActivity : AppCompatActivity(), View.OnClickListener {
         when (v!!.id) {
 //            R.id.registerButton -> register()
             R.id.registerButton -> testEmail()
-            R.id.signInTextView -> Tools.startActivity(this, LoginActivity())
+            R.id.signInTextView -> Tools.startActivity(this, LoginActivity(),true)
         }
     }
 

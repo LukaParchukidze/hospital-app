@@ -6,6 +6,7 @@ import android.view.MenuItem
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import dev.kacebi.hospitalapp.R
 import dev.kacebi.hospitalapp.ui.dashboard.doctors.DoctorsFragment
@@ -17,12 +18,9 @@ class PatientDashboardActivity : AppCompatActivity() {
 
     private lateinit var toggle: ActionBarDrawerToggle
 
-    val homeFragment =
-        HomeFragment()
-    val doctorsFragment =
-        DoctorsFragment()
-    val searchDoctorsFragment =
-        SearchDoctorsFragment()
+    val homeFragment = HomeFragment()
+    val doctorsFragment = DoctorsFragment()
+    val searchDoctorsFragment = SearchDoctorsFragment()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -34,7 +32,9 @@ class PatientDashboardActivity : AppCompatActivity() {
 
         supportFragmentManager.beginTransaction()
             .add(R.id.dashboardFragmentContainer, doctorsFragment).hide(doctorsFragment).commit()
-        supportFragmentManager.beginTransaction().add(R.id.dashboardFragmentContainer, searchDoctorsFragment).hide(searchDoctorsFragment).commit()
+        supportFragmentManager.beginTransaction()
+            .add(R.id.dashboardFragmentContainer, searchDoctorsFragment).hide(searchDoctorsFragment)
+            .commit()
         supportFragmentManager.beginTransaction().add(R.id.dashboardFragmentContainer, homeFragment)
             .commit()
     }
@@ -47,7 +47,7 @@ class PatientDashboardActivity : AppCompatActivity() {
 
     private fun setUpToolbar() {
         setSupportActionBar(toolbar as Toolbar?)
-        supportActionBar!!.title = "Dashboard"
+        supportActionBar!!.title = getString(R.string.dashboard)
     }
 
     private fun setUpDrawerMenu() {
@@ -64,14 +64,19 @@ class PatientDashboardActivity : AppCompatActivity() {
             when (it.itemId) {
                 R.id.miHome -> goToFragment(homeFragment, doctorsFragment, searchDoctorsFragment)
                 R.id.miDoctors -> goToFragment(doctorsFragment, homeFragment, searchDoctorsFragment)
-                R.id.miSearchDoctors -> goToFragment(searchDoctorsFragment, homeFragment, doctorsFragment)
+                R.id.miSearchDoctors -> goToFragment(
+                    searchDoctorsFragment,
+                    homeFragment,
+                    doctorsFragment
+                )
             }
             true
         }
     }
 
     fun goToFragment(fragment1: Fragment, fragment2: Fragment, fragment3: Fragment) {
-        supportFragmentManager.beginTransaction().show(fragment1).hide(fragment2).hide(fragment3).commit()
+        supportFragmentManager.beginTransaction().show(fragment1).hide(fragment2).hide(fragment3)
+            .commit()
     }
 
 }
