@@ -7,7 +7,10 @@ import androidx.recyclerview.widget.RecyclerView
 import dev.kacebi.hospitalapp.R
 import kotlinx.android.synthetic.main.item_doctor_overview_layout.view.*
 
-class DoctorsOverviewsAdapter(private val doctorsOverviews: MutableList<DoctorOverviewModel>) :
+class DoctorsOverviewsAdapter(
+    private val doctorsOverviews: MutableList<DoctorOverviewModel>,
+    private val doctorsOverviewsOnClick: DoctorsOverviewsOnClick
+) :
     RecyclerView.Adapter<DoctorsOverviewsAdapter.ViewHolder>() {
 
 
@@ -27,7 +30,7 @@ class DoctorsOverviewsAdapter(private val doctorsOverviews: MutableList<DoctorOv
     }
 
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        lateinit var doctorOverview: DoctorOverviewModel
+        private lateinit var doctorOverview: DoctorOverviewModel
 
         fun onBind() {
             doctorOverview = doctorsOverviews[adapterPosition]
@@ -35,6 +38,10 @@ class DoctorsOverviewsAdapter(private val doctorsOverviews: MutableList<DoctorOv
             itemView.doctorOverviewImage.setImageDrawable(doctorOverview.drawable)
             itemView.doctorOverviewFullName.text = doctorOverview.full_name
             itemView.specialtyOverview.text = doctorOverview.specialty
+
+            itemView.setOnClickListener {
+                doctorsOverviewsOnClick.onClick(adapterPosition)
+            }
         }
     }
 }

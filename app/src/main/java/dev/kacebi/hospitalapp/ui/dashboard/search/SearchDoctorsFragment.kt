@@ -1,5 +1,6 @@
 package dev.kacebi.hospitalapp.ui.dashboard.search
 
+import android.content.Intent
 import android.graphics.BitmapFactory
 import android.graphics.drawable.BitmapDrawable
 import android.os.Bundle
@@ -15,8 +16,11 @@ import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import dev.kacebi.hospitalapp.App
 import dev.kacebi.hospitalapp.R
+import dev.kacebi.hospitalapp.ui.dashboard.DoctorInformationActivity
+import dev.kacebi.hospitalapp.ui.dashboard.PatientDashboardActivity
 import dev.kacebi.hospitalapp.ui.dashboard.doctors.DoctorOverviewModel
 import dev.kacebi.hospitalapp.ui.dashboard.doctors.DoctorsOverviewsAdapter
+import dev.kacebi.hospitalapp.ui.dashboard.doctors.DoctorsOverviewsOnClick
 import kotlinx.android.synthetic.main.fragment_search_doctors.*
 import kotlinx.coroutines.*
 import kotlinx.coroutines.tasks.await
@@ -45,7 +49,23 @@ class SearchDoctorsFragment : Fragment() {
         searchDoctorsRecyclerView.layoutManager = LinearLayoutManager(context)
         adapter =
             DoctorsOverviewsAdapter(
-                doctorsOverviews
+                doctorsOverviews,
+                object : DoctorsOverviewsOnClick {
+                    override fun onClick(adapterPosition: Int) {
+                        val intent = Intent(
+                            (activity as PatientDashboardActivity),
+                            DoctorInformationActivity::class.java
+                        ).apply {
+                            putExtra(
+                                "doctorId",
+                                doctorsOverviews[adapterPosition].doctorId
+                            )
+                            putExtra("lastName", doctorsOverviews[adapterPosition].last_name)
+                        }
+                        activity!!.startActivity(intent)
+                    }
+
+                }
             )
         searchDoctorsRecyclerView.adapter = adapter
         adapter.notifyDataSetChanged()
@@ -68,7 +88,12 @@ class SearchDoctorsFragment : Fragment() {
                 for (document in querySnapshot.documents) {
                     if (jobDoctors!!.isActive) {
                         if (document.get("full_name").toString().contains(search)) {
-                            val doctor = document.toObject(DoctorOverviewModel::class.java)
+                            val doctorOverview = DoctorOverviewModel(
+                                doctorId = document.id,
+                                full_name = document["full_name"] as String,
+                                last_name = document["last_name"] as String,
+                                specialty = document["specialty"] as String
+                            )
                             val byteArray =
                                 App.storage.child(document.id + ".png").getBytes(1024 * 1024L)
                                     .await()
@@ -76,8 +101,8 @@ class SearchDoctorsFragment : Fragment() {
                                 resources,
                                 BitmapFactory.decodeByteArray(byteArray, 0, byteArray.size)
                             )
-                            doctor!!.drawable = bitmapDrawable
-                            doctorsOverviews.add(doctor)
+                            doctorOverview.drawable = bitmapDrawable
+                            doctorsOverviews.add(doctorOverview)
                         }
                     }
                 }
