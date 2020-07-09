@@ -25,4 +25,9 @@
     <string name="read_more">Read More</string>
     <string name="author">Author:</string>
     <string name="dashboard">Dashboard</string>
+    <string name="hospital_news">Hospital News</string>
+    <string name="user_profile">User Profile</string>
+    <string name="appointments">Appointments</string>
+    <string name="messages">Messages</string>
+    <string name="sign_out">Sign Out</string>
 </resources>

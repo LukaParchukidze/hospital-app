@@ -2,62 +2,98 @@
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    android:layout_marginStart="10dp"
+    android:layout_marginTop="10dp"
+    android:layout_marginEnd="10dp"
+    app:cardCornerRadius="15dp"
+    app:cardElevation="5dp">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <LinearLayout
+        android:layout_height="match_parent"
+        android:layout_marginTop="10dp"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_marginBottom="10dp"
+        android:orientation="horizontal">
 
         <de.hdodenhof.circleimageview.CircleImageView
             android:id="@+id/doctorImage"
             android:layout_width="100dp"
             android:layout_height="100dp"
+            android:layout_marginStart="10dp"
             app:civ_border_color="@android:color/black"
-            app:civ_border_width="2dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:civ_border_width="1dp" />
 
-        <TextView
-            android:id="@+id/doctorFullName"
+        <LinearLayout
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="10dp"
-            android:layout_marginTop="10dp"
-            app:layout_constraintStart_toEndOf="@id/doctorImage"
-            app:layout_constraintTop_toTopOf="parent" />
+            android:layout_height="match_parent"
+            android:layout_marginStart="15dp"
+            android:gravity="center"
+            android:orientation="vertical">
 
-        <TextView
-            android:id="@+id/doctorTime"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="10dp"
-            android:layout_marginTop="10dp"
-            app:layout_constraintStart_toEndOf="@id/doctorImage"
-            app:layout_constraintTop_toBottomOf="@id/doctorFullName" />
+            <TextView
+                android:id="@+id/doctorLastName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/nexa_light"
+                android:text="Color Ground"
+                android:textColor="@android:color/black"
+                android:textSize="16sp" />
 
-        <Button
-            android:id="@+id/cancelAppointment"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="@android:color/holo_red_dark"
-            android:text="Cancel"
-            android:textColor="@android:color/white"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent" />
+            <TextView
+                android:id="@+id/doctorTime"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:fontFamily="@font/nexa_light"
+                android:text="10:00 - 15:00"
+                android:textColor="@android:color/black"
+                android:textSize="14sp" />
 
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/message"
-            android:text="Message"
-            android:background="@color/colorPrimary"
-            android:textColor="@android:color/white"
-            app:layout_constraintEnd_toStartOf="@id/cancelAppointment"
-            app:layout_constraintBottom_toBottomOf="parent"
-            android:layout_marginEnd="20dp"
-            />
+        </LinearLayout>
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="end"
+            android:layout_marginEnd="10dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="end"
+                android:orientation="vertical">
+
+                <Button
+                    android:id="@+id/message"
+                    android:layout_width="120dp"
+                    android:layout_height="wrap_content"
+                    android:background="@color/colorPrimary"
+                    android:drawableStart="@drawable/ic_messages"
+                    android:drawableTint="@android:color/white"
+                    android:fontFamily="@font/nexa_bold"
+                    android:paddingHorizontal="10dp"
+                    android:text="Message"
+                    android:textColor="@android:color/white" />
+
+                <Button
+                    android:id="@+id/cancelAppointment"
+                    android:layout_width="120dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:background="@android:color/holo_red_dark"
+                    android:drawableStart="@drawable/ic_cancel"
+                    android:drawableTint="@android:color/white"
+                    android:fontFamily="@font/nexa_bold"
+                    android:paddingHorizontal="10dp"
+                    android:text="Cancel"
+                    android:textColor="@android:color/white" />
+            </LinearLayout>
+
+
+        </FrameLayout>
+
+    </LinearLayout>
 
 </androidx.cardview.widget.CardView>

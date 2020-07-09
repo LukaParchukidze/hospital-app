@@ -16,10 +16,12 @@ import androidx.appcompat.widget.Toolbar
 import androidx.recyclerview.widget.LinearLayoutManager
 import dev.kacebi.hospitalapp.App
 import dev.kacebi.hospitalapp.R
+import dev.kacebi.hospitalapp.tools.Tools
 import dev.kacebi.hospitalapp.ui.chat.ChatActivity
 import dev.kacebi.hospitalapp.ui.dashboard.AppointmentTime
 import dev.kacebi.hospitalapp.ui.dashboard.AppointmentTimesAdapter
 import kotlinx.android.synthetic.main.activity_doctor_information.*
+import kotlinx.android.synthetic.main.toolbar_layout.*
 import kotlinx.android.synthetic.main.dialog_appointment_layout.*
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -43,11 +45,10 @@ class DoctorInformationActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_doctor_information)
 
+        lastName = intent.extras!!.getString("lastName", "")
+        Tools.setSupportActionBar(this,"Dr. $lastName")
         doctorId = intent.extras!!.getString("doctorId")!!
         lastName = intent.extras!!.getString("lastName")!!
-        setSupportActionBar(toolbar as Toolbar?)
-        supportActionBar!!.title = "Dr. $lastName"
-        supportActionBar!!.setDisplayHomeAsUpEnabled(true)
 
         getDoctor(doctorId)
 
@@ -64,6 +65,9 @@ class DoctorInformationActivity : AppCompatActivity() {
     }
 
     private fun showDialog() {
+
+        bookDoctorButton.isClickable = false
+        messageDoctorButton.isClickable = false
 
         if (adapter != null) {
             appointmentTimes.clear()
@@ -89,17 +93,20 @@ class DoctorInformationActivity : AppCompatActivity() {
                 CoroutineScope(Dispatchers.IO).launch {
                     val data = App.dbDoctors.document(doctorId).collection("patients").document(App.auth.uid!!).get().await().data
                     if (data == null) {
-                        val info = hashMapOf(
-                            "start_time" to appointmentTimes[adapter!!.click].start_time,
-                            "end_time" to appointmentTimes[adapter!!.click].end_time
-                        )
                         App.dbDoctors.document(doctorId).collection("patients")
                             .document(App.auth.uid!!).set(
-                            info
+                                hashMapOf(
+                                    "start_time" to appointmentTimes[adapter!!.click].start_time,
+                                    "end_time" to appointmentTimes[adapter!!.click].end_time
+                                )
                         ).await()
                         App.dbUsers.document(App.auth.uid!!).collection("doctors")
                             .document(doctorId).set(
-                            info
+                                hashMapOf(
+                                    "start_time" to appointmentTimes[adapter!!.click].start_time,
+                                    "end_time" to appointmentTimes[adapter!!.click].end_time,
+                                    "last_name" to lastName
+                                )
                         ).await()
                         withContext(Dispatchers.Main) {
                             dialog.dismiss()
@@ -125,6 +132,9 @@ class DoctorInformationActivity : AppCompatActivity() {
 
         dialog.show()
 
+        bookDoctorButton.isClickable = true
+        messageDoctorButton.isClickable = true
+
         dialog.appointmentsProgressBar.visibility = View.VISIBLE
         CoroutineScope(Dispatchers.IO).launch {
             val size =
@@ -133,7 +143,6 @@ class DoctorInformationActivity : AppCompatActivity() {
 
             if (size == 0) {
                 withContext(Dispatchers.Main) {
-
                     dialog.appointmentsProgressBar.visibility = View.GONE
                     adapter!!.notifyDataSetChanged()
                 }
