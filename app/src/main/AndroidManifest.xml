@@ -12,19 +12,17 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <activity android:name=".ui.dashboard.DoctorsAppointmentsActivity"></activity>
         <activity android:name=".ui.dashboard.DoctorDashboardActivity" />
         <activity android:name=".ui.dashboard.doctors.DoctorInformationActivity" />
         <activity android:name=".ui.dashboard.home.news.NewsActivity" />
-        <activity android:name=".ui.authentication.LoginActivity">
-
-        </activity>
+        <activity android:name=".ui.authentication.LoginActivity"></activity>
         <activity android:name=".ui.chat.ZoomChatImageActivity" />
         <activity android:name=".ui.authentication.RegisterActivity" />
         <activity android:name=".ui.chat.ChatActivity" />
         <activity
             android:name=".ui.dashboard.PatientDashboardActivity"
-            android:windowSoftInputMode="adjustPan">
-        </activity>
+            android:windowSoftInputMode="adjustPan"></activity>
         <activity android:name=".ui.authentication.ForgotPasswordActivity" />
         <activity android:name=".splash.SplashActivity">
             <intent-filter>

@@ -17,6 +17,8 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import dev.kacebi.hospitalapp.App
 import dev.kacebi.hospitalapp.R
 import dev.kacebi.hospitalapp.ui.chat.ChatActivity
+import dev.kacebi.hospitalapp.ui.dashboard.AppointmentTime
+import dev.kacebi.hospitalapp.ui.dashboard.AppointmentTimesAdapter
 import kotlinx.android.synthetic.main.activity_doctor_information.*
 import kotlinx.android.synthetic.main.dialog_appointment_layout.*
 import kotlinx.coroutines.CoroutineScope
@@ -87,11 +89,18 @@ class DoctorInformationActivity : AppCompatActivity() {
                 CoroutineScope(Dispatchers.IO).launch {
                     val data = App.dbDoctors.document(doctorId).collection("patients").document(App.auth.uid!!).get().await().data
                     if (data == null) {
-                        App.dbDoctors.document(doctorId).collection("patients").document(App.auth.uid!!).set(
-                            hashMapOf(
-                                "start_time" to appointmentTimes[adapter!!.click].start_time,
-                                "end_time" to appointmentTimes[adapter!!.click].end_time
-                            )).await()
+                        val info = hashMapOf(
+                            "start_time" to appointmentTimes[adapter!!.click].start_time,
+                            "end_time" to appointmentTimes[adapter!!.click].end_time
+                        )
+                        App.dbDoctors.document(doctorId).collection("patients")
+                            .document(App.auth.uid!!).set(
+                            info
+                        ).await()
+                        App.dbUsers.document(App.auth.uid!!).collection("doctors")
+                            .document(doctorId).set(
+                            info
+                        ).await()
                         withContext(Dispatchers.Main) {
                             dialog.dismiss()
                         }
