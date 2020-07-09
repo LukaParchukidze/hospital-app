@@ -13,6 +13,7 @@ import dev.kacebi.hospitalapp.R
 import dev.kacebi.hospitalapp.extensions.setSpannableText
 import dev.kacebi.hospitalapp.tools.Tools
 import dev.kacebi.hospitalapp.ui.chat.ChatActivity
+import dev.kacebi.hospitalapp.ui.dashboard.PatientDashboardActivity
 import kotlinx.android.synthetic.main.activity_login.*
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -79,7 +80,7 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener {
                                             Toast.LENGTH_LONG
                                         )
                                             .show()
-                                        startActivity(Intent(this@LoginActivity, ChatActivity::class.java))
+                                        startActivity(Intent(this@LoginActivity, PatientDashboardActivity::class.java))
                                     } else {
                                         Toast.makeText(
                                             this@LoginActivity,

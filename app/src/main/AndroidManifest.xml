@@ -14,12 +14,12 @@
         android:theme="@style/AppTheme">
         <activity android:name=".ui.dashboard.DoctorInformationActivity" />
         <activity android:name=".ui.dashboard.home.news.NewsActivity" />
-        <activity android:name=".ui.authentication.LoginActivity" />
+        <activity android:name=".ui.dashboard.PatientDashboardActivity" />
         <activity android:name=".ui.chat.ZoomChatImageActivity" />
         <activity android:name=".ui.authentication.RegisterActivity" />
         <activity android:name=".ui.chat.ChatActivity" />
         <activity
-            android:name=".ui.dashboard.PatientDashboardActivity"
+            android:name=".ui.authentication.LoginActivity"
             android:windowSoftInputMode="adjustPan">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
