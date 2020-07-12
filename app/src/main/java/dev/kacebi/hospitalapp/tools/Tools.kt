@@ -10,15 +10,7 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import com.google.android.material.snackbar.Snackbar
-import dev.kacebi.hospitalapp.App
 import dev.kacebi.hospitalapp.R
-import dev.kacebi.hospitalapp.ui.authentication.LoginActivity
-import dev.kacebi.hospitalapp.ui.dashboard.DoctorDashboardActivity
-import dev.kacebi.hospitalapp.ui.dashboard.PatientDashboardActivity
-import kotlinx.android.synthetic.main.activity_login.*
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.tasks.await
-import kotlinx.coroutines.withContext
 import java.util.regex.Pattern.compile
 
 object Tools {
@@ -100,10 +92,15 @@ object Tools {
         snackbar.show()
     }
 
-    fun setSupportActionBar(activity: AppCompatActivity, title: String){
+    fun setSupportActionBar(activity: AppCompatActivity, title: String, isLastName: Boolean, backEnabled: Boolean){
         activity.setSupportActionBar(activity.findViewById(R.id.toolbar))
+        if (!isLastName)
+            activity.findViewById<TextView>(R.id.toolbarTitle).text = title
+        else
+            activity.findViewById<TextView>(R.id.toolbarTitle).text = "Dr. $title"
+
         activity.findViewById<TextView>(R.id.toolbarTitle).text = title
         activity.supportActionBar!!.setDisplayShowTitleEnabled(false)
-        activity.supportActionBar!!.setDisplayHomeAsUpEnabled(true)
+        activity.supportActionBar!!.setDisplayHomeAsUpEnabled(backEnabled)
     }
 }

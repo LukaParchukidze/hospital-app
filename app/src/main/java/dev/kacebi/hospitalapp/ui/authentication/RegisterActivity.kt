@@ -76,7 +76,6 @@ class RegisterActivity : AppCompatActivity(), View.OnClickListener {
                         val uid = App.auth.currentUser!!.uid
                         App.dbUsers.document(uid).set(
                             mapOf(
-                                "uid" to uid,
                                 "email" to email,
                                 "user_type" to "patient"
                             )
@@ -194,7 +193,6 @@ class RegisterActivity : AppCompatActivity(), View.OnClickListener {
             R.id.signInTextView -> Tools.startActivity(this, LoginActivity(),true)
         }
     }
-
 
     // Get image and set to ImageView
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {

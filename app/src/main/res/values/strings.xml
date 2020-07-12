@@ -26,8 +26,9 @@
     <string name="author">Author:</string>
     <string name="dashboard">Dashboard</string>
     <string name="hospital_news">Hospital News</string>
-    <string name="user_profile">User Profile</string>
+    <string name="user_profile">Profile</string>
     <string name="appointments">Appointments</string>
     <string name="messages">Messages</string>
     <string name="sign_out">Sign Out</string>
+    <string name="photo">PHOTO</string>
 </resources>
