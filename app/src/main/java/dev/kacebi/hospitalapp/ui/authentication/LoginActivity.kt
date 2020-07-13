@@ -3,6 +3,7 @@ package dev.kacebi.hospitalapp.ui.authentication
 import android.graphics.Color
 import android.os.Bundle
 import android.view.View
+import android.widget.EditText
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import dev.kacebi.hospitalapp.App
@@ -34,7 +35,7 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener {
         loginButton.setOnClickListener(this)
     }
 
-    private fun login() {
+    private fun checkConditions() {
         val email = emailLoginEditText
         val password = passwordLoginEditText
 
@@ -43,44 +44,47 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener {
             val isPasswordValid = Tools.isPasswordValid(password)
 
             if (isEmailValid && isPasswordValid) {
-                App.auth.signInWithEmailAndPassword(
-                    email.text.toString(),
-                    password.text.toString()
-                )
-                    .addOnCompleteListener(this) { task ->
-                        CoroutineScope(Dispatchers.IO).launch {
-                            if (task.isSuccessful) {
-                                val uid = App.auth.currentUser!!.uid
-                                val userType = App.dbUsers.document(uid).get().await()["user_type"]
+                login(email, password)
+            }
+        }
+    }
 
-                                withContext(Dispatchers.Main) {
-                                    if (userType != null) {
-                                        Tools.startActivity(
-                                            this@LoginActivity,
-                                            PatientDashboardActivity(), true
-                                        )
-                                    } else {
-                                        Tools.startActivity(
-                                            this@LoginActivity,
-                                            DoctorDashboardActivity(), true
-                                        )
-                                    }
-                                }
+    private fun login(email: EditText, password: EditText) {
+        App.auth.signInWithEmailAndPassword(
+            email.text.toString(),
+            password.text.toString()
+        )
+            .addOnCompleteListener(this) { task ->
+                CoroutineScope(Dispatchers.IO).launch {
+                    if (task.isSuccessful) {
+                        val uid = App.auth.currentUser!!.uid
+                        val userType = App.dbUsers.document(uid).get().await()["user_type"]
+
+                        withContext(Dispatchers.Main) {
+                            if (userType != null) {
+                                Tools.startActivity(
+                                    this@LoginActivity,
+                                    PatientDashboardActivity(), true
+                                )
                             } else {
-                                withContext(Dispatchers.Main) {
-                                    Tools.showSnackbar(
-                                        this@LoginActivity,
-                                        login_root_layout,
-                                        "Credentials was incorrect",
-                                        "Close"
-                                    )
-                                }
+                                Tools.startActivity(
+                                    this@LoginActivity,
+                                    DoctorDashboardActivity(), true
+                                )
                             }
                         }
+                    } else {
+                        withContext(Dispatchers.Main) {
+                            Tools.showSnackbar(
+                                this@LoginActivity,
+                                loginRoot,
+                                "Credentials was incorrect", false,
+                                "Close"
+                            )
+                        }
                     }
-            } else
-                return
-        }
+                }
+            }
     }
 
     private fun setUpSignUpTextView() {
@@ -101,7 +105,7 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener {
                 ForgotPasswordActivity(), true
             )
             R.id.signUpTextView -> Tools.startActivity(this@LoginActivity, RegisterActivity(), true)
-            R.id.loginButton -> login()
+            R.id.loginButton -> checkConditions()
         }
     }
 }

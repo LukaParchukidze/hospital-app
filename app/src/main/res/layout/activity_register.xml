@@ -1,230 +1,272 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/registerRoot"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@android:color/white"
     android:orientation="vertical"
     tools:context=".ui.authentication.RegisterActivity">
 
-    <LinearLayout
+    <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="center"
+        android:background="@android:color/white"
         android:orientation="vertical"
-        android:paddingHorizontal="30dp">
-
-        <de.hdodenhof.circleimageview.CircleImageView
-            android:id="@+id/cameraCircleImageView"
-            android:layout_width="200dp"
-            android:layout_height="200dp"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginTop="60dp"
-            android:src="@drawable/ic_user"
-            app:civ_border_color="@color/colorPrimary"
-            app:civ_border_width="5dp" />
-
-        <TextView
-            android:id="@+id/uploadPicture"
-            android:layout_width="wrap_content"
-            android:layout_height="50dp"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginTop="15dp"
-            android:fontFamily="@font/nexa_light"
-            android:gravity="center"
-            android:text="Upload Picture"
-            android:textSize="13sp"
-            android:textStyle="bold" />
-
-        <EditText
-            android:id="@+id/firstNameEditText"
-            android:layout_width="match_parent"
-            android:layout_height="45dp"
-            android:layout_marginTop="40dp"
-            android:background="@drawable/fields_background"
-            android:drawableStart="@drawable/ic_user"
-            android:drawablePadding="12dp"
-            android:fontFamily="@font/nexa_light"
-            android:hint="@string/firstname_edittext_hint"
-            android:inputType="text"
-            android:maxLines="1"
-            android:paddingStart="15dp"
-            android:paddingEnd="15dp"
-            android:textColor="@color/edittexts_text_color"
-            android:textColorHint="@color/edittexts_hint_color"
-            android:textSize="@dimen/edittexts_text_size" />
-
-        <EditText
-            android:id="@+id/lastNameEditText"
-            android:layout_width="match_parent"
-            android:layout_height="45dp"
-            android:layout_marginTop="15dp"
-            android:background="@drawable/fields_background"
-            android:drawableStart="@drawable/ic_user"
-            android:drawablePadding="12dp"
-            android:fontFamily="@font/nexa_light"
-            android:hint="@string/lastname_edittext_hint"
-            android:inputType="text"
-            android:maxLines="1"
-            android:paddingStart="15dp"
-            android:paddingEnd="15dp"
-            android:textColor="@color/edittexts_text_color"
-            android:textColorHint="@color/edittexts_hint_color"
-            android:textSize="@dimen/edittexts_text_size" />
-
-        <EditText
-            android:id="@+id/emailRegisterEditText"
-            android:layout_width="match_parent"
-            android:layout_height="45dp"
-            android:layout_marginTop="15dp"
-            android:background="@drawable/fields_background"
-            android:drawableStart="@drawable/ic_mail"
-            android:drawablePadding="12dp"
-            android:fontFamily="@font/nexa_light"
-            android:hint="@string/email_edittext_hint"
-            android:inputType="textEmailAddress"
-            android:maxLines="1"
-            android:paddingStart="15dp"
-            android:paddingEnd="15dp"
-            android:textColor="@color/edittexts_text_color"
-            android:textColorHint="@color/edittexts_hint_color"
-            android:textSize="@dimen/edittexts_text_size" />
-
-        <EditText
-            android:id="@+id/passwordRegisterEditText"
-            android:layout_width="match_parent"
-            android:layout_height="45dp"
-            android:layout_marginTop="15dp"
-            android:background="@drawable/fields_background"
-            android:drawableStart="@drawable/ic_password"
-            android:drawablePadding="12dp"
-            android:fontFamily="@font/nexa_light"
-            android:hint="@string/password_edittext_hint"
-            android:inputType="textPassword"
-            android:maxLines="1"
-            android:paddingStart="15dp"
-            android:paddingEnd="15dp"
-            android:textColor="@color/edittexts_text_color"
-            android:textColorHint="@color/edittexts_hint_color" />
-
-        <EditText
-            android:id="@+id/rePasswordRegisterEditText"
-            android:layout_width="match_parent"
-            android:layout_height="45dp"
-            android:layout_marginTop="15dp"
-            android:background="@drawable/fields_background"
-            android:drawableStart="@drawable/ic_password"
-            android:drawablePadding="12dp"
-            android:fontFamily="@font/nexa_light"
-            android:hint="@string/repassword_edittext_hint"
-            android:inputType="textPassword"
-            android:maxLines="1"
-            android:paddingStart="15dp"
-            android:paddingEnd="15dp"
-            android:textColor="@color/edittexts_text_color"
-            android:textColorHint="@color/edittexts_hint_color" />
+        android:paddingBottom="20dp">
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginTop="15dp">
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:focusableInTouchMode="true"
+            android:orientation="vertical"
+            android:paddingHorizontal="30dp">
 
             <LinearLayout
-                android:id="@+id/chooseDate"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="45"
+                android:id="@+id/imageUpload"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
                 android:orientation="vertical">
 
-                <TextView
-                    android:id="@+id/birthDateTextView"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="15dp"
-                    android:fontFamily="@font/nexa_light"
-                    android:text="Birth Date"
-                    android:textSize="16sp" />
+                <ImageView
+                    android:id="@+id/chooserImageView"
+                    android:layout_width="80dp"
+                    android:layout_height="80dp"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginTop="60dp"
+                    android:background="@mipmap/ic_avatar_placeholder"
+                    android:backgroundTint="@color/colorPrimary"
+                    android:scaleType="centerCrop" />
+
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:id="@+id/uploadedImageCircleImageView"
+                    android:layout_width="150dp"
+                    android:layout_height="150dp"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginTop="60dp"
+                    android:visibility="gone"
+                    app:civ_border_color="@color/colorPrimary"
+                    app:civ_border_width="2dp"
+                    tools:ignore="VectorDrawableCompat" />
 
                 <TextView
-                    android:id="@+id/selectedDateTextView"
+                    android:id="@+id/uploadImageTextView"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="15dp"
-                    android:fontFamily="@font/nexa_light"
-                    android:paddingTop="10dp"
-                    android:paddingBottom="10dp"
-                    android:text="@string/date_default_text"
-                    android:textSize="16sp" />
+                    android:layout_height="50dp"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginTop="15dp"
+                    android:fontFamily="@font/nexa_bold"
+                    android:gravity="center"
+                    android:text="Upload Image"
+                    android:textSize="13sp"
+                    android:textStyle="bold" />
 
             </LinearLayout>
 
+
+            <EditText
+                android:id="@+id/firstNameEditText"
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+                android:layout_marginTop="30dp"
+                android:background="@drawable/fields_background"
+                android:drawableStart="@drawable/ic_user"
+                android:drawablePadding="12dp"
+                android:drawableTint="@color/colorPrimary"
+                android:fontFamily="@font/nexa_light"
+                android:hint="@string/firstname_edittext_hint"
+                android:inputType="text"
+                android:maxLines="1"
+                android:paddingStart="15dp"
+                android:paddingEnd="15dp"
+                android:textColor="@color/edittexts_text_color"
+                android:textColorHint="@color/edittexts_hint_color"
+                android:textSize="@dimen/edittexts_text_size" />
+
+            <EditText
+                android:id="@+id/lastNameEditText"
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+                android:layout_marginTop="15dp"
+                android:background="@drawable/fields_background"
+                android:drawableStart="@drawable/ic_user"
+                android:drawablePadding="12dp"
+                android:drawableTint="@color/colorPrimary"
+                android:fontFamily="@font/nexa_light"
+                android:hint="@string/lastname_edittext_hint"
+                android:inputType="text"
+                android:maxLines="1"
+                android:paddingStart="15dp"
+                android:paddingEnd="15dp"
+                android:textColor="@color/edittexts_text_color"
+                android:textColorHint="@color/edittexts_hint_color"
+                android:textSize="@dimen/edittexts_text_size" />
+
+            <EditText
+                android:id="@+id/emailRegisterEditText"
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+                android:layout_marginTop="15dp"
+                android:background="@drawable/fields_background"
+                android:drawableStart="@drawable/ic_mail"
+                android:drawablePadding="12dp"
+                android:drawableTint="@color/colorPrimary"
+                android:fontFamily="@font/nexa_light"
+                android:hint="@string/email_edittext_hint"
+                android:inputType="textEmailAddress"
+                android:maxLines="1"
+                android:paddingStart="15dp"
+                android:paddingEnd="15dp"
+                android:textColor="@color/edittexts_text_color"
+                android:textColorHint="@color/edittexts_hint_color"
+                android:textSize="@dimen/edittexts_text_size" />
+
+            <EditText
+                android:id="@+id/passwordRegisterEditText"
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+                android:layout_marginTop="15dp"
+                android:background="@drawable/fields_background"
+                android:drawableStart="@drawable/ic_password"
+                android:drawablePadding="12dp"
+                android:drawableTint="@color/colorPrimary"
+                android:fontFamily="@font/nexa_light"
+                android:hint="@string/password_edittext_hint"
+                android:inputType="textPassword"
+                android:maxLines="1"
+                android:paddingStart="15dp"
+                android:paddingEnd="15dp"
+                android:textColor="@color/edittexts_text_color"
+                android:textColorHint="@color/edittexts_hint_color" />
+
+            <EditText
+                android:id="@+id/rePasswordRegisterEditText"
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+                android:layout_marginTop="15dp"
+                android:background="@drawable/fields_background"
+                android:drawableStart="@drawable/ic_password"
+                android:drawablePadding="12dp"
+                android:drawableTint="@color/colorPrimary"
+                android:fontFamily="@font/nexa_light"
+                android:hint="@string/repassword_edittext_hint"
+                android:inputType="textPassword"
+                android:maxLines="1"
+                android:paddingStart="15dp"
+                android:paddingEnd="15dp"
+                android:textColor="@color/edittexts_text_color"
+                android:textColorHint="@color/edittexts_hint_color" />
+
             <LinearLayout
-                android:layout_width="0dp"
+                android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_weight="55"
-                android:orientation="vertical">
+                android:layout_marginTop="20dp">
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="6dp"
-                    android:fontFamily="@font/nexa_light"
-                    android:text="Gender"
-                    android:textSize="16sp" />
+                <LinearLayout
+                    android:id="@+id/chooseDate"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="45"
+                    android:orientation="vertical">
 
-                <RadioGroup
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="3dp"
-                    android:orientation="horizontal">
-
-                    <RadioButton
-                        android:id="@+id/radioButton"
+                    <TextView
+                        android:id="@+id/birthDateTextView"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_marginStart="15dp"
                         android:fontFamily="@font/nexa_light"
-                        android:text="Male"
-                        android:textSize="15sp" />
+                        android:text="Birth Date"
+                        android:textSize="16sp" />
 
-                    <RadioButton
-                        android:id="@+id/radioButton2"
+                    <TextView
+                        android:id="@+id/selectedDateTextView"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_marginStart="15dp"
                         android:fontFamily="@font/nexa_light"
-                        android:text="Female"
-                        android:textSize="15sp" />
+                        android:paddingTop="10dp"
+                        android:paddingBottom="10dp"
+                        android:text="@string/date_default_text"
+                        android:textSize="16sp" />
 
-                </RadioGroup>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="55"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/genderTextView"
+                        android:layout_width="100dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="6dp"
+                        android:fontFamily="@font/nexa_light"
+                        android:text="Gender"
+                        android:textSize="16sp" />
+
+                    <RadioGroup
+                        android:id="@+id/genderChooser"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="3dp"
+                        android:orientation="horizontal">
+
+                        <RadioButton
+                            android:id="@+id/maleRadioButton"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:buttonTint="@color/colorPrimary"
+                            android:fontFamily="@font/nexa_light"
+                            android:text="Male"
+                            android:textSize="15sp" />
+
+                        <RadioButton
+                            android:id="@+id/femaleRadioButton"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:buttonTint="@color/colorPrimary"
+                            android:fontFamily="@font/nexa_light"
+                            android:text="Female"
+                            android:textSize="15sp" />
+
+                    </RadioGroup>
+                </LinearLayout>
+
             </LinearLayout>
+
+
+            <Button
+                android:id="@+id/registerButton"
+                android:layout_width="200dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="40dp"
+                android:background="@drawable/button_background"
+                android:fontFamily="@font/nexa_light"
+                android:text="@string/sign_up"
+                android:textAlignment="center"
+                android:textAllCaps="false"
+                android:textColor="#FFFFFF"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/signInTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="30dp"
+                android:layout_gravity="bottom|center"
+                android:layout_marginTop="60dp"
+                android:fontFamily="@font/nexa_light"
+                android:gravity="center" />
 
         </LinearLayout>
 
 
-        <Button
-            android:id="@+id/registerButton"
-            android:layout_width="200dp"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginTop="40dp"
-            android:background="@drawable/button_background"
-            android:fontFamily="@font/nexa_light"
-            android:text="@string/sign_up"
-            android:textAlignment="center"
-            android:textAllCaps="false"
-            android:textColor="#FFFFFF"
-            android:textSize="18sp"
-            android:textStyle="bold" />
+    </FrameLayout>
 
-    </LinearLayout>
 
-    <TextView
-        android:id="@+id/signInTextView"
-        android:layout_width="wrap_content"
-        android:layout_height="30dp"
-        android:layout_gravity="bottom|center"
-        android:layout_marginBottom="30dp"
-        android:fontFamily="@font/nexa_light"
-        android:gravity="center" />
-</FrameLayout>
-
+</ScrollView>

@@ -6,4 +6,7 @@
     <color name="edittexts_text_color">#373737</color>
     <color name="edittexts_hint_color">#878787</color>
     <color name="snackbar_action_text_color">#FF0700</color>
+    <color name="colorDivider">#ECECEC</color>
+    <color name="errorColor">#FF0700</color>
+    <color name="pinkColor">#E84372</color>
 </resources>

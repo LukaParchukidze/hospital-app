@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     package="dev.kacebi.hospitalapp">
 
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
@@ -12,25 +13,61 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".ui.dashboard.DoctorsAppointmentsActivity" />
-        <activity android:name=".ui.dashboard.DoctorDashboardActivity" />
-        <activity android:name=".ui.dashboard.doctors.DoctorInformationActivity" />
-        <activity android:name=".ui.dashboard.home.news.NewsActivity" />
-        <activity android:name=".ui.authentication.LoginActivity" />
-        <activity android:name=".ui.chat.ZoomChatImageActivity" />
-        <activity android:name=".ui.authentication.RegisterActivity" />
-        <activity android:name=".ui.chat.ChatActivity" />
         <activity
-            android:name=".ui.dashboard.PatientDashboardActivity"
-            android:windowSoftInputMode="adjustPan" />
+            android:name=".ui.dashboard.DoctorsAppointmentsActivity"
+            android:screenOrientation="portrait"
+            tools:ignore="LockedOrientationActivity" />
+        <activity
+            android:name=".ui.dashboard.DoctorDashboardActivity"
+            android:screenOrientation="portrait"
+            tools:ignore="LockedOrientationActivity" />
+        <activity
+            android:name=".ui.dashboard.doctors.DoctorInformationActivity"
+            android:screenOrientation="portrait"
+            tools:ignore="LockedOrientationActivity" />
+        <activity
+            android:name=".ui.dashboard.home.news.NewsActivity"
+            android:screenOrientation="portrait"
+            tools:ignore="LockedOrientationActivity" />
+        <activity
+            android:name=".ui.authentication.LoginActivity"
+            android:screenOrientation="portrait"
+            tools:ignore="LockedOrientationActivity">
 
-        <activity android:name=".ui.authentication.ForgotPasswordActivity" />
-        <activity android:name=".splash.SplashActivity">
+        </activity>
+        <activity
+            android:name=".ui.chat.ZoomChatImageActivity"
+            android:screenOrientation="portrait"
+            tools:ignore="LockedOrientationActivity" />
+        <activity
+            android:name=".ui.authentication.RegisterActivity"
+            android:screenOrientation="portrait"
+            tools:ignore="LockedOrientationActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+        </activity>
+        <activity
+            android:name=".ui.chat.ChatActivity"
+            android:screenOrientation="portrait"
+            tools:ignore="LockedOrientationActivity" />
+        <activity
+            android:name=".ui.dashboard.PatientDashboardActivity"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustPan"
+            tools:ignore="LockedOrientationActivity" />
+
+        <activity
+            android:name=".ui.authentication.ForgotPasswordActivity"
+            android:screenOrientation="portrait"
+            tools:ignore="LockedOrientationActivity" />
+        <activity
+            android:name=".splash.SplashActivity"
+            android:screenOrientation="portrait"
+            tools:ignore="LockedOrientationActivity">
+
         </activity>
     </application>
 

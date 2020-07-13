@@ -3,6 +3,7 @@ package dev.kacebi.hospitalapp.tools
 import android.app.Activity
 import android.content.Context
 import android.content.Intent
+import android.util.Log.d
 import android.view.View
 import android.widget.EditText
 import android.widget.TextView
@@ -10,15 +11,8 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import com.google.android.material.snackbar.Snackbar
-import dev.kacebi.hospitalapp.App
+import de.hdodenhof.circleimageview.CircleImageView
 import dev.kacebi.hospitalapp.R
-import dev.kacebi.hospitalapp.ui.authentication.LoginActivity
-import dev.kacebi.hospitalapp.ui.dashboard.DoctorDashboardActivity
-import dev.kacebi.hospitalapp.ui.dashboard.PatientDashboardActivity
-import kotlinx.android.synthetic.main.activity_login.*
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.tasks.await
-import kotlinx.coroutines.withContext
 import java.util.regex.Pattern.compile
 
 object Tools {
@@ -67,6 +61,32 @@ object Tools {
         return true
     }
 
+    fun isPasswordsEquals(passwordEditText: EditText, rePasswordEditText: EditText): Boolean {
+        return if (passwordEditText.text.toString() == rePasswordEditText.text.toString())
+            true
+        else {
+            rePasswordEditText.error = "Re-Password doesn't match"
+            false
+        }
+    }
+
+    fun isTextViewsNotEmpty(pairs: Map<String, TextView>): Boolean {
+        var result = true
+
+        for ((key, value) in pairs) {
+            if (key.contains("Empty")) {
+                value.error = ""
+                result = false
+            } else
+                value.error = null
+        }
+        return result
+    }
+
+    fun isImageViewNotEmpty(image: CircleImageView): Boolean {
+        return image.drawable != null
+    }
+
     fun startActivity(context: Context, activity: Activity, isFinished: Boolean) {
         val intent = Intent(context, activity::class.java)
 
@@ -81,15 +101,27 @@ object Tools {
         )
     }
 
-    fun showSnackbar(context: Context, rootView: View, message: String, actionText: String) {
+    fun showSnackbar(
+        context: Context,
+        rootView: View,
+        message: String,
+        isContinuable: Boolean,
+        actionText: String
+    ) {
         val snackbar = Snackbar.make(
             rootView,
             message,
-            Snackbar.LENGTH_INDEFINITE
+            if (isContinuable)
+                Snackbar.LENGTH_INDEFINITE
+            else
+                Snackbar.LENGTH_LONG
         )
+
         snackbar.setAction(actionText) {
             snackbar.dismiss()
         }
+
+
         snackbar.setActionTextColor(
             ContextCompat.getColor(
                 context,
@@ -100,7 +132,7 @@ object Tools {
         snackbar.show()
     }
 
-    fun setSupportActionBar(activity: AppCompatActivity, title: String){
+    fun setSupportActionBar(activity: AppCompatActivity, title: String) {
         activity.setSupportActionBar(activity.findViewById(R.id.toolbar))
         activity.findViewById<TextView>(R.id.toolbarTitle).text = title
         activity.supportActionBar!!.setDisplayShowTitleEnabled(false)
