@@ -13,10 +13,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="@drawable/message_from_background"
-        android:gravity="end"
-        android:maxWidth="280dp"
+        android:textIsSelectable="true"
         android:padding="10dp"
-        android:textAlignment="gravity"
+        android:maxWidth="280dp"
         android:textColor="@android:color/white"
         android:textSize="18sp" />
 

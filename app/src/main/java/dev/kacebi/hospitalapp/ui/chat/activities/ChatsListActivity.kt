@@ -70,7 +70,7 @@ class ChatsListActivity : AppCompatActivity() {
                 override fun onChildAdded(snapshot: DataSnapshot, previousChildName: String?) {
                     CoroutineScope(Dispatchers.IO).launch {
                         val id = snapshot.key!!
-                        val byteArray = App.storage.child("$id.png").getBytes(FileSizeConstants.ONE_MEGABYTE).await()
+                        val byteArray = App.storage.child("$id.png").getBytes(FileSizeConstants.THREE_MEGABYTES).await()
                         val bitmapDrawable = BitmapDrawable(
                             resources,
                             BitmapFactory.decodeByteArray(byteArray, 0, byteArray.size)

@@ -1,5 +1,8 @@
 package dev.kacebi.hospitalapp.ui.patients_dashboard
 
+import android.content.Intent
+import android.graphics.BitmapFactory
+import android.graphics.drawable.BitmapDrawable
 import android.os.Bundle
 import android.view.Gravity
 import android.view.MenuItem
@@ -10,6 +13,7 @@ import androidx.fragment.app.Fragment
 import com.google.android.material.navigation.NavigationView
 import dev.kacebi.hospitalapp.App
 import dev.kacebi.hospitalapp.R
+import dev.kacebi.hospitalapp.file_size_constants.FileSizeConstants
 import dev.kacebi.hospitalapp.tools.Tools
 import dev.kacebi.hospitalapp.ui.authentication.LoginActivity
 import dev.kacebi.hospitalapp.ui.chat.activities.ChatsListActivity
@@ -19,7 +23,13 @@ import dev.kacebi.hospitalapp.ui.patients_dashboard.home.HomeFragment
 import dev.kacebi.hospitalapp.ui.patients_dashboard.search.SearchDoctorsFragment
 import dev.kacebi.hospitalapp.ui.profile.ProfileActivity
 import kotlinx.android.synthetic.main.activity_patient_dashboard.*
+import kotlinx.android.synthetic.main.nav_drawer_header.*
 import kotlinx.android.synthetic.main.toolbar_layout.*
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.tasks.await
+import kotlinx.coroutines.withContext
 
 class PatientDashboardActivity : AppCompatActivity() {
 
@@ -40,6 +50,17 @@ class PatientDashboardActivity : AppCompatActivity() {
         setUpNavigationView()
 
         addFragments()
+
+        //get user icon
+        CoroutineScope(Dispatchers.IO).launch {
+            val byteArray = App.storage.child("${App.auth.uid!!}.png").getBytes(FileSizeConstants.THREE_MEGABYTES).await()
+            val bitmapDrawable = BitmapDrawable(resources, BitmapFactory.decodeByteArray(byteArray, 0, byteArray.size))
+            val fullName = App.dbUsers.document(App.auth.uid!!).get().await()["full_name"] as String
+            withContext(Dispatchers.Main) {
+                drawerPictureImageView.setImageDrawable(bitmapDrawable)
+                drawerFullNameTextView.text = fullName
+            }
+        }
     }
 
     private fun addFragments(){

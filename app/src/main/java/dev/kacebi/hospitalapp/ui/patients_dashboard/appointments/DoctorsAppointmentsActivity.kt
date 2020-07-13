@@ -131,7 +131,7 @@ class DoctorsAppointmentsActivity : AppCompatActivity() {
                                     time = (document["start_time"] as String + " - " + document["end_time"])
                                 )
                             val byteArray =
-                                App.storage.child(document.id + ".png").getBytes(FileSizeConstants.ONE_MEGABYTE).await()
+                                App.storage.child(document.id + ".png").getBytes(FileSizeConstants.THREE_MEGABYTES).await()
                             val bitmapDrawable = BitmapDrawable(
                                 resources,
                                 BitmapFactory.decodeByteArray(byteArray, 0, byteArray.size)

@@ -101,7 +101,7 @@ class DoctorsFragment : Fragment() {
                             specialty = document["specialty"] as String
                         )
 //                    val byteArray =
-//                        App.storage.child(document.id + ".png").getBytes(FileSizeConstants.ONE_MEGABYTE).await()
+//                        App.storage.child(document.id + ".png").getBytes(FileSizeConstants.THREE_MEGABYTES).await()
 //                    val bitmapDrawable = BitmapDrawable(
 //                        resources,
 //                        BitmapFactory.decodeByteArray(byteArray, 0, byteArray.size)

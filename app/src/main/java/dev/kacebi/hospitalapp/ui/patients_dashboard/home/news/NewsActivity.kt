@@ -38,7 +38,7 @@ class NewsActivity : AppCompatActivity() {
             news = App.dbNews.document("news${position + 1}").get().await().toObject(
                 NewsModel::class.java
             )
-//            val byteArray = App.storage.child(news!!.image_uri).getBytes(FileSizeConstants.ONE_MEGABYTE).await()
+//            val byteArray = App.storage.child(news!!.image_uri).getBytes(FileSizeConstants.THREE_MEGABYTES).await()
 //            val bitmapDrawable = BitmapDrawable(
 //                resources,
 //                BitmapFactory.decodeByteArray(byteArray, 0, byteArray.size)

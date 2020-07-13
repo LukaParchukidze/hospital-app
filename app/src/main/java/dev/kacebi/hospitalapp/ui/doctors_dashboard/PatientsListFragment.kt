@@ -74,7 +74,7 @@ class PatientsListFragment : Fragment() {
                             )
                             val byteArray =
                                 App.storage.child(appointment.patientId + ".png")
-                                    .getBytes(FileSizeConstants.ONE_MEGABYTE)
+                                    .getBytes(FileSizeConstants.THREE_MEGABYTES)
                                     .await()
                             val bitmapDrawable = BitmapDrawable(
                                 resources,

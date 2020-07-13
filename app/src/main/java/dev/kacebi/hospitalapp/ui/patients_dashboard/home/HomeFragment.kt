@@ -61,7 +61,7 @@ class HomeFragment : Fragment() {
                 val news = App.dbNews.document(item.id).get().await().toObject(
                     NewsModel::class.java
                 )
-//                val byteArray = App.storage.child(news!!.image_uri).getBytes(FileSizeConstants.ONE_MEGABYTE).await()
+//                val byteArray = App.storage.child(news!!.image_uri).getBytes(FileSizeConstants.THREE_MEGABYTES).await()
 //                val bitmapDrawable = BitmapDrawable(
 //                    resources,
 //                    BitmapFactory.decodeByteArray(byteArray, 0, byteArray.size)
@@ -108,7 +108,7 @@ class HomeFragment : Fragment() {
                 val specialty = App.dbSpecialties.document(specialtyQDS.id).get().await().toObject(
                     SpecialtyModel::class.java
                 )!!
-//                val byteArray = App.storage.child(specialty!!.uri).getBytes(FileSizeConstants.ONE_MEGABYTE).await()
+//                val byteArray = App.storage.child(specialty!!.uri).getBytes(FileSizeConstants.THREE_MEGABYTES).await()
 //                val bitmapDrawable = BitmapDrawable(
 //                    resources,
 //                    BitmapFactory.decodeByteArray(byteArray, 0, byteArray.size)

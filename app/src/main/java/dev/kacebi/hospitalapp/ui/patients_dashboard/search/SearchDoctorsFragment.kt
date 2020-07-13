@@ -97,7 +97,7 @@ class SearchDoctorsFragment : Fragment() {
                                     specialty = document["specialty"] as String
                                 )
                             val byteArray =
-                                App.storage.child(document.id + ".png").getBytes(FileSizeConstants.ONE_MEGABYTE)
+                                App.storage.child(document.id + ".png").getBytes(FileSizeConstants.THREE_MEGABYTES)
                                     .await()
                             val bitmapDrawable = BitmapDrawable(
                                 resources,

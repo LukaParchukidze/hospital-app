@@ -205,7 +205,7 @@ class DoctorInformationActivity : AppCompatActivity() {
             doctor =
                 App.dbDoctors.document(doctorId).get().await()
                     .toObject(DoctorModel::class.java)!!
-            val byteArray = App.storage.child("$doctorId.png").getBytes(FileSizeConstants.ONE_MEGABYTE).await()
+            val byteArray = App.storage.child("$doctorId.png").getBytes(FileSizeConstants.THREE_MEGABYTES).await()
             val bitmapDrawable = BitmapDrawable(
                 resources,
                 BitmapFactory.decodeByteArray(byteArray, 0, byteArray.size)

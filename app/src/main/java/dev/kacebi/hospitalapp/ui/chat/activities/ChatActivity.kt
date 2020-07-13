@@ -5,13 +5,17 @@ import android.content.Intent
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.os.Bundle
+import android.util.Log.d
 import android.view.animation.AnimationUtils
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.net.toFile
+import androidx.documentfile.provider.DocumentFile
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.*
 import com.google.firebase.storage.FirebaseStorage
+import dev.kacebi.hospitalapp.App
 import dev.kacebi.hospitalapp.R
 import dev.kacebi.hospitalapp.file_size_constants.FileSizeConstants
 import dev.kacebi.hospitalapp.tools.Tools
@@ -27,6 +31,7 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.tasks.await
 import kotlinx.coroutines.withContext
 import java.io.File
+import java.net.URI
 
 class ChatActivity : AppCompatActivity() {
 
@@ -43,8 +48,6 @@ class ChatActivity : AppCompatActivity() {
 
     private lateinit var toUserMessagesDatabase: DatabaseReference
     private lateinit var toLatestMessagesDatabase: DatabaseReference
-
-    private val storageRef = FirebaseStorage.getInstance().reference
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -77,7 +80,7 @@ class ChatActivity : AppCompatActivity() {
 
         CoroutineScope(Dispatchers.IO).launch {
             val byteArray =
-                storageRef.child("$toId.png").getBytes(FileSizeConstants.ONE_MEGABYTE).await()
+                App.storage.child("$toId.png").getBytes(FileSizeConstants.THREE_MEGABYTES).await()
             val toIdProfileImage: Bitmap =
                 BitmapFactory.decodeByteArray(byteArray, 0, byteArray.size)
 
@@ -113,7 +116,7 @@ class ChatActivity : AppCompatActivity() {
 
         //Send Text Message Listener
         btnChat.setOnClickListener {
-            val message = etChat.text.toString()
+            val message = etChat.text.toString().trim()
             if (message.isNotEmpty()) {
                 it.startAnimation(AnimationUtils.loadAnimation(this, R.anim.click))
                 val messageModel =
@@ -178,13 +181,13 @@ class ChatActivity : AppCompatActivity() {
         super.onActivityResult(requestCode, resultCode, data)
         if (resultCode == Activity.RESULT_OK && requestCode == RegisterActivity.REQUEST_CODE_GALLERY && data != null) {
             val imageUri = data.data!!
-            val imageSize = File(imageUri.path!!).length()
+            val imageSize = DocumentFile.fromSingleUri(this, imageUri)!!.length()
 
-            if (imageSize <= FileSizeConstants.FIVE_MEGABYTES) {
+            if (imageSize <= FileSizeConstants.TWO_MEGABYTES) {
                 val push = fromUserMessagesDatabase.push()
                 val path = "/sent_photos/${push.key}/${imageUri.lastPathSegment}"
                 CoroutineScope(Dispatchers.IO).launch {
-                    storageRef.child(path).putFile(imageUri).await()
+                    App.storage.child(path).putFile(imageUri).await()
                     val chatMessage = ChatMessageModel(
                         fromId = fromId,
                         toId = toId,
@@ -202,7 +205,7 @@ class ChatActivity : AppCompatActivity() {
                     toLatestMessagesDatabase.setValue(chatMessage)
                 }
             } else {
-                Toast.makeText(this, "The file limit is 5 MB", Toast.LENGTH_LONG).show()
+                Toast.makeText(this, "The file size limit is 2 MB", Toast.LENGTH_LONG).show()
             }
         }
     }
