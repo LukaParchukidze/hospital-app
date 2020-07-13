@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".ui.dashboard.doctors.DoctorInformationActivity">
+    tools:context=".ui.patients_dashboard.doctors.full_information.DoctorInformationActivity">
 
     <include
         layout="@layout/toolbar_layout" />
@@ -36,7 +36,7 @@
                 android:orientation="vertical">
 
                 <de.hdodenhof.circleimageview.CircleImageView
-                    android:id="@+id/doctorImage"
+                    android:id="@+id/doctorProfileImageView"
                     android:layout_width="200dp"
                     android:layout_height="200dp"
                     android:layout_gravity="center_horizontal"

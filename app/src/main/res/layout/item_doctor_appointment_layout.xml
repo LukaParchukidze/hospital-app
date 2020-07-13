@@ -17,7 +17,7 @@
         android:orientation="horizontal">
 
         <de.hdodenhof.circleimageview.CircleImageView
-            android:id="@+id/doctorImage"
+            android:id="@+id/doctorProfileImageView"
             android:layout_width="100dp"
             android:layout_height="100dp"
             android:layout_marginStart="10dp"
@@ -41,7 +41,7 @@
                 android:textSize="16sp" />
 
             <TextView
-                android:id="@+id/doctorTime"
+                android:id="@+id/appointmentTimeTextView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
@@ -49,6 +49,16 @@
                 android:text="10:00 - 15:00"
                 android:textColor="@android:color/black"
                 android:textSize="14sp" />
+
+            <TextView
+                android:id="@+id/appointmentStatusTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Unconfirmed"
+                android:padding="5dp"
+                android:background="@android:color/darker_gray"
+                android:textColor="@android:color/white"
+                />
 
         </LinearLayout>
 
@@ -78,7 +88,7 @@
                     android:textColor="@android:color/white" />
 
                 <Button
-                    android:id="@+id/cancelAppointment"
+                    android:id="@+id/cancelAppointmentButton"
                     android:layout_width="120dp"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
@@ -89,6 +99,7 @@
                     android:paddingHorizontal="10dp"
                     android:text="Cancel"
                     android:textColor="@android:color/white" />
+
             </LinearLayout>
 
 

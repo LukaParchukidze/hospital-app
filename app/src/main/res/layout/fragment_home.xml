@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.dashboard.home.HomeFragment">
+    tools:context=".ui.patients_dashboard.home.HomeFragment">
 
     <TextView
         android:id="@+id/newsTextView"

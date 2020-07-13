@@ -10,8 +10,8 @@ import dev.kacebi.hospitalapp.App
 import dev.kacebi.hospitalapp.R
 import dev.kacebi.hospitalapp.extensions.setSpannableText
 import dev.kacebi.hospitalapp.tools.Tools
-import dev.kacebi.hospitalapp.ui.dashboard.DoctorDashboardActivity
-import dev.kacebi.hospitalapp.ui.dashboard.PatientDashboardActivity
+import dev.kacebi.hospitalapp.ui.doctors_dashboard.DoctorDashboardActivity
+import dev.kacebi.hospitalapp.ui.patients_dashboard.PatientDashboardActivity
 import kotlinx.android.synthetic.main.activity_login.*
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers

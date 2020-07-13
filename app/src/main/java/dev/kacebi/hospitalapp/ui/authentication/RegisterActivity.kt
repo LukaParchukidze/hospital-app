@@ -17,15 +17,18 @@ import android.util.Log.d
 import android.view.View
 import android.widget.LinearLayout
 import android.widget.TextView
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.core.graphics.drawable.toBitmap
+import androidx.documentfile.provider.DocumentFile
 import com.bumptech.glide.Glide
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import dev.kacebi.hospitalapp.App
 import dev.kacebi.hospitalapp.R
 import dev.kacebi.hospitalapp.extensions.setNewColor
 import dev.kacebi.hospitalapp.extensions.setSpannableText
+import dev.kacebi.hospitalapp.file_size_constants.FileSizeConstants
 import dev.kacebi.hospitalapp.tools.Tools
 import dev.kacebi.hospitalapp.tools.Utils
 import dev.kacebi.hospitalapp.tools.Utils.bitmapToByteArray
@@ -198,11 +201,11 @@ class RegisterActivity : AppCompatActivity(), View.OnClickListener {
                                             )
                                         ).await()
 
-                                        if (imageUri != null)
+                                        if (imageUri != null) {
                                             App.storage.child("/patient_photos/$uid.png")
                                                 .putFile(imageUri!!)
                                                 .await()
-                                        else {
+                                        } else {
                                             App.storage.child("/patient_photos/$uid.png")
                                                 .putBytes(bitmapToByteArray(takenImage!!))
                                                 .await()
@@ -291,10 +294,24 @@ class RegisterActivity : AppCompatActivity(), View.OnClickListener {
         // Get Image from Gallery
         if (requestCode == REQUEST_CODE_GALLERY && resultCode == RESULT_OK && data != null) {
             imageUri = data.data
+            val imageSize = DocumentFile.fromSingleUri(
+                this@RegisterActivity,
+                imageUri!!
+            )!!.length()
+            if (imageSize <= FileSizeConstants.THREE_MEGABYTES) {
+                Glide.with(this).load(imageUri).into(uploadedImageCircleImageView)
+                changeUIAfterImageUpload()
+            } else {
+                Toast.makeText(
+                    this@RegisterActivity,
+                    "The file size limit is 3 MB",
+                    Toast.LENGTH_LONG
+                ).show()
+                imageUri = null
+            }
             takenImage = null
-            Glide.with(this).load(imageUri).into(uploadedImageCircleImageView)
 
-            changeUIAfterImageUpload()
+
         }
     }
 

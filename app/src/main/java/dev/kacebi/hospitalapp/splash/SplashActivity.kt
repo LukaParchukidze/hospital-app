@@ -3,13 +3,12 @@ package dev.kacebi.hospitalapp.splash
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
-import android.util.Log.d
 import dev.kacebi.hospitalapp.App
 import dev.kacebi.hospitalapp.R
 import dev.kacebi.hospitalapp.tools.Tools
 import dev.kacebi.hospitalapp.ui.authentication.LoginActivity
-import dev.kacebi.hospitalapp.ui.dashboard.DoctorDashboardActivity
-import dev.kacebi.hospitalapp.ui.dashboard.PatientDashboardActivity
+import dev.kacebi.hospitalapp.ui.doctors_dashboard.DoctorDashboardActivity
+import dev.kacebi.hospitalapp.ui.patients_dashboard.PatientDashboardActivity
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -28,7 +27,7 @@ class SplashActivity : AppCompatActivity() {
 
     override fun onResume() {
         super.onResume()
-        handler.postDelayed(runnable, 5000)
+        handler.postDelayed(runnable, 3000)
     }
 
     override fun onPause() {
@@ -49,7 +48,8 @@ class SplashActivity : AppCompatActivity() {
                     if (userType != null) {
                         Tools.startActivity(this@SplashActivity, PatientDashboardActivity(),true)
                     } else {
-                        Tools.startActivity(this@SplashActivity, DoctorDashboardActivity(),true)
+                        Tools.startActivity(this@SplashActivity,
+                            DoctorDashboardActivity(),true)
                     }
                 }
             }

@@ -14,51 +14,48 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".ui.dashboard.DoctorsAppointmentsActivity"
+            android:name=".ui.profile.ProfileActivity"
             android:screenOrientation="portrait"
             tools:ignore="LockedOrientationActivity" />
         <activity
-            android:name=".ui.dashboard.DoctorDashboardActivity"
+            android:name=".ui.chat.activities.ChatsListActivity"
             android:screenOrientation="portrait"
             tools:ignore="LockedOrientationActivity" />
         <activity
-            android:name=".ui.dashboard.doctors.DoctorInformationActivity"
+            android:name=".ui.patients_dashboard.appointments.DoctorsAppointmentsActivity"
             android:screenOrientation="portrait"
             tools:ignore="LockedOrientationActivity" />
         <activity
-            android:name=".ui.dashboard.home.news.NewsActivity"
+            android:name=".ui.doctors_dashboard.DoctorDashboardActivity"
+            android:screenOrientation="portrait"
+            tools:ignore="LockedOrientationActivity" />
+        <activity
+            android:name=".ui.patients_dashboard.doctors.full_information.DoctorInformationActivity"
+            android:screenOrientation="portrait"
+            tools:ignore="LockedOrientationActivity" />
+        <activity
+            android:name=".ui.patients_dashboard.home.news.NewsActivity"
             android:screenOrientation="portrait"
             tools:ignore="LockedOrientationActivity" />
         <activity
             android:name=".ui.authentication.LoginActivity"
             android:screenOrientation="portrait"
-            tools:ignore="LockedOrientationActivity">
-
-        </activity>
+            tools:ignore="LockedOrientationActivity" />
         <activity
-            android:name=".ui.chat.ZoomChatImageActivity"
+            android:name=".ui.chat.activities.ZoomChatImageActivity"
             android:screenOrientation="portrait"
             tools:ignore="LockedOrientationActivity" />
         <activity
             android:name=".ui.authentication.RegisterActivity"
             android:screenOrientation="portrait"
-            tools:ignore="LockedOrientationActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
+            tools:ignore="LockedOrientationActivity" />
         <activity
-            android:name=".ui.chat.ChatActivity"
+            android:name=".ui.chat.activities.ChatActivity"
             android:screenOrientation="portrait"
             tools:ignore="LockedOrientationActivity" />
         <activity
-            android:name=".ui.dashboard.PatientDashboardActivity"
-            android:screenOrientation="portrait"
-            android:windowSoftInputMode="adjustPan"
-            tools:ignore="LockedOrientationActivity" />
-
+            android:name=".ui.patients_dashboard.PatientDashboardActivity"
+            android:windowSoftInputMode="adjustPan" />
         <activity
             android:name=".ui.authentication.ForgotPasswordActivity"
             android:screenOrientation="portrait"
@@ -67,7 +64,11 @@
             android:name=".splash.SplashActivity"
             android:screenOrientation="portrait"
             tools:ignore="LockedOrientationActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
 
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
     </application>
 
