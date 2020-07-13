@@ -78,7 +78,7 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener {
                             Tools.showSnackbar(
                                 this@LoginActivity,
                                 loginRoot,
-                                "Credentials was incorrect", false,
+                                "Credentials are incorrect", false,
                                 "Close"
                             )
                         }
@@ -102,7 +102,7 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener {
         when (v!!.id) {
             R.id.forgotPasswordTextView -> Tools.startActivity(
                 this@LoginActivity,
-                ForgotPasswordActivity(), true
+                ForgotPasswordActivity(), false
             )
             R.id.signUpTextView -> Tools.startActivity(this@LoginActivity, RegisterActivity(), true)
             R.id.loginButton -> checkConditions()

@@ -212,6 +212,8 @@ class RegisterActivity : AppCompatActivity(), View.OnClickListener {
                                         }
 
                                         withContext(Dispatchers.Main) {
+                                            App.auth.signOut()
+
                                             Tools.showSnackbar(
                                                 this@RegisterActivity,
                                                 registerRoot,
@@ -310,8 +312,6 @@ class RegisterActivity : AppCompatActivity(), View.OnClickListener {
                 imageUri = null
             }
             takenImage = null
-
-
         }
     }
 
