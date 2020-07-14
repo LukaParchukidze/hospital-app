@@ -2,25 +2,39 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="170dp"
-    android:background="@color/colorPrimary"
-    android:orientation="vertical"
     android:gravity="center_vertical"
-    android:paddingStart="30dp"
-    >
+    android:orientation="vertical">
 
-    <de.hdodenhof.circleimageview.CircleImageView
-        android:layout_width="70dp"
-        android:layout_height="70dp"
-        android:padding="2dp"
-        android:background="@drawable/drawer_menu_profile_background"
-        android:id="@+id/drawerPictureImageView"
-        />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:alpha="0.95"
+        android:background="@mipmap/image6"
+        android:orientation="vertical"
+        android:paddingStart="20dp"
+        android:paddingTop="10dp">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/drawerFullNameTextView"
-        android:layout_marginTop="10dp"
-        />
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/drawerPictureImageView"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/drawer_menu_profile_background_no_border"
+            android:padding="2dp" />
+
+        <TextView
+            android:id="@+id/drawerFullNameTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="15dp"
+            android:fontFamily="@font/nexa_bold"
+            android:text="Lasha Kakulia"
+            android:textColor="@android:color/white"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+
+    </LinearLayout>
+
 
 </LinearLayout>
