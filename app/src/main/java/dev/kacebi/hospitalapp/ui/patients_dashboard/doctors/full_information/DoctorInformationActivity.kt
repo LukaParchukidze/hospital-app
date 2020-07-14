@@ -52,8 +52,7 @@ class DoctorInformationActivity : AppCompatActivity() {
             onBackPressed()
         }
 
-        doctorId = intent.extras!!.getString("doctorId", "Muteli")
-        d("doctorId", "$doctorId")
+        doctorId = intent.extras!!.getString("doctorId", "")
 
         getDoctor(doctorId)
 
@@ -71,17 +70,19 @@ class DoctorInformationActivity : AppCompatActivity() {
 
     private fun showDialog() {
 
-        bookDoctorButton.isClickable = false
-        messageDoctorButton.isClickable = false
+        //disable book and message buttons
+        bookDoctorButton.isEnabled = false
+        messageDoctorButton.isEnabled = false
 
         if (adapter != null) {
             appointmentTimes.clear()
             adapter!!.notifyDataSetChanged()
         }
 
+        //init dialog
         val dialog = Dialog(this)
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
-        dialog.setCancelable(false)
+        dialog.setCancelable(true)
         dialog.setContentView(R.layout.dialog_appointment_layout)
 
         val params: ViewGroup.LayoutParams = dialog.window!!.attributes
@@ -95,6 +96,9 @@ class DoctorInformationActivity : AppCompatActivity() {
 
         dialog.applyDialogButton.setOnClickListener {
             if (adapter != null && adapter!!.click != -1) {
+                dialog.closeDialogButton.isEnabled = false
+                dialog.applyDialogButton.isEnabled = false
+
                 CoroutineScope(Dispatchers.IO).launch {
                     val data = App.dbDoctors.document(doctorId).collection("patients").document(App.auth.uid!!).get().await().data
                     if (data == null || data["status"] == "Cancelled") {
@@ -117,11 +121,15 @@ class DoctorInformationActivity : AppCompatActivity() {
                                 )
                         ).await()
                         withContext(Dispatchers.Main) {
+                            dialog.closeDialogButton.isEnabled = true
+                            dialog.applyDialogButton.isEnabled = true
                             dialog.dismiss()
                         }
                     } else {
                         withContext(Dispatchers.Main) {
-                            Toast.makeText(this@DoctorInformationActivity, "You've already been registered", Toast.LENGTH_LONG).show()
+                            dialog.closeDialogButton.isEnabled = true
+                            dialog.applyDialogButton.isEnabled = true
+                            Toast.makeText(this@DoctorInformationActivity, "You've already booked an appointment.", Toast.LENGTH_LONG).show()
                         }
                     }
                 }
@@ -129,6 +137,10 @@ class DoctorInformationActivity : AppCompatActivity() {
                 dialog.dismiss()
             }
         }
+
+        //enable buttons
+        bookDoctorButton.isEnabled = true
+        messageDoctorButton.isEnabled = true
 
         adapter =
             AppointmentTimesAdapter(
@@ -141,12 +153,7 @@ class DoctorInformationActivity : AppCompatActivity() {
             false
         )
 
-        dialog.show()
-
-        bookDoctorButton.isClickable = true
-        messageDoctorButton.isClickable = true
-
-        dialog.appointmentsProgressBar.visibility = View.VISIBLE
+        //get appointment times
         CoroutineScope(Dispatchers.IO).launch {
             val size =
                 App.dbDoctors.document(doctorId).collection("patients").get().await().size()
@@ -154,7 +161,7 @@ class DoctorInformationActivity : AppCompatActivity() {
 
             if (size == 0) {
                 withContext(Dispatchers.Main) {
-                    dialog.appointmentsProgressBar.visibility = View.GONE
+                    dialog.show()
                     adapter!!.notifyDataSetChanged()
                 }
             } else {
@@ -172,7 +179,7 @@ class DoctorInformationActivity : AppCompatActivity() {
                     }
                 }
                 withContext(Dispatchers.Main) {
-                    dialog.appointmentsProgressBar.visibility = View.GONE
+                    dialog.show()
                     adapter!!.notifyDataSetChanged()
                 }
             }

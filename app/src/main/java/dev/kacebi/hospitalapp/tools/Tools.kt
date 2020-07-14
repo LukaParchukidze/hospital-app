@@ -134,13 +134,15 @@ object Tools {
 
     fun setSupportActionBar(activity: AppCompatActivity, title: String, isLastName: Boolean, backEnabled: Boolean){
         activity.setSupportActionBar(activity.findViewById(R.id.toolbar))
+        d("toolbarYle", title)
+        d("toolbarYle", isLastName.toString())
         if (!isLastName)
             activity.findViewById<TextView>(R.id.toolbarTitle).text = title
         else
             activity.findViewById<TextView>(R.id.toolbarTitle).text = "Dr. $title"
 
-        activity.findViewById<TextView>(R.id.toolbarTitle).text = title
         activity.supportActionBar!!.setDisplayShowTitleEnabled(false)
         activity.supportActionBar!!.setDisplayHomeAsUpEnabled(backEnabled)
     }
+
 }

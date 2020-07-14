@@ -31,4 +31,6 @@
     <string name="sign_out">Sign Out</string>
     <string name="change_image">Change Image</string>
     <string name="photo">PHOTO</string>
+    <string name="close">Close</string>
+    <string name="apply">Apply</string>
 </resources>

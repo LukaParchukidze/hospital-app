@@ -3,6 +3,8 @@ package dev.kacebi.hospitalapp.ui.chat.activities
 import android.graphics.BitmapFactory
 import android.graphics.drawable.BitmapDrawable
 import android.os.Bundle
+import android.os.Handler
+import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.firebase.database.ChildEventListener
@@ -17,6 +19,7 @@ import dev.kacebi.hospitalapp.ui.chat.adapters.ChatsListAdapter
 import dev.kacebi.hospitalapp.ui.chat.models.ChatsListItemModel
 import dev.kacebi.hospitalapp.ui.chat.models.LatestMessageModel
 import kotlinx.android.synthetic.main.activity_chats_list.*
+import kotlinx.android.synthetic.main.spinkit_loader_layout.*
 import kotlinx.android.synthetic.main.toolbar_layout.*
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -33,6 +36,9 @@ class ChatsListActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_chats_list)
 
+        Handler().postDelayed({
+            spinKitContainerView.visibility = View.GONE
+        }, 2000)
         init()
         Tools.setSupportActionBar(this, "Messages", isLastName = false, backEnabled = true)
         toolbar!!.setNavigationOnClickListener {

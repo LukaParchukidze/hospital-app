@@ -14,6 +14,7 @@ import dev.kacebi.hospitalapp.file_size_constants.FileSizeConstants
 import dev.kacebi.hospitalapp.tools.Tools
 import dev.kacebi.hospitalapp.ui.authentication.LoginActivity
 import kotlinx.android.synthetic.main.activity_profile.*
+import kotlinx.android.synthetic.main.spinkit_loader_layout.*
 import kotlinx.android.synthetic.main.toolbar_layout.*
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -46,6 +47,7 @@ class ProfileActivity : AppCompatActivity() {
 
     @Suppress("NAME_SHADOWING")
     private fun getData() {
+        spinKitContainerView.visibility = View.VISIBLE
         CoroutineScope(Dispatchers.IO).launch {
             var byteArray: ByteArray? = null
             val documentSnapshot = App.dbUsers.document(App.auth.uid!!).get().await()
@@ -67,10 +69,10 @@ class ProfileActivity : AppCompatActivity() {
                 BitmapFactory.decodeByteArray(byteArray, 0, byteArray.size)
             )
             withContext(Dispatchers.Main) {
+                spinKitContainerView.visibility = View.GONE
                 profileImageView.setImageDrawable(bitmapDrawable)
                 fullNameEditText.setText(fullName)
                 emailEditText.setText(email)
-
 
             }
         }

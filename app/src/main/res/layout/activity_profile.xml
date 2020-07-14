@@ -1,150 +1,169 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.profile.ProfileActivity">
+    android:fillViewport="true">
 
     <FrameLayout
         android:layout_width="match_parent"
-        android:id="@+id/sample"
-        app:layout_constraintTop_toTopOf="parent"
-        android:layout_height="?attr/actionBarSize">
+        android:layout_height="wrap_content">
 
-        <include
-            layout="@layout/toolbar_layout" />
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            tools:context=".ui.profile.ProfileActivity">
+
+
+            <FrameLayout
+                android:id="@+id/sample"
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <include layout="@layout/toolbar_layout" />
+
+            </FrameLayout>
+
+            <ImageButton
+                android:id="@+id/editProfileImageButton"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_marginEnd="7dp"
+                android:layout_marginTop="7dp"
+                android:background="@drawable/ic_edit"
+                android:backgroundTint="@android:color/black"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <ImageButton
+                android:id="@+id/cancelChangesButton"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_marginEnd="7dp"
+                android:layout_marginTop="7dp"
+                android:background="@drawable/ic_cancel"
+                android:backgroundTint="@android:color/black"
+                android:visibility="gone"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <ImageView
+                android:id="@+id/backgroundImageView"
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
+                android:background="@mipmap/profile_background_3"
+                app:layout_constraintTop_toBottomOf="@id/sample" />
+
+
+            <EditText
+                android:id="@+id/fullNameEditText"
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+                android:layout_marginHorizontal="20dp"
+                android:layout_marginTop="25dp"
+                android:background="@drawable/fields_background"
+                android:drawableStart="@drawable/ic_user"
+                android:drawablePadding="12dp"
+                android:fontFamily="@font/nexa_light"
+                android:hint="Full Name"
+                android:maxLines="1"
+                android:paddingStart="15dp"
+                android:paddingEnd="15dp"
+                android:textColor="@color/edittexts_text_color"
+                android:textColorHint="@color/edittexts_hint_color"
+                android:textSize="@dimen/edittexts_text_size"
+                app:layout_constraintTop_toBottomOf="@id/profileImageView" />
+
+            <EditText
+                android:id="@+id/emailEditText"
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+                android:layout_marginHorizontal="20dp"
+                android:layout_marginTop="25dp"
+                android:background="@drawable/fields_background"
+                android:drawableStart="@drawable/ic_mail"
+                android:drawablePadding="12dp"
+                android:fontFamily="@font/nexa_light"
+                android:hint="@string/email_edittext_hint"
+                android:maxLines="1"
+                android:paddingStart="15dp"
+                android:paddingEnd="15dp"
+                android:textColor="@color/edittexts_text_color"
+                android:textColorHint="@color/edittexts_hint_color"
+                android:textSize="@dimen/edittexts_text_size"
+                app:layout_constraintTop_toBottomOf="@id/fullNameEditText" />
+
+            <EditText
+                android:id="@+id/passwordEditText"
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+                android:layout_marginHorizontal="20dp"
+                android:layout_marginTop="25dp"
+                android:background="@drawable/fields_background"
+                android:drawableStart="@drawable/ic_password"
+                android:drawablePadding="12dp"
+                android:fontFamily="@font/nexa_light"
+                android:hint="@string/password_edittext_hint"
+                android:maxLines="1"
+                android:paddingStart="15dp"
+                android:paddingEnd="15dp"
+                android:textColor="@color/edittexts_text_color"
+                android:textColorHint="@color/edittexts_hint_color"
+                app:layout_constraintTop_toBottomOf="@id/emailEditText" />
+
+            <EditText
+                android:id="@+id/rePasswordEditText"
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+                android:layout_marginHorizontal="20dp"
+                android:layout_marginTop="25dp"
+                android:background="@drawable/fields_background"
+                android:drawableStart="@drawable/ic_password"
+                android:drawablePadding="12dp"
+                android:fontFamily="@font/nexa_light"
+                android:hint="@string/repassword_edittext_hint"
+                android:maxLines="1"
+                android:paddingStart="15dp"
+                android:paddingEnd="15dp"
+                android:textColor="@color/edittexts_text_color"
+                android:textColorHint="@color/edittexts_hint_color"
+                app:layout_constraintTop_toBottomOf="@id/passwordEditText" />
+
+            <Button
+                android:id="@+id/saveChangesButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="25dp"
+                android:background="@color/colorPrimaryDark"
+                android:text="Save"
+                android:textAllCaps="false"
+                android:textColor="@android:color/white"
+                android:textSize="17sp"
+                android:visibility="gone"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/rePasswordEditText" />
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/profileImageView"
+                android:layout_width="150dp"
+                android:layout_height="150dp"
+                android:layout_marginTop="125dp"
+                android:background="@drawable/drawer_menu_profile_background"
+                android:clickable="false"
+                app:civ_border_color="@android:color/black"
+                app:civ_border_width="1dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@id/backgroundImageView" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <include layout="@layout/spinkit_loader_layout" />
 
     </FrameLayout>
 
-    <ImageButton
-        android:id="@+id/editProfileImageButton"
-        android:layout_width="?attr/actionBarSize"
-        android:layout_height="?attr/actionBarSize"
-        android:background="@drawable/ic_edit"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        />
 
-    <ImageButton
-        android:id="@+id/cancelChangesButton"
-        android:layout_width="?attr/actionBarSize"
-        android:layout_height="?attr/actionBarSize"
-        android:background="@drawable/ic_cancel"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:visibility="gone"
-        />
-
-    <ImageView
-        android:id="@+id/backgroundImageView"
-        android:layout_width="match_parent"
-        android:layout_height="200dp"
-        android:background="@mipmap/profile_background_3"
-        app:layout_constraintTop_toBottomOf="@id/sample" />
-
-
-    <EditText
-        android:id="@+id/fullNameEditText"
-        android:layout_width="match_parent"
-        android:layout_height="45dp"
-        android:layout_marginHorizontal="20dp"
-        android:layout_marginTop="25dp"
-        android:background="@drawable/fields_background"
-        android:drawableStart="@drawable/ic_user"
-        android:drawablePadding="12dp"
-        android:fontFamily="@font/nexa_light"
-        android:hint="Full Name"
-        android:maxLines="1"
-        android:paddingStart="15dp"
-        android:paddingEnd="15dp"
-        android:textColor="@color/edittexts_text_color"
-        android:textColorHint="@color/edittexts_hint_color"
-        android:textSize="@dimen/edittexts_text_size"
-        app:layout_constraintTop_toBottomOf="@id/profileImageView" />
-
-    <EditText
-        android:id="@+id/emailEditText"
-        android:layout_width="match_parent"
-        android:layout_height="45dp"
-        android:layout_marginHorizontal="20dp"
-        android:layout_marginTop="25dp"
-        android:background="@drawable/fields_background"
-        android:drawableStart="@drawable/ic_mail"
-        android:drawablePadding="12dp"
-        android:fontFamily="@font/nexa_light"
-        android:hint="@string/email_edittext_hint"
-        android:maxLines="1"
-        android:paddingStart="15dp"
-        android:paddingEnd="15dp"
-        android:textColor="@color/edittexts_text_color"
-        android:textColorHint="@color/edittexts_hint_color"
-        android:textSize="@dimen/edittexts_text_size"
-        app:layout_constraintTop_toBottomOf="@id/fullNameEditText" />
-
-    <EditText
-        android:id="@+id/passwordEditText"
-        android:layout_width="match_parent"
-        android:layout_height="45dp"
-        android:layout_marginHorizontal="20dp"
-        android:layout_marginTop="25dp"
-        android:background="@drawable/fields_background"
-        android:drawableStart="@drawable/ic_password"
-        android:drawablePadding="12dp"
-        android:fontFamily="@font/nexa_light"
-        android:hint="@string/password_edittext_hint"
-        android:maxLines="1"
-        android:paddingStart="15dp"
-        android:paddingEnd="15dp"
-        android:textColor="@color/edittexts_text_color"
-        android:textColorHint="@color/edittexts_hint_color"
-        app:layout_constraintTop_toBottomOf="@id/emailEditText" />
-
-    <EditText
-        android:id="@+id/rePasswordEditText"
-        android:layout_width="match_parent"
-        android:layout_height="45dp"
-        android:layout_marginHorizontal="20dp"
-        android:layout_marginTop="25dp"
-        android:background="@drawable/fields_background"
-        android:drawableStart="@drawable/ic_password"
-        android:drawablePadding="12dp"
-        android:fontFamily="@font/nexa_light"
-        android:hint="@string/repassword_edittext_hint"
-        android:maxLines="1"
-        android:paddingStart="15dp"
-        android:paddingEnd="15dp"
-        android:textColor="@color/edittexts_text_color"
-        android:textColorHint="@color/edittexts_hint_color"
-        app:layout_constraintTop_toBottomOf="@id/passwordEditText" />
-
-    <Button
-        android:id="@+id/saveChangesButton"
-
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="25dp"
-        android:background="@color/colorPrimaryDark"
-        android:text="Save"
-        android:textAllCaps="false"
-        android:textColor="@android:color/white"
-        android:textSize="17sp"
-        android:visibility="gone"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/rePasswordEditText" />
-
-    <de.hdodenhof.circleimageview.CircleImageView
-        android:id="@+id/profileImageView"
-        android:layout_width="150dp"
-        android:layout_height="150dp"
-        android:layout_marginTop="125dp"
-        android:clickable="false"
-        app:civ_border_color="@android:color/black"
-        app:civ_border_width="1dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@id/backgroundImageView" />
-
-
-</androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>

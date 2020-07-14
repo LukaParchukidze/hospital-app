@@ -13,11 +13,9 @@ import dev.kacebi.hospitalapp.tools.Tools
 import dev.kacebi.hospitalapp.ui.doctors_dashboard.DoctorDashboardActivity
 import dev.kacebi.hospitalapp.ui.patients_dashboard.PatientDashboardActivity
 import kotlinx.android.synthetic.main.activity_login.*
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
+import kotlinx.android.synthetic.main.spinkit_loader_layout.*
+import kotlinx.coroutines.*
 import kotlinx.coroutines.tasks.await
-import kotlinx.coroutines.withContext
 
 class LoginActivity : AppCompatActivity(), View.OnClickListener {
 
@@ -62,11 +60,17 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener {
 
                         withContext(Dispatchers.Main) {
                             if (userType != null) {
+                                spinKitContainerView.visibility = View.VISIBLE
+                                delay(2000)
+                                spinKitContainerView.visibility = View.GONE
                                 Tools.startActivity(
                                     this@LoginActivity,
                                     PatientDashboardActivity(), true
                                 )
                             } else {
+                                spinKitContainerView.visibility = View.VISIBLE
+                                delay(2000)
+                                spinKitContainerView.visibility = View.GONE
                                 Tools.startActivity(
                                     this@LoginActivity,
                                     DoctorDashboardActivity(), true

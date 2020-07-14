@@ -3,23 +3,16 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <ProgressBar
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:id="@+id/appointmentsProgressBar"
-        android:layout_gravity="center"
-        android:visibility="gone"
-        />
-
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
 
         <TextView
+            android:fontFamily="@font/nexa_bold"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Appointments"
+            android:text="@string/appointments"
             android:layout_gravity="center_horizontal"
             android:layout_marginVertical="10dp"
             android:textSize="20sp"
@@ -33,23 +26,36 @@
             />
 
         <LinearLayout
+            android:layout_marginHorizontal="20dp"
+            android:layout_marginTop="10dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="end">
 
             <Button
+                android:layout_marginBottom="10dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/closeDialogButton"
-                android:text="Close"
-                />
+                android:background="@drawable/negative_button_background"
+                android:fontFamily="@font/nexa_bold"
+                android:text="@string/close"
+                android:textAllCaps="false"
+                android:textColor="@android:color/white"
+                android:textSize="15sp" />
 
             <Button
+                android:layout_marginStart="10dp"
+                android:layout_marginBottom="10dp"
+                android:background="@drawable/positive_button_background"
+                android:fontFamily="@font/nexa_bold"
+                android:text="@string/apply"
+                android:textAllCaps="false"
+                android:textColor="@android:color/white"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/applyDialogButton"
-                android:text="Apply"
-                />
+                android:textSize="15sp" />
 
         </LinearLayout>
 
