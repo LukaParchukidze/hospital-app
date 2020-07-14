@@ -89,6 +89,8 @@ class ProfileActivity : AppCompatActivity() {
     }
 
     private fun enableProfileChange() {
+        passwordEditText.inputType = InputType.TYPE_TEXT_VARIATION_PASSWORD
+        rePasswordEditText.inputType = InputType.TYPE_TEXT_VARIATION_PASSWORD
         passwordEditText.transformationMethod = PasswordTransformationMethod.getInstance()
         rePasswordEditText.transformationMethod = PasswordTransformationMethod.getInstance()
 
