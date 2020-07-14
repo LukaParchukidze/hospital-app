@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import dev.kacebi.hospitalapp.App
 import dev.kacebi.hospitalapp.R
+import dev.kacebi.hospitalapp.ui.ItemOnClickListener
 import dev.kacebi.hospitalapp.ui.chat.activities.ChatActivity
 import dev.kacebi.hospitalapp.ui.doctors_dashboard.PatientAppointmentModel
 import kotlinx.android.synthetic.main.item_patients_layout.view.*
@@ -15,7 +16,10 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.tasks.await
 
-class PatientsAdapter(private val appointments: MutableList<PatientAppointmentModel>) :
+class PatientsAdapter(
+    private val appointments: MutableList<PatientAppointmentModel>,
+    private val itemClick: ItemOnClickListener
+) :
     RecyclerView.Adapter<PatientsAdapter.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -59,17 +63,10 @@ class PatientsAdapter(private val appointments: MutableList<PatientAppointmentMo
                 itemView.context.startActivity(intent)
             }
             itemView.confirmPatientButton.setOnClickListener {
-                changeStatus("Confirmed")
+                itemClick.onClickChangeStatus(adapterPosition, "Confirmed")
             }
             itemView.cancelAppointmentButton.setOnClickListener {
-                changeStatus("Cancelled")
-            }
-        }
-
-        private fun changeStatus(status: String) {
-            CoroutineScope(Dispatchers.IO).launch {
-                App.dbDoctors.document(App.auth.uid!!).collection("patients").document(appointment.patientId).update("status", status).await()
-                App.dbUsers.document(appointment.patientId).collection("doctors").document(App.auth.uid!!).update("status", status).await()
+                itemClick.onClickChangeStatus(adapterPosition, "Cancelled")
             }
         }
     }

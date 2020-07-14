@@ -55,6 +55,7 @@ class DoctorDashboardActivity : AppCompatActivity() {
         toggle.syncState()
 
         setUpNavigationView()
+
         //get user icon
         CoroutineScope(Dispatchers.IO).launch {
             val byteArray = App.storage.child("/doctor_photos/${App.auth.uid!!}.png").getBytes(

@@ -1,4 +1,4 @@
-package dev.kacebi.hospitalapp.splash
+package dev.kacebi.hospitalapp.ui.splash
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle

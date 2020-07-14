@@ -59,40 +59,10 @@ class DoctorsAppointmentsActivity : AppCompatActivity() {
             val appointment = appointments[adapterPosition]
             dialog.dismiss()
 
-            App.dbUsers.document(App.auth.uid!!).collection("doctors")
-                .addSnapshotListener { querySnapshot, firebaseFirestoreException ->
-                    if (querySnapshot == null || querySnapshot.documents.size == 0) {
-
-                    }
-                }
-
-//            CoroutineScope(Dispatchers.IO).launch {
-//                App.dbUsers.document(App.auth.uid!!).collection("doctors")
-//                    .document(appointment.doctorId).delete().await()
-//                App.dbDoctors.document(appointment.doctorId).collection("patients")
-//                    .document(App.auth.uid!!).delete().await()
-//                withContext(Dispatchers.Main) {
-//                    appointments.remove(appointment)
-//                    adapter.notifyItemRemoved(adapterPosition)
-//                }
-//                if (appointment.status == "Confirmed") {
-//                    App.dbDoctors.document(appointment.doctorId).collection("cancelled_patients")
-//                        .document(App.auth.uid!!).set(mutableMapOf(
-//                            "status" to "Cancelled",
-//                            "start_time" to appointment.start_time,
-//                            "end_time" to appointment.end_time,
-//                            "full_name" to App.dbUsers.document(App.auth.uid!!).get().await()["full_name"] as String
-//                        )).await()
-//                    App.dbUsers.document(App.auth.uid!!).collection("cancelled_doctors")
-//                        .document(appointment.doctorId).set(mutableMapOf(
-//                            "status" to "Cancelled",
-//                            "start_time" to appointment.start_time,
-//                            "end_time" to appointment.end_time,
-//                            "last_name" to appointment.last_name
-//                        )).await()
-//                }
-//
-//            }
+            CoroutineScope(Dispatchers.IO).launch {
+                App.dbDoctors.document(appointment.doctorId).collection("patients").document(App.auth.uid!!).update("status", "Cancelled").await()
+                App.dbUsers.document(App.auth.uid!!).collection("doctors").document(appointment.doctorId).update("status", "Cancelled").await()
+            }
         }
         dialog.noCancelButton.setOnClickListener {
             dialog.dismiss()
@@ -107,13 +77,13 @@ class DoctorsAppointmentsActivity : AppCompatActivity() {
                 appointments,
                 object : ItemOnClickListener {
                     override fun onClick(adapterPosition: Int) {
-//                        initCancelDialog(adapterPosition)
+                        initCancelDialog(adapterPosition)
                     }
 
                 })
         doctorsAppointmentsRecyclerView.adapter = adapter
         App.dbUsers.document(App.auth.uid!!).collection("doctors")
-            .addSnapshotListener { querySnapshot, firebaseFirestoreException ->
+            .addSnapshotListener { querySnapshot, _ ->
                 if (querySnapshot == null || querySnapshot.documents.size == 0) {
                     appointments.clear()
                     adapter.notifyDataSetChanged()
@@ -131,7 +101,7 @@ class DoctorsAppointmentsActivity : AppCompatActivity() {
                                     time = (document["start_time"] as String + " - " + document["end_time"])
                                 )
                             val byteArray =
-                                App.storage.child("/doctor_photos/${document.id}").getBytes(FileSizeConstants.THREE_MEGABYTES).await()
+                                App.storage.child("/doctor_photos/${document.id}.png").getBytes(FileSizeConstants.THREE_MEGABYTES).await()
                             val bitmapDrawable = BitmapDrawable(
                                 resources,
                                 BitmapFactory.decodeByteArray(byteArray, 0, byteArray.size)
