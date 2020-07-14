@@ -1,6 +1,7 @@
 package dev.kacebi.hospitalapp.ui.patients_dashboard.search
 
 import android.content.Intent
+import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.graphics.drawable.BitmapDrawable
 import android.os.Bundle
@@ -99,17 +100,13 @@ class SearchDoctorsFragment : Fragment() {
                             val byteArray =
                                 App.storage.child("/doctor_photos/${document.id}").getBytes(FileSizeConstants.THREE_MEGABYTES)
                                     .await()
-                            val bitmapDrawable = BitmapDrawable(
-                                resources,
-                                BitmapFactory.decodeByteArray(byteArray, 0, byteArray.size)
-                            )
-                            doctorOverview.drawable = bitmapDrawable
+                            val bitmap = BitmapFactory.decodeByteArray(byteArray, 0, byteArray.size)
+                            doctorOverview.bitmap = bitmap
                             doctorsOverviews.add(doctorOverview)
                         }
                     }
                 }
                 withContext(Dispatchers.Main) {
-                    d("outsideXXX", "NO")
                     searchDoctorsProgressBar.visibility = View.GONE
                     adapter.notifyDataSetChanged()
                 }

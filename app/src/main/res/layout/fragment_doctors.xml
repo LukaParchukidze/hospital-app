@@ -4,30 +4,43 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.patients_dashboard.doctors.list.DoctorsFragment">
+    tools:context=".ui.patients_dashboard.doctors.list.fragments.DoctorsFragment">
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/specialtiesRecyclerView"
+    <com.google.android.material.tabs.TabLayout
+        android:id="@+id/specialtiesTabLayout"
+        app:tabMode="scrollable"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:tabIndicatorColor="@android:color/holo_orange_dark"
+        app:layout_constraintTop_toTopOf="parent" >
+        <com.google.android.material.tabs.TabItem
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="TEST"
+            />
+        <com.google.android.material.tabs.TabItem
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="TEST"
+            />
+    </com.google.android.material.tabs.TabLayout>
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/doctorsOverviewsRecyclerView"
+    <androidx.viewpager.widget.ViewPager
+        android:id="@+id/doctorsOverviewsViewPager"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/specialtiesRecyclerView" />
+        app:layout_constraintTop_toBottomOf="@id/specialtiesTabLayout" />
 
     <ProgressBar
         android:layout_width="50dp"
         android:layout_height="50dp"
         android:id="@+id/doctorsOverviewsProgressBar"
-        app:layout_constraintTop_toTopOf="@id/doctorsOverviewsRecyclerView"
+        app:layout_constraintTop_toTopOf="@id/doctorsOverviewsViewPager"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
