@@ -1,8 +1,6 @@
 package dev.kacebi.hospitalapp.ui.patients_dashboard.doctors.list.fragments
 
 import android.content.Intent
-import android.graphics.BitmapFactory
-import android.graphics.drawable.BitmapDrawable
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -11,13 +9,11 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
 import dev.kacebi.hospitalapp.App
 import dev.kacebi.hospitalapp.R
-import dev.kacebi.hospitalapp.file_size_constants.FileSizeConstants
 import dev.kacebi.hospitalapp.ui.ItemOnClickListener
 import dev.kacebi.hospitalapp.ui.patients_dashboard.DoctorOverviewModel
 import dev.kacebi.hospitalapp.ui.patients_dashboard.PatientDashboardActivity
 import dev.kacebi.hospitalapp.ui.patients_dashboard.doctors.full_information.DoctorInformationActivity
 import dev.kacebi.hospitalapp.ui.patients_dashboard.doctors.list.adapters.DoctorsOverviewsAdapter
-import dev.kacebi.hospitalapp.ui.patients_dashboard.home.SpecialtiesWithIconsAdapter
 import kotlinx.android.synthetic.main.fragment_doctors_tab.view.*
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers

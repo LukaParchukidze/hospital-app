@@ -35,7 +35,7 @@ class ChatsListAdapter(private val chats: MutableList<ChatsListItemModel>) :
         fun onBind() {
             chat = chats[adapterPosition]
 
-            itemView.profileImageView.setImageDrawable(chat.drawable)
+            itemView.profileImageView.setImageBitmap(chat.bitmap)
             if (chat.name.contains(" "))
                 itemView.nameTextView.text = chat.name
             else

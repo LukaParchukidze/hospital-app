@@ -1,26 +1,21 @@
 package dev.kacebi.hospitalapp.ui.authentication
 
 
-import android.R.attr.bitmap
 import android.app.Activity
 import android.app.DatePickerDialog
 import android.app.DatePickerDialog.OnDateSetListener
 import android.content.Intent
 import android.graphics.Bitmap
 import android.graphics.Color
-import android.graphics.drawable.BitmapDrawable
-import android.graphics.drawable.Drawable
 import android.net.Uri
 import android.os.Bundle
 import android.provider.MediaStore
 import android.util.Log.d
 import android.view.View
 import android.widget.LinearLayout
-import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
-import androidx.core.graphics.drawable.toBitmap
 import androidx.documentfile.provider.DocumentFile
 import com.bumptech.glide.Glide
 import com.google.android.material.bottomsheet.BottomSheetDialog
@@ -30,14 +25,11 @@ import dev.kacebi.hospitalapp.extensions.setNewColor
 import dev.kacebi.hospitalapp.extensions.setSpannableText
 import dev.kacebi.hospitalapp.file_size_constants.FileSizeConstants
 import dev.kacebi.hospitalapp.tools.Tools
-import dev.kacebi.hospitalapp.tools.Utils
 import dev.kacebi.hospitalapp.tools.Utils.bitmapToByteArray
 import kotlinx.android.synthetic.main.activity_register.*
 import kotlinx.android.synthetic.main.spinkit_loader_layout.*
 import kotlinx.coroutines.*
 import kotlinx.coroutines.tasks.await
-import java.io.ByteArrayOutputStream
-import java.nio.ByteBuffer
 import java.text.SimpleDateFormat
 import java.util.*
 

@@ -33,6 +33,7 @@ class DoctorsFragment : Fragment() {
         if (itemView == null) {
             itemView = inflater.inflate(R.layout.fragment_doctors, container, false)
             setUpSpecialtiesTabLayout(itemView!!)
+
         }
         return itemView
     }
@@ -52,86 +53,4 @@ class DoctorsFragment : Fragment() {
             }
         }
     }
-
-//    fun setUpDoctorsRecyclerview(itemView: View, specialty: String) {
-//        if (doctorsOverviews[specialty]!!.size == 0) {
-//            itemView.doctorsOverviewsProgressBar.visibility = View.VISIBLE
-//            itemView.doctorsOverviewsRecyclerView.swapAdapter(null, true)
-//
-//            jobDoctors = scope.launch {
-//                val querySnapshot =
-//                    App.dbDoctors.whereEqualTo("specialty", specialty).get().await()
-//                for (document in querySnapshot.documents) {
-//                    val doctorOverview =
-//                        DoctorOverviewModel(
-//                            doctorId = document.id,
-//                            full_name = document["full_name"] as String,
-//                            last_name = document["last_name"] as String,
-//                            specialty = document["specialty"] as String
-//                        )
-////                    val byteArray =
-////                        App.storage.child("/doctor_photos/${document.id}.png").getBytes(FileSizeConstants.THREE_MEGABYTES).await()
-////                    val bitmapDrawable = BitmapDrawable(
-////                        resources,
-////                        BitmapFactory.decodeByteArray(byteArray, 0, byteArray.size)
-////                    )
-////                    doctorOverview.drawable = bitmapDrawable
-//                    doctorsOverviews[specialty]!!.add(doctorOverview)
-//                }
-//
-//                doctorsOverviewsAdapter =
-//                    DoctorsOverviewsAdapter(
-//                        doctorsOverviews[specialty]!!,
-//                        object : ItemOnClickListener {
-//                            override fun onClick(adapterPosition: Int) {
-//                                val intent = Intent(
-//                                    (activity as PatientDashboardActivity),
-//                                    DoctorInformationActivity::class.java
-//                                ).apply {
-//                                    putExtra(
-//                                        "doctorId",
-//                                        doctorsOverviews[specialty]!![adapterPosition].doctorId
-//                                    )
-//                                    putExtra(
-//                                        "lastName",
-//                                        doctorsOverviews[specialty]!![adapterPosition].last_name
-//                                    )
-//                                }
-//                                activity!!.startActivity(intent)
-//                            }
-//                        }
-//                    )
-//                withContext(Dispatchers.Main) {
-//                    itemView.doctorsOverviewsRecyclerView.adapter = doctorsOverviewsAdapter
-//                    doctorsOverviewsAdapter.notifyDataSetChanged()
-//                    itemView.doctorsOverviewsProgressBar.visibility = View.GONE
-//                }
-//            }
-//        } else {
-//            doctorsOverviewsAdapter =
-//                DoctorsOverviewsAdapter(
-//                    doctorsOverviews[specialty]!!,
-//                    object : ItemOnClickListener {
-//                        override fun onClick(adapterPosition: Int) {
-//                            val intent = Intent(
-//                                (activity as PatientDashboardActivity),
-//                                DoctorInformationActivity::class.java
-//                            ).apply {
-//                                putExtra(
-//                                    "doctorId",
-//                                    doctorsOverviews[specialty]!![adapterPosition].doctorId
-//                                )
-//                                putExtra(
-//                                    "lastName",
-//                                    doctorsOverviews[specialty]!![adapterPosition].last_name
-//                                )
-//                            }
-//                            activity!!.startActivity(intent)
-//                        }
-//                    }
-//                )
-//            itemView.doctorsOverviewsRecyclerView.adapter = doctorsOverviewsAdapter
-//
-//        }
-//    }
 }

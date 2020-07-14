@@ -2,8 +2,6 @@ package dev.kacebi.hospitalapp.ui.patients_dashboard.doctors.full_information
 
 import android.app.Dialog
 import android.content.Intent
-import android.graphics.BitmapFactory
-import android.graphics.drawable.BitmapDrawable
 import android.os.Bundle
 import android.util.Log.d
 import android.view.View
@@ -17,6 +15,7 @@ import dev.kacebi.hospitalapp.App
 import dev.kacebi.hospitalapp.R
 import dev.kacebi.hospitalapp.file_size_constants.FileSizeConstants
 import dev.kacebi.hospitalapp.tools.Tools
+import dev.kacebi.hospitalapp.tools.Utils
 import dev.kacebi.hospitalapp.ui.chat.activities.ChatActivity
 import dev.kacebi.hospitalapp.ui.patients_dashboard.doctors.full_information.models.AppointmentTimeModel
 import dev.kacebi.hospitalapp.ui.patients_dashboard.doctors.full_information.models.DoctorModel
@@ -214,16 +213,13 @@ class DoctorInformationActivity : AppCompatActivity() {
                 App.dbDoctors.document(doctorId).get().await()
                     .toObject(DoctorModel::class.java)!!
             val byteArray = App.storage.child("/doctor_photos/$doctorId.png").getBytes(FileSizeConstants.THREE_MEGABYTES).await()
-            val bitmapDrawable = BitmapDrawable(
-                resources,
-                BitmapFactory.decodeByteArray(byteArray, 0, byteArray.size)
-            )
-            doctor.drawable = bitmapDrawable
+            val bitmap = Utils.byteArrayToBitmap(byteArray)
+            doctor.bitmap = bitmap
 
             withContext(Dispatchers.Main) {
                 progressBar.visibility = View.GONE
                 scrollView.visibility = View.VISIBLE
-                doctorProfileImageView.setImageDrawable(doctor.drawable)
+                doctorProfileImageView.setImageBitmap(doctor.bitmap)
                 specialtyTextView.text = doctor.specialty
                 fullNameTextView.text = doctor.full_name
                 ageTextView.text = "Age: " + doctor.age.toString()

@@ -1,10 +1,10 @@
 package dev.kacebi.hospitalapp.ui.chat.models
 
-import android.graphics.drawable.Drawable
+import android.graphics.Bitmap
 
 data class ChatsListItemModel(
     val id: String = "",
-    var drawable: Drawable? = null,
+    var bitmap: Bitmap? = null,
     val name: String = "",
     var latestMessage: String = ""
 )

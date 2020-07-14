@@ -1,7 +1,5 @@
 package dev.kacebi.hospitalapp.ui.doctors_dashboard
 
-import android.graphics.BitmapFactory
-import android.graphics.drawable.BitmapDrawable
 import android.os.Bundle
 import android.view.MenuItem
 import androidx.appcompat.app.ActionBarDrawerToggle
@@ -13,6 +11,7 @@ import dev.kacebi.hospitalapp.App
 import dev.kacebi.hospitalapp.R
 import dev.kacebi.hospitalapp.file_size_constants.FileSizeConstants
 import dev.kacebi.hospitalapp.tools.Tools
+import dev.kacebi.hospitalapp.tools.Utils
 import dev.kacebi.hospitalapp.ui.authentication.LoginActivity
 import dev.kacebi.hospitalapp.ui.chat.activities.ChatsListActivity
 import dev.kacebi.hospitalapp.ui.doctors_dashboard.adapters.PatientsPagerAdapter
@@ -60,10 +59,10 @@ class DoctorDashboardActivity : AppCompatActivity() {
         CoroutineScope(Dispatchers.IO).launch {
             val byteArray = App.storage.child("/doctor_photos/${App.auth.uid!!}.png").getBytes(
                 FileSizeConstants.THREE_MEGABYTES).await()
-            val bitmapDrawable = BitmapDrawable(resources, BitmapFactory.decodeByteArray(byteArray, 0, byteArray.size))
+            val bitmap = Utils.byteArrayToBitmap(byteArray)
             val fullName = App.dbDoctors.document(App.auth.uid!!).get().await()["full_name"] as String
             withContext(Dispatchers.Main) {
-                drawerPictureImageView.setImageDrawable(bitmapDrawable)
+                drawerPictureImageView.setImageBitmap(bitmap)
                 drawerFullNameTextView.text = fullName
             }
         }

@@ -1,7 +1,5 @@
 package dev.kacebi.hospitalapp.ui.profile
 
-import android.graphics.BitmapFactory
-import android.graphics.drawable.BitmapDrawable
 import android.os.Bundle
 import android.text.InputType
 import android.text.method.PasswordTransformationMethod
@@ -12,6 +10,7 @@ import dev.kacebi.hospitalapp.App
 import dev.kacebi.hospitalapp.R
 import dev.kacebi.hospitalapp.file_size_constants.FileSizeConstants
 import dev.kacebi.hospitalapp.tools.Tools
+import dev.kacebi.hospitalapp.tools.Utils
 import dev.kacebi.hospitalapp.ui.authentication.LoginActivity
 import kotlinx.android.synthetic.main.activity_profile.*
 import kotlinx.android.synthetic.main.spinkit_loader_layout.*
@@ -64,13 +63,10 @@ class ProfileActivity : AppCompatActivity() {
                 fullName = fullName as String
                 email = documentSnapshot["email"] as String
             }
-            val bitmapDrawable = BitmapDrawable(
-                resources,
-                BitmapFactory.decodeByteArray(byteArray, 0, byteArray.size)
-            )
+            val bitmap = Utils.byteArrayToBitmap(byteArray)
             withContext(Dispatchers.Main) {
                 spinKitContainerView.visibility = View.GONE
-                profileImageView.setImageDrawable(bitmapDrawable)
+                profileImageView.setImageBitmap(bitmap)
                 fullNameEditText.setText(fullName)
                 emailEditText.setText(email)
 

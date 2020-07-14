@@ -11,12 +11,15 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import dev.kacebi.hospitalapp.App
 import dev.kacebi.hospitalapp.R
 import dev.kacebi.hospitalapp.extensions.autoScroll
+import dev.kacebi.hospitalapp.file_size_constants.FileSizeConstants
+import dev.kacebi.hospitalapp.tools.Utils
 import dev.kacebi.hospitalapp.ui.ItemOnClickListener
 import dev.kacebi.hospitalapp.ui.patients_dashboard.PatientDashboardActivity
 import dev.kacebi.hospitalapp.ui.patients_dashboard.home.news.NewsActivity
 import dev.kacebi.hospitalapp.ui.patients_dashboard.home.news.NewsModel
 import dev.kacebi.hospitalapp.ui.patients_dashboard.home.news.NewsViewPagerAdapter
 import kotlinx.android.synthetic.main.activity_patient_dashboard.*
+import kotlinx.android.synthetic.main.fragment_doctors.*
 import kotlinx.android.synthetic.main.fragment_home.*
 import kotlinx.android.synthetic.main.fragment_home.view.*
 import kotlinx.coroutines.CoroutineScope
@@ -58,11 +61,8 @@ class HomeFragment : Fragment() {
                     NewsModel::class.java
                 )
 //                val byteArray = App.storage.child(news!!.image_uri).getBytes(FileSizeConstants.THREE_MEGABYTES).await()
-//                val bitmapDrawable = BitmapDrawable(
-//                    resources,
-//                    BitmapFactory.decodeByteArray(byteArray, 0, byteArray.size)
-//                )
-//                news.drawable = bitmapDrawable
+//                val bitmap = Utils.byteArrayToBitmap(byteArray)
+//                news.bitmap = bitmap
                 if (news != null) {
                     newsModel.add(news)
                 }
@@ -104,12 +104,9 @@ class HomeFragment : Fragment() {
                 val specialty = App.dbSpecialties.document(specialtyQDS.id).get().await().toObject(
                     SpecialtyModel::class.java
                 )!!
-//                val byteArray = App.storage.child(specialty!!.uri).getBytes(FileSizeConstants.THREE_MEGABYTES).await()
-//                val bitmapDrawable = BitmapDrawable(
-//                    resources,
-//                    BitmapFactory.decodeByteArray(byteArray, 0, byteArray.size)
-//                )
-//                specialty.drawable = bitmapDrawable
+//                val byteArray = App.storage.child(specialty.uri).getBytes(FileSizeConstants.THREE_MEGABYTES).await()
+//                val bitmap = Utils.byteArrayToBitmap(byteArray)
+//                specialty.bitmap = bitmap
                 specialties.add(specialty)
             }
             adapter =
@@ -125,15 +122,7 @@ class HomeFragment : Fragment() {
                                 activity.searchDoctorsFragment
                             )
                             activity.doctorsFragment.getDoctorsIndex = adapterPosition
-//                            SpecialtiesAdapter.click = adapterPosition
-//                            activity.doctorsFragment.adapter.notifyDataSetChanged()
-//                            activity.doctorsFragment.setUpDoctorsRecyclerview(
-//                                activity.doctorsFragment.itemView!!,
-//                                specialties[adapterPosition].specialty
-//                            )
-                            activity.doctorsFragment.specialtiesRecyclerView.scrollToPosition(
-                                adapterPosition
-                            )
+                            activity.doctorsFragment.specialtiesTabLayout.getTabAt(adapterPosition)?.select()
                             activity.bottomNavigation.selectedItemId = R.id.miDoctors
                         }
 

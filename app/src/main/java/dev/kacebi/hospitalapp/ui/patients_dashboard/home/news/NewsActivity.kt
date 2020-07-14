@@ -4,9 +4,12 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log.d
 import android.view.View
+import com.bumptech.glide.Glide
 import dev.kacebi.hospitalapp.App
 import dev.kacebi.hospitalapp.R
+import dev.kacebi.hospitalapp.file_size_constants.FileSizeConstants
 import dev.kacebi.hospitalapp.tools.Tools
+import dev.kacebi.hospitalapp.tools.Utils
 import kotlinx.android.synthetic.main.activity_news.*
 import kotlinx.android.synthetic.main.toolbar_layout.*
 import kotlinx.coroutines.CoroutineScope
@@ -39,16 +42,13 @@ class NewsActivity : AppCompatActivity() {
                 NewsModel::class.java
             )
 //            val byteArray = App.storage.child(news!!.image_uri).getBytes(FileSizeConstants.THREE_MEGABYTES).await()
-//            val bitmapDrawable = BitmapDrawable(
-//                resources,
-//                BitmapFactory.decodeByteArray(byteArray, 0, byteArray.size)
-//            )
-//            news!!.drawable = bitmapDrawable
+//            val bitmap = Utils.byteArrayToBitmap(byteArray)
+//            news!!.bitmap = bitmap
 
 
             withContext(Dispatchers.Main) {
 //                Glide.with(this@NewsActivity)
-//                    .load(news!!.drawable)
+//                    .load(news!!.bitmap)
 //                    .into(newsImageView)
 
                 newsTitleTextView.text = news!!.title

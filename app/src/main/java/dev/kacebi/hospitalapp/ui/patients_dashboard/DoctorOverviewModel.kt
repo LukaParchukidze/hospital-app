@@ -11,6 +11,6 @@ data class DoctorOverviewModel(
     val working_experience: Long = -1
 ) {
     override fun toString(): String {
-        return "DoctorOverviewModel(drawable=$bitmap, full_name='$full_name', specialty='$specialty')"
+        return "DoctorOverviewModel(bitmap=$bitmap, full_name='$full_name', specialty='$specialty')"
     }
 }

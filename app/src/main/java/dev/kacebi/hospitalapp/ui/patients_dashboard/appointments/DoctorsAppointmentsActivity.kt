@@ -1,8 +1,6 @@
 package dev.kacebi.hospitalapp.ui.patients_dashboard.appointments
 
 import android.app.Dialog
-import android.graphics.BitmapFactory
-import android.graphics.drawable.BitmapDrawable
 import android.os.Bundle
 import android.view.ViewGroup
 import android.view.Window
@@ -13,6 +11,7 @@ import dev.kacebi.hospitalapp.App
 import dev.kacebi.hospitalapp.R
 import dev.kacebi.hospitalapp.file_size_constants.FileSizeConstants
 import dev.kacebi.hospitalapp.tools.Tools
+import dev.kacebi.hospitalapp.tools.Utils
 import dev.kacebi.hospitalapp.ui.ItemOnClickListener
 import kotlinx.android.synthetic.main.activity_doctors_appointments.*
 import kotlinx.android.synthetic.main.dialog_cancel_appointment_layout.*
@@ -102,11 +101,8 @@ class DoctorsAppointmentsActivity : AppCompatActivity() {
                                 )
                             val byteArray =
                                 App.storage.child("/doctor_photos/${document.id}.png").getBytes(FileSizeConstants.THREE_MEGABYTES).await()
-                            val bitmapDrawable = BitmapDrawable(
-                                resources,
-                                BitmapFactory.decodeByteArray(byteArray, 0, byteArray.size)
-                            )
-                            appointment.drawable = bitmapDrawable
+                            val bitmap = Utils.byteArrayToBitmap(byteArray)
+                            appointment.bitmap = bitmap
                             appointments.add(appointment)
                         }
                         withContext(Dispatchers.Main) {

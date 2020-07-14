@@ -1,8 +1,6 @@
 package dev.kacebi.hospitalapp.ui.doctors_dashboard
 
 import android.app.Dialog
-import android.graphics.BitmapFactory
-import android.graphics.drawable.BitmapDrawable
 import android.os.Bundle
 import android.view.*
 import androidx.fragment.app.Fragment
@@ -10,6 +8,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import dev.kacebi.hospitalapp.App
 import dev.kacebi.hospitalapp.R
 import dev.kacebi.hospitalapp.file_size_constants.FileSizeConstants
+import dev.kacebi.hospitalapp.tools.Utils
 import dev.kacebi.hospitalapp.ui.ItemOnClickListener
 import dev.kacebi.hospitalapp.ui.doctors_dashboard.adapters.PatientsAdapter
 import kotlinx.android.synthetic.main.dialog_cancel_appointment_layout.*
@@ -108,11 +107,8 @@ class PatientsListFragment : Fragment() {
                                 App.storage.child("/patient_photos/${appointment.patientId}.png")
                                     .getBytes(FileSizeConstants.THREE_MEGABYTES)
                                     .await()
-                            val bitmapDrawable = BitmapDrawable(
-                                this@PatientsListFragment.resources,
-                                BitmapFactory.decodeByteArray(byteArray, 0, byteArray.size)
-                            )
-                            appointment.drawable = bitmapDrawable
+                            val bitmap = Utils.byteArrayToBitmap(byteArray)
+                            appointment.bitmap = bitmap
                             appointments.add(appointment)
                             withContext(Dispatchers.Main) {
                                 adapter.notifyDataSetChanged()
