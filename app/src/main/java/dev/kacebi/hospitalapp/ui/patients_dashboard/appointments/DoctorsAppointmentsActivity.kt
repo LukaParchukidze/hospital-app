@@ -15,7 +15,7 @@ import dev.kacebi.hospitalapp.file_size_constants.FileSizeConstants
 import dev.kacebi.hospitalapp.tools.Tools
 import dev.kacebi.hospitalapp.ui.ItemOnClickListener
 import kotlinx.android.synthetic.main.activity_doctors_appointments.*
-import kotlinx.android.synthetic.main.cancel_appointment_dialog_layout.*
+import kotlinx.android.synthetic.main.dialog_cancel_appointment_layout.*
 import kotlinx.android.synthetic.main.toolbar_layout.*
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -48,7 +48,7 @@ class DoctorsAppointmentsActivity : AppCompatActivity() {
         val dialog = Dialog(this)
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
         dialog.setCancelable(false)
-        dialog.setContentView(R.layout.cancel_appointment_dialog_layout)
+        dialog.setContentView(R.layout.dialog_cancel_appointment_layout)
 
         val params: ViewGroup.LayoutParams = dialog.window!!.attributes
         params.width = ViewGroup.LayoutParams.MATCH_PARENT

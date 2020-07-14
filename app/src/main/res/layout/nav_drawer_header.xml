@@ -11,6 +11,8 @@
     <de.hdodenhof.circleimageview.CircleImageView
         android:layout_width="70dp"
         android:layout_height="70dp"
+        android:padding="2dp"
+        android:background="@drawable/drawer_menu_profile_background"
         android:id="@+id/drawerPictureImageView"
         />
 
