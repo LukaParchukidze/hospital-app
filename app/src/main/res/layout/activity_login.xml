@@ -81,7 +81,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="70dp"
-            android:background="@drawable/button_background"
+            android:background="@drawable/positive_button_background"
             android:fontFamily="@font/nexa_light"
             android:text="@string/log_in"
             android:textAllCaps="false"
@@ -101,4 +101,8 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
+    <include
+        layout="@layout/spinkit_loader_layout" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
+

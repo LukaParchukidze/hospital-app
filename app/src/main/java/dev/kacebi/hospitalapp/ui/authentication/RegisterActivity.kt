@@ -33,6 +33,7 @@ import dev.kacebi.hospitalapp.tools.Tools
 import dev.kacebi.hospitalapp.tools.Utils
 import dev.kacebi.hospitalapp.tools.Utils.bitmapToByteArray
 import kotlinx.android.synthetic.main.activity_register.*
+import kotlinx.android.synthetic.main.spinkit_loader_layout.*
 import kotlinx.coroutines.*
 import kotlinx.coroutines.tasks.await
 import java.io.ByteArrayOutputStream
@@ -221,7 +222,9 @@ class RegisterActivity : AppCompatActivity(), View.OnClickListener {
                                                 "Close"
                                             )
 
+                                            spinKitContainerView.visibility = View.VISIBLE
                                             delay(2000)
+                                            spinKitContainerView.visibility = View.GONE
 
                                             Tools.startActivity(
                                                 this@RegisterActivity,

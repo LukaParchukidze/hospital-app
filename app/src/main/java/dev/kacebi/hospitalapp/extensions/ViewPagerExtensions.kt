@@ -12,7 +12,7 @@ fun ViewPager.autoScroll(interval: Long) {
     val runnable = object : Runnable {
 
         override fun run() {
-            
+
             position = currentItem
 
             if (position == size - 1)
@@ -20,7 +20,7 @@ fun ViewPager.autoScroll(interval: Long) {
 
             setCurrentItem(++position % size, true)
             handler.postDelayed(this, interval)
-            
+
         }
     }
 

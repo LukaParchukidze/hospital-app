@@ -7,6 +7,7 @@ import dev.kacebi.hospitalapp.App
 import dev.kacebi.hospitalapp.R
 import dev.kacebi.hospitalapp.tools.Tools
 import kotlinx.android.synthetic.main.activity_forgot_password.*
+import kotlinx.android.synthetic.main.spinkit_loader_layout.*
 import kotlinx.coroutines.*
 
 class ForgotPasswordActivity : AppCompatActivity(), View.OnClickListener {
@@ -36,7 +37,9 @@ class ForgotPasswordActivity : AppCompatActivity(), View.OnClickListener {
                                         "Cancel"
                                     )
 
-                                    delay(3000)
+                                    spinKitContainerView.visibility = View.VISIBLE
+                                    delay(2000)
+                                    spinKitContainerView.visibility = View.GONE
 
                                     val intent =
                                         this@ForgotPasswordActivity.packageManager.getLaunchIntentForPackage(

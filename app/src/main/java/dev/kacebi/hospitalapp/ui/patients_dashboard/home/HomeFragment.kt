@@ -13,12 +13,10 @@ import dev.kacebi.hospitalapp.R
 import dev.kacebi.hospitalapp.extensions.autoScroll
 import dev.kacebi.hospitalapp.ui.ItemOnClickListener
 import dev.kacebi.hospitalapp.ui.patients_dashboard.PatientDashboardActivity
-import dev.kacebi.hospitalapp.ui.patients_dashboard.doctors.list.adapters.SpecialtiesAdapter
 import dev.kacebi.hospitalapp.ui.patients_dashboard.home.news.NewsActivity
 import dev.kacebi.hospitalapp.ui.patients_dashboard.home.news.NewsModel
 import dev.kacebi.hospitalapp.ui.patients_dashboard.home.news.NewsViewPagerAdapter
 import kotlinx.android.synthetic.main.activity_patient_dashboard.*
-import kotlinx.android.synthetic.main.fragment_doctors.specialtiesRecyclerView
 import kotlinx.android.synthetic.main.fragment_home.*
 import kotlinx.android.synthetic.main.fragment_home.view.*
 import kotlinx.coroutines.CoroutineScope
@@ -127,12 +125,12 @@ class HomeFragment : Fragment() {
                                 activity.searchDoctorsFragment
                             )
                             activity.doctorsFragment.getDoctorsIndex = adapterPosition
-                            SpecialtiesAdapter.click = adapterPosition
-                            activity.doctorsFragment.adapter.notifyDataSetChanged()
-                            activity.doctorsFragment.setUpDoctorsRecyclerview(
-                                activity.doctorsFragment.itemView!!,
-                                specialties[adapterPosition].specialty
-                            )
+//                            SpecialtiesAdapter.click = adapterPosition
+//                            activity.doctorsFragment.adapter.notifyDataSetChanged()
+//                            activity.doctorsFragment.setUpDoctorsRecyclerview(
+//                                activity.doctorsFragment.itemView!!,
+//                                specialties[adapterPosition].specialty
+//                            )
                             activity.doctorsFragment.specialtiesRecyclerView.scrollToPosition(
                                 adapterPosition
                             )

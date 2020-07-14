@@ -5,7 +5,9 @@ import android.content.Intent
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.os.Bundle
+import android.os.Handler
 import android.util.Log.d
+import android.view.View
 import android.view.animation.AnimationUtils
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
@@ -66,9 +68,15 @@ class ChatActivity : AppCompatActivity() {
 
         name = intent.extras!!.getString("name")!!
 
+        d("activitiyName", name.contains(" ").toString())
+
         Tools.setSupportActionBar(this, name, isLastName = !name.contains(" "), backEnabled = true)
 
         setUpAdapter()
+        Handler().postDelayed({
+            progressBar.visibility = View.GONE
+            chatLayout.visibility = View.VISIBLE
+        }, 2000)
         toolbar!!.setNavigationOnClickListener {
             onBackPressed()
         }

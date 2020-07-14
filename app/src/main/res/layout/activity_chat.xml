@@ -1,64 +1,79 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".ui.chat.activities.ChatActivity">
+    android:layout_height="match_parent">
 
-    <include
-        android:id="@+id/sample"
-        layout="@layout/toolbar_layout" />
-
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rvChat"
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/chatLayout"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        app:layout_constraintBottom_toTopOf="@id/etChat"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/sample" />
+        android:layout_height="match_parent"
+        android:visibility="invisible"
+        tools:context=".ui.chat.activities.ChatActivity">
 
-    <EditText
-        android:id="@+id/etChat"
-        android:layout_width="250dp"
-        android:layout_height="50dp"
-        android:layout_marginVertical="10dp"
-        android:background="@drawable/fields_background"
-        android:hint="Aa"
-        android:paddingHorizontal="10dp"
-        android:paddingVertical="3dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/btnChatImage"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/rvChat" />
+        <include
+            android:id="@+id/sample"
+            layout="@layout/toolbar_layout" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rvChat"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            app:layout_constraintBottom_toTopOf="@id/etChat"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/sample" />
+
+        <EditText
+            android:id="@+id/etChat"
+            android:layout_width="250dp"
+            android:layout_height="50dp"
+            android:layout_marginVertical="10dp"
+            android:background="@drawable/fields_background"
+            android:hint="Aa"
+            android:paddingHorizontal="10dp"
+            android:paddingVertical="3dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/btnChatImage"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/rvChat" />
 
 
-    <ImageButton
-        android:id="@+id/btnChatImage"
+        <ImageButton
+            android:id="@+id/btnChatImage"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_marginVertical="10dp"
+            android:background="@android:color/transparent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/btnChat"
+            app:layout_constraintStart_toEndOf="@id/etChat"
+            app:layout_constraintTop_toBottomOf="@+id/rvChat"
+            app:srcCompat="@drawable/ic_insert_photo" />
+
+        <ImageButton
+            android:id="@+id/btnChat"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_marginVertical="10dp"
+            android:background="@android:color/transparent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/btnChatImage"
+            app:layout_constraintTop_toBottomOf="@+id/rvChat"
+            app:srcCompat="@drawable/ic_send" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <ProgressBar
+        android:id="@+id/progressBar"
+        style="?android:attr/progressBarStyleLarge"
         android:layout_width="50dp"
         android:layout_height="50dp"
-        android:layout_marginVertical="10dp"
-        android:background="@android:color/transparent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/btnChat"
-        app:layout_constraintStart_toEndOf="@id/etChat"
-        app:layout_constraintTop_toBottomOf="@+id/rvChat"
-        app:srcCompat="@drawable/ic_insert_photo" />
+        android:layout_gravity="center"
+        android:indeterminate="true"
+        android:indeterminateTint="@color/colorPrimaryDark"
+        android:visibility="visible" />
 
-    <ImageButton
-        android:id="@+id/btnChat"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:layout_marginVertical="10dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:background="@android:color/transparent"
-        app:layout_constraintStart_toEndOf="@id/btnChatImage"
-        app:layout_constraintTop_toBottomOf="@+id/rvChat"
-        app:srcCompat="@drawable/ic_send" />
-
-
-
-
-</androidx.constraintlayout.widget.ConstraintLayout>
+</FrameLayout>

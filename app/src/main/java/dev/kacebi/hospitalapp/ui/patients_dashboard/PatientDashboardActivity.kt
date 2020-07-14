@@ -1,10 +1,8 @@
 package dev.kacebi.hospitalapp.ui.patients_dashboard
 
-import android.content.Intent
 import android.graphics.BitmapFactory
 import android.graphics.drawable.BitmapDrawable
 import android.os.Bundle
-import android.view.Gravity
 import android.view.MenuItem
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AppCompatActivity
@@ -18,7 +16,7 @@ import dev.kacebi.hospitalapp.tools.Tools
 import dev.kacebi.hospitalapp.ui.authentication.LoginActivity
 import dev.kacebi.hospitalapp.ui.chat.activities.ChatsListActivity
 import dev.kacebi.hospitalapp.ui.patients_dashboard.appointments.DoctorsAppointmentsActivity
-import dev.kacebi.hospitalapp.ui.patients_dashboard.doctors.list.DoctorsFragment
+import dev.kacebi.hospitalapp.ui.patients_dashboard.doctors.list.fragments.DoctorsFragment
 import dev.kacebi.hospitalapp.ui.patients_dashboard.home.HomeFragment
 import dev.kacebi.hospitalapp.ui.patients_dashboard.search.SearchDoctorsFragment
 import dev.kacebi.hospitalapp.ui.profile.ProfileActivity

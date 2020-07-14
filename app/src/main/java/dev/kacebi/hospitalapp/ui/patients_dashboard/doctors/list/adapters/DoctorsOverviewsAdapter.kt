@@ -38,13 +38,13 @@ class DoctorsOverviewsAdapter(
         fun onBind() {
             doctorOverview = doctorsOverviews[adapterPosition]
 
-//            itemView.doctorOverviewImage.setImageDrawable(doctorOverview.drawable)
+//            itemView.doctorOverviewImage.setImageBitmap(doctorOverview.bitmap)
             itemView.doctorOverviewFullName.text = doctorOverview.full_name
-            itemView.specialtyOverview.text = doctorOverview.specialty
+            itemView.doctorOverviewSpecialty.text = doctorOverview.specialty
+            itemView.doctorOverviewWorkingExperience.text = "Working Experience: ${doctorOverview.working_experience}"
 
             itemView.setOnClickListener {
                 itemClick.onClick(adapterPosition)
-                d("doctorId", "${doctorsOverviews[adapterPosition].doctorId}")
             }
         }
     }
