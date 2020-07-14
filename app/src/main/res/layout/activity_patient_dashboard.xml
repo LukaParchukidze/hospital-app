@@ -35,6 +35,23 @@
             app:layout_constraintStart_toStartOf="parent"
             app:menu="@menu/nav_bottom_menu" />
 
+<!--        <com.google.android.material.navigation.NavigationView-->
+<!--            android:id="@+id/nav_view"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="match_parent"-->
+<!--            android:layout_gravity="start"-->
+<!--            android:background="#425867"-->
+<!--            android:fitsSystemWindows="true"-->
+<!--            app:headerLayout="@layout/nav_drawer_header"-->
+<!--            app:itemHorizontalPadding="20dp"-->
+<!--            app:itemIconTint="@android:color/white"-->
+<!--            app:itemTextColor="@android:color/white"-->
+<!--            app:layout_constraintBottom_toBottomOf="parent"-->
+<!--            app:layout_constraintEnd_toEndOf="parent"-->
+<!--            app:layout_constraintStart_toStartOf="parent"-->
+<!--            app:layout_constraintTop_toTopOf="parent"-->
+<!--            app:menu="@menu/nav_drawer_menu" />-->
+
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -43,8 +60,13 @@
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:layout_gravity="start"
+        android:background="#425867"
         android:fitsSystemWindows="true"
         app:headerLayout="@layout/nav_drawer_header"
+        app:itemHorizontalPadding="20dp"
+        app:itemIconTint="@android:color/white"
+        app:itemTextColor="@android:color/white"
         app:menu="@menu/nav_drawer_menu" />
+
 
 </androidx.drawerlayout.widget.DrawerLayout>

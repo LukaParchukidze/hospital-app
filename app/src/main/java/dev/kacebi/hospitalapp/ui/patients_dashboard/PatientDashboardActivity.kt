@@ -53,17 +53,21 @@ class PatientDashboardActivity : AppCompatActivity() {
 
         //get user icon
         CoroutineScope(Dispatchers.IO).launch {
-            val byteArray = App.storage.child("/patient_photos/${App.auth.uid!!}.png").getBytes(FileSizeConstants.THREE_MEGABYTES).await()
-            val bitmapDrawable = BitmapDrawable(resources, BitmapFactory.decodeByteArray(byteArray, 0, byteArray.size))
+            val byteArray = App.storage.child("/patient_photos/${App.auth.uid!!}.png")
+                .getBytes(FileSizeConstants.THREE_MEGABYTES).await()
+            val bitmapDrawable = BitmapDrawable(
+                resources,
+                BitmapFactory.decodeByteArray(byteArray, 0, byteArray.size)
+            )
             val fullName = App.dbUsers.document(App.auth.uid!!).get().await()["full_name"] as String
             withContext(Dispatchers.Main) {
                 drawerPictureImageView.setImageDrawable(bitmapDrawable)
-                drawerFullNameTextView.text = fullName
+                drawerFullNameTextView.text = "Hi, $fullName"
             }
         }
     }
 
-    private fun addFragments(){
+    private fun addFragments() {
         supportFragmentManager.beginTransaction()
             .add(R.id.dashboardFragmentContainer, doctorsFragment).hide(doctorsFragment).commit()
         supportFragmentManager.beginTransaction()
@@ -91,7 +95,7 @@ class PatientDashboardActivity : AppCompatActivity() {
         toggle.syncState()
     }
 
-    private fun setUpNavigationView(){
+    private fun setUpNavigationView() {
         val navigationView = findViewById<NavigationView>(R.id.nav_view)
         navigationView.setNavigationItemSelectedListener {
             when (it.itemId) {

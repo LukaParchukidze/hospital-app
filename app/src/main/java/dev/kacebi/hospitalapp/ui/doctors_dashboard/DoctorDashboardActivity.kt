@@ -64,7 +64,7 @@ class DoctorDashboardActivity : AppCompatActivity() {
             val fullName = App.dbDoctors.document(App.auth.uid!!).get().await()["full_name"] as String
             withContext(Dispatchers.Main) {
                 drawerPictureImageView.setImageDrawable(bitmapDrawable)
-                drawerFullNameTextView.text = fullName
+                drawerFullNameTextView.text = "Hi, $fullName"
             }
         }
     }

@@ -28,7 +28,9 @@
         <activity
             android:name=".ui.doctors_dashboard.DoctorDashboardActivity"
             android:screenOrientation="portrait"
-            tools:ignore="LockedOrientationActivity" />
+            tools:ignore="LockedOrientationActivity">
+
+        </activity>
         <activity
             android:name=".ui.patients_dashboard.doctors.full_information.DoctorInformationActivity"
             android:screenOrientation="portrait"
@@ -61,7 +63,9 @@
             tools:ignore="LockedOrientationActivity" />
         <activity
             android:name=".ui.patients_dashboard.PatientDashboardActivity"
-            android:windowSoftInputMode="adjustPan" />
+            android:windowSoftInputMode="adjustPan">
+
+        </activity>
         <activity
             android:name=".ui.authentication.ForgotPasswordActivity"
             android:screenOrientation="portrait"
