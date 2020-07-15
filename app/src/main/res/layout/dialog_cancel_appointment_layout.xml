@@ -3,77 +3,67 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:gravity="center"
-    android:background="#425867"
     android:orientation="vertical">
 
-    <TextView
-        android:fontFamily="@font/nexa_bold"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/cancel_appointment_title"
-        android:textColor="@android:color/holo_red_dark"
-        android:textSize="20sp"
-        android:textStyle="bold" />
-
-    <View
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:background="@android:color/holo_red_dark"
-        />
-
-    <TextView
-        android:id="@+id/nameTextView"
-        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:fontFamily="@font/nexa_bold"
-        android:textColor="@android:color/white"
-        android:text="Johann Bach"
-        android:textSize="15sp" />
+        android:background="@color/dialogNegativeColor"
+        android:gravity="center">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/nexa_bold"
+            android:paddingTop="15dp"
+            android:paddingBottom="15dp"
+            android:text="@string/cancel_appointment_title"
+            android:textColor="@color/dialogTitleColor"
+            android:textSize="20sp"
+            android:textStyle="bold" />
+    </LinearLayout>
 
     <TextView
-        android:fontFamily="@font/nexa_light"
-        android:text="@string/cancel_appointment_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginVertical="10dp"
+        android:layout_marginStart="25dp"
+        android:layout_marginEnd="25dp"
+        android:fontFamily="@font/nexa_light"
         android:gravity="center"
-        android:textColor="@android:color/white" />
-
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:layout_marginBottom="10dp"
-        android:background="@android:color/darker_gray" />
+        android:paddingTop="5dp"
+        android:paddingBottom="5dp"
+        android:text="@string/cancel_appointment_text"
+        android:textColor="#000000" />
 
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="end">
+        android:layout_gravity="end"
+        android:layout_marginTop="10dp">
 
         <Button
-            android:layout_width="120dp"
-            android:layout_marginBottom="10dp"
-            android:id="@+id/noCancelButton"
-            android:background="@drawable/button_positive_background"
-            android:layout_height="wrap_content"
-            android:padding="10dp"
-            android:text="@string/don_t_cancel"
-            android:textAllCaps="false"
-            android:textSize="15sp"
-            android:textColor="@android:color/white" />
-
-        <Button
-            android:layout_marginEnd="10dp"
-            android:background="@drawable/button_negative_red_background"
             android:id="@+id/cancelButton"
-            android:layout_width="100dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="10dp"
-            android:text="@string/cancel"
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"
+            android:layout_marginBottom="10dp"
+            android:background="@drawable/button_cancel_background"
+            android:text="@string/agree"
             android:textAllCaps="false"
-            android:textSize="15sp"
-            android:textColor="@android:color/white" />
+            android:textColor="@android:color/white"
+            android:textSize="15sp" />
+
+        <Button
+            android:id="@+id/noCancelButton"
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="10dp"
+            android:background="@drawable/button_negative_background"
+            android:text="@string/disagree"
+            android:textAllCaps="false"
+            android:textColor="@android:color/white"
+            android:textSize="15sp" />
 
     </LinearLayout>
 

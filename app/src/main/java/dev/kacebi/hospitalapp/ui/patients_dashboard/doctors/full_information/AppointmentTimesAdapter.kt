@@ -1,5 +1,6 @@
 package dev.kacebi.hospitalapp.ui.patients_dashboard.doctors.full_information
 
+import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -33,12 +34,13 @@ class AppointmentTimesAdapter(private val appointmentTimeModels: MutableList<App
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         private lateinit var appointmentTimeModel: AppointmentTimeModel
 
+        @SuppressLint("SetTextI18n")
         fun onBind() {
             appointmentTimeModel = appointmentTimeModels[adapterPosition]
 
             itemView.appointmentTimeTextView.text = appointmentTimeModel.start_time + " - " + appointmentTimeModel.end_time
             if (appointmentTimeModel.available) {
-                itemView.appointmentTimeTextView.setTextColor(ContextCompat.getColor(itemView.context, android.R.color.holo_red_dark))
+                itemView.appointmentTimeTextView.setTextColor(ContextCompat.getColor(itemView.context, R.color.statusCancelled))
                 itemView.setBackgroundColor(ContextCompat.getColor(itemView.context, android.R.color.white))
                 itemView.setOnClickListener {
                     click = adapterPosition
@@ -46,11 +48,11 @@ class AppointmentTimesAdapter(private val appointmentTimeModels: MutableList<App
                 }
                 if (click == adapterPosition) {
                     itemView.appointmentTimeTextView.setTextColor(ContextCompat.getColor(itemView.context, android.R.color.white))
-                    itemView.setBackgroundColor(ContextCompat.getColor(itemView.context, android.R.color.holo_red_dark))
+                    itemView.setBackgroundColor(ContextCompat.getColor(itemView.context, R.color.statusCancelled))
                 }
             } else {
                 itemView.appointmentTimeTextView.setTextColor(ContextCompat.getColor(itemView.context, android.R.color.white))
-                itemView.setBackgroundColor(ContextCompat.getColor(itemView.context, android.R.color.darker_gray))
+                itemView.setBackgroundColor(ContextCompat.getColor(itemView.context, R.color.dialogCancelGray))
             }
         }
     }

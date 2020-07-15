@@ -163,7 +163,6 @@ object Tools {
 
     fun initDialog(
         activity: AppCompatActivity,
-        name: String = "",
         patientId: String = "",
         doctorId: String = "",
         layout: Int,
@@ -187,7 +186,6 @@ object Tools {
         if (changeStatus)
             changeStatusDialog(
                 dialog,
-                name,
                 patientId,
                 doctorId,
                 negativeButtonId,
@@ -201,7 +199,6 @@ object Tools {
 
     private fun changeStatusDialog(
         dialog: Dialog,
-        name: String,
         patientId: String,
         doctorId: String,
         negativeButtonId: Int,
@@ -212,7 +209,6 @@ object Tools {
         val negativeButton = dialog.findViewById<Button>(negativeButtonId)
         val positiveButton = dialog.findViewById<Button>(positiveButtonId)
 
-        dialog.findViewById<TextView>(R.id.nameTextView).text = name
 
         positiveButton.setOnClickListener {
             dialog.dismiss()

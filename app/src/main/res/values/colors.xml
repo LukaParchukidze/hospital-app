@@ -10,4 +10,12 @@
     <color name="errorColor">#FF0700</color>
     <color name="pinkColor">#E84372</color>
     <color name="toolbarColor">#1E88E5</color>
+    <color name="dialogPositiveColor">#00b8f1</color>
+    <color name="dialogNegativeColor">#FF443F</color>
+    <color name="dialogTitleColor">#fafafa</color>
+    <color name="statusConfirmed">#54A520</color>
+    <color name="statusUnconfirmed">#B3B3B3</color>
+    <color name="statusCancelled">#FF443F</color>
+    <color name="navigationViewColor">#265275</color>
+    <color name="dialogCancelGray">#FFBEBEBE</color>
 </resources>

@@ -49,7 +49,6 @@ class DoctorsAppointmentsActivity : AppCompatActivity() {
                     override fun onClick(adapterPosition: Int) {
                         val dialog = Tools.initDialog(
                             this@DoctorsAppointmentsActivity,
-                            "Dr. ${appointments[adapterPosition].last_name}",
                             App.auth.uid!!,
                             appointments[adapterPosition].doctorId,
                             R.layout.dialog_cancel_appointment_layout,

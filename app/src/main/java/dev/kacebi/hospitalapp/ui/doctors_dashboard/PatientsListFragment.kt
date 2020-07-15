@@ -60,7 +60,6 @@ class PatientsListFragment : Fragment() {
                         if (status == "Confirmed") {
                             val dialog = Tools.initDialog(
                                 activity as DoctorDashboardActivity,
-                                appointments[adapterPosition].full_name,
                                 appointments[adapterPosition].patientId,
                                 App.auth.uid!!,
                                 R.layout.dialog_confirm_appointment_layout,
@@ -74,7 +73,6 @@ class PatientsListFragment : Fragment() {
                         } else if (status == "Cancelled") {
                             val dialog = Tools.initDialog(
                                 activity as DoctorDashboardActivity,
-                                appointments[adapterPosition].full_name,
                                 appointments[adapterPosition].patientId,
                                 App.auth.uid!!,
                                 R.layout.dialog_cancel_appointment_layout,

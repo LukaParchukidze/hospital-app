@@ -5,7 +5,6 @@ import android.content.Intent
 import android.os.Bundle
 import android.util.Log.d
 import android.view.View
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import dev.kacebi.hospitalapp.App
@@ -41,6 +40,10 @@ class DoctorInformationActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_doctor_information)
 
+        init()
+    }
+
+    private fun init() {
         lastName = intent.extras!!.getString("lastName", "")
 
         Tools.setSupportActionBar(this, lastName, isLastName = true, backEnabled = true)
@@ -66,7 +69,7 @@ class DoctorInformationActivity : AppCompatActivity() {
 
     private fun showDialog() {
 
-        //disable book and message buttons
+        // Disable book and message buttons
         bookDoctorButton.isEnabled = false
         messageDoctorButton.isEnabled = false
 
@@ -75,9 +78,13 @@ class DoctorInformationActivity : AppCompatActivity() {
             adapter!!.notifyDataSetChanged()
         }
 
-        //init dialog
+        // Init dialog
         val dialog =
-            Tools.initDialog(this, layout = R.layout.dialog_appointment_layout, changeStatus = false)
+            Tools.initDialog(
+                this,
+                layout = R.layout.dialog_appointment_layout,
+                changeStatus = false
+            )
 
         dialog.closeDialogButton.setOnClickListener {
             dialog.dismiss()
@@ -89,7 +96,8 @@ class DoctorInformationActivity : AppCompatActivity() {
                 dialog.applyDialogButton.isEnabled = false
 
                 CoroutineScope(Dispatchers.IO).launch {
-                    val data = App.dbDoctors.document(doctorId).collection("patients").document(App.auth.uid!!).get().await().data
+                    val data = App.dbDoctors.document(doctorId).collection("patients")
+                        .document(App.auth.uid!!).get().await().data
                     if (data == null || data["status"] == "Cancelled") {
                         App.dbDoctors.document(doctorId).collection("patients")
                             .document(App.auth.uid!!).set(
@@ -97,9 +105,10 @@ class DoctorInformationActivity : AppCompatActivity() {
                                     "status" to "Unconfirmed",
                                     "start_time" to appointmentTimes[adapter!!.click].start_time,
                                     "end_time" to appointmentTimes[adapter!!.click].end_time,
-                                    "full_name" to App.dbUsers.document(App.auth.uid!!).get().await()["full_name"] as String
+                                    "full_name" to App.dbUsers.document(App.auth.uid!!).get()
+                                        .await()["full_name"] as String
                                 )
-                        ).await()
+                            ).await()
                         App.dbUsers.document(App.auth.uid!!).collection("doctors")
                             .document(doctorId).set(
                                 hashMapOf(
@@ -108,7 +117,7 @@ class DoctorInformationActivity : AppCompatActivity() {
                                     "end_time" to appointmentTimes[adapter!!.click].end_time,
                                     "last_name" to lastName
                                 )
-                        ).await()
+                            ).await()
                         withContext(Dispatchers.Main) {
                             dialog.closeDialogButton.isEnabled = true
                             dialog.applyDialogButton.isEnabled = true
@@ -118,7 +127,14 @@ class DoctorInformationActivity : AppCompatActivity() {
                         withContext(Dispatchers.Main) {
                             dialog.closeDialogButton.isEnabled = true
                             dialog.applyDialogButton.isEnabled = true
-                            Toast.makeText(this@DoctorInformationActivity, "You've already booked an appointment.", Toast.LENGTH_LONG).show()
+                            Tools.showSnackbar(
+                                this@DoctorInformationActivity,
+                                doctorInformationRoot,
+                                "You've already booked an appointment.",
+                                false,
+                                "Hide"
+                            )
+                            dialog.dismiss()
                         }
                     }
                 }
@@ -127,7 +143,7 @@ class DoctorInformationActivity : AppCompatActivity() {
             }
         }
 
-        //enable buttons
+        // Enable buttons
         bookDoctorButton.isEnabled = true
         messageDoctorButton.isEnabled = true
 
@@ -142,7 +158,7 @@ class DoctorInformationActivity : AppCompatActivity() {
             false
         )
 
-        //get appointment times
+        // Get appointment times
         CoroutineScope(Dispatchers.IO).launch {
             val size =
                 App.dbDoctors.document(doctorId).collection("patients").get().await().size()
@@ -158,9 +174,9 @@ class DoctorInformationActivity : AppCompatActivity() {
                     App.dbDoctors.document(doctorId).collection("patients").get().await()
                 for (document in patients.documents) {
                     if (document["status"] != "Cancelled") {
-                        val start_time = document["start_time"] as String
+                        val startTime = document["start_time"] as String
                         for (i in 0 until appointmentTimes.size) {
-                            if (start_time == appointmentTimes[i].start_time) {
+                            if (startTime == appointmentTimes[i].start_time) {
                                 appointmentTimes[i].available = false
                                 break
                             }
@@ -176,7 +192,7 @@ class DoctorInformationActivity : AppCompatActivity() {
 
     }
 
-    // time formatting for appointment management
+    // Time formatting for appointment management
     @SuppressLint("SimpleDateFormat")
     private fun getTimes(start_time: String, end_time: String, increment: Int) {
         if (start_time == end_time)
@@ -204,7 +220,8 @@ class DoctorInformationActivity : AppCompatActivity() {
             doctor =
                 App.dbDoctors.document(doctorId).get().await()
                     .toObject(DoctorModel::class.java)!!
-            val byteArray = App.storage.child("/doctor_photos/$doctorId.png").getBytes(FileSizeConstants.THREE_MEGABYTES).await()
+            val byteArray = App.storage.child("/doctor_photos/$doctorId.png")
+                .getBytes(FileSizeConstants.THREE_MEGABYTES).await()
             val bitmap = Utils.byteArrayToBitmap(byteArray)
             doctor.bitmap = bitmap
 
