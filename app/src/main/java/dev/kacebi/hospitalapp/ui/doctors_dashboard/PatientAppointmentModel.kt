@@ -1,9 +1,9 @@
 package dev.kacebi.hospitalapp.ui.doctors_dashboard
 
-import android.graphics.drawable.Drawable
+import android.graphics.Bitmap
 
 data class PatientAppointmentModel(
-    var drawable: Drawable? = null,
+    var bitmap: Bitmap? = null,
     val patientId: String = "",
     val full_name: String = "",
     val start_time: String = "",

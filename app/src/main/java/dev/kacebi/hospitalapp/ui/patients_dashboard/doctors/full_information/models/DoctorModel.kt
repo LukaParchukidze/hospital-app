@@ -1,6 +1,6 @@
 package dev.kacebi.hospitalapp.ui.patients_dashboard.doctors.full_information.models
 
-import android.graphics.drawable.Drawable
+import android.graphics.Bitmap
 
 data class DoctorModel(
     val full_name: String = "",
@@ -12,9 +12,9 @@ data class DoctorModel(
     val about: String = "",
     val working_experience: Int = -1,
     var phone_numbers: List<String>? = null,
-    var drawable: Drawable? = null
+    var bitmap: Bitmap? = null
 ) {
     override fun toString(): String {
-        return "DoctorModel(full_name='$full_name', email='$email', age=$age, specialty='$specialty', start_time='$start_time', end_time='$end_time', about='$about', working_experience=$working_experience, phone_numbers=$phone_numbers, drawable=$drawable)"
+        return "DoctorModel(full_name='$full_name', email='$email', age=$age, specialty='$specialty', start_time='$start_time', end_time='$end_time', about='$about', working_experience=$working_experience, phone_numbers=$phone_numbers, bitmap=$bitmap)"
     }
 }

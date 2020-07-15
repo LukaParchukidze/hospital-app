@@ -36,7 +36,7 @@ class SpecialtiesWithIconsAdapter(
         fun onBind() {
             specialty = specialties[adapterPosition]
 
-//            itemView.specialtyImageView.setImageDrawable(specialty.drawable)
+            itemView.specialtyImageView.setImageBitmap(specialty.bitmap)
             itemView.specialtyTextView.text = specialty.specialty
             itemView.setOnClickListener {
                 itemClick.onClick(adapterPosition)

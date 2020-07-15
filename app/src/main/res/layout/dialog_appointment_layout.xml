@@ -37,7 +37,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/closeDialogButton"
-                android:background="@drawable/negative_button_background"
+                android:background="@drawable/button_negative_background"
                 android:fontFamily="@font/nexa_bold"
                 android:text="@string/close"
                 android:textAllCaps="false"
@@ -47,7 +47,7 @@
             <Button
                 android:layout_marginStart="10dp"
                 android:layout_marginBottom="10dp"
-                android:background="@drawable/positive_button_background"
+                android:background="@drawable/button_positive_background"
                 android:fontFamily="@font/nexa_bold"
                 android:text="@string/apply"
                 android:textAllCaps="false"

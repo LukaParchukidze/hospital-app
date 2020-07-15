@@ -1,14 +1,14 @@
 package dev.kacebi.hospitalapp.tools
 
 import android.app.Activity
+import android.app.Dialog
 import android.content.Context
 import android.content.Intent
-import android.util.Log.d
 import android.view.View
-import android.widget.EditText
-import android.widget.ImageView
-import android.widget.TextView
-import android.widget.Toast
+import android.view.ViewGroup
+import android.view.Window
+import android.view.WindowManager
+import android.widget.*
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
@@ -20,8 +20,7 @@ import de.hdodenhof.circleimageview.CircleImageView
 import dev.kacebi.hospitalapp.App
 import dev.kacebi.hospitalapp.R
 import dev.kacebi.hospitalapp.file_size_constants.FileSizeConstants
-import kotlinx.android.synthetic.main.nav_drawer_header.*
-import kotlinx.android.synthetic.main.toolbar_layout.*
+import dev.kacebi.hospitalapp.utils.Utils
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -52,7 +51,7 @@ object Tools {
     }
 
     fun showToast(context: Context, text: String) {
-        return Toast.makeText(context, text, Toast.LENGTH_LONG).show()
+        return Toast.makeText(context, text, Toast.LENGTH_SHORT).show()
     }
 
     fun isFieldsNotEmpty(editTextArray: Array<EditText>): Boolean {
@@ -153,16 +152,72 @@ object Tools {
         backEnabled: Boolean
     ) {
         activity.setSupportActionBar(activity.findViewById(R.id.toolbar))
-        d("toolbarYle", title)
-        d("toolbarYle", isLastName.toString())
         if (!isLastName)
             activity.findViewById<TextView>(R.id.toolbarTitle).text = title
         else
             activity.findViewById<TextView>(R.id.toolbarTitle).text = "Dr. $title"
 
         activity.supportActionBar!!.setDisplayShowTitleEnabled(false)
-
         activity.supportActionBar!!.setDisplayHomeAsUpEnabled(backEnabled)
+    }
+
+    fun initDialog(
+        activity: AppCompatActivity,
+        patientId: String = "",
+        doctorId: String = "",
+        layout: Int,
+        negativeButtonId: Int = 0,
+        positiveButtonId: Int = 0,
+        status: String = "",
+        changeStatus: Boolean
+    ): Dialog {
+        val dialog = Dialog(activity)
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        dialog.setCancelable(false)
+        dialog.setContentView(layout)
+
+        val params: ViewGroup.LayoutParams = dialog.window!!.attributes
+        params.width = ViewGroup.LayoutParams.MATCH_PARENT
+        params.height = ViewGroup.LayoutParams.WRAP_CONTENT
+        dialog.window!!.attributes = params as WindowManager.LayoutParams
+
+        if (changeStatus)
+            changeStatusDialog(
+                dialog,
+                patientId,
+                doctorId,
+                negativeButtonId,
+                positiveButtonId,
+                status
+            )
+
+        return dialog
+    }
+
+    private fun changeStatusDialog(
+        dialog: Dialog,
+        patientId: String,
+        doctorId: String,
+        negativeButtonId: Int,
+        positiveButtonId: Int,
+        status: String
+    ) {
+        val negativeButton = dialog.findViewById<Button>(negativeButtonId)
+        val positiveButton = dialog.findViewById<Button>(positiveButtonId)
+
+        positiveButton.setOnClickListener {
+            dialog.dismiss()
+
+            CoroutineScope(Dispatchers.IO).launch {
+                App.dbDoctors.document(doctorId).collection("patients").document(patientId)
+                    .update("status", status).await()
+                App.dbUsers.document(patientId).collection("doctors").document(doctorId)
+                    .update("status", status).await()
+            }
+        }
+        negativeButton.setOnClickListener {
+            dialog.dismiss()
+        }
     }
 
     fun toggleDrawer(
@@ -192,6 +247,8 @@ object Tools {
                 activity.findViewById<TextView>(R.id.drawerFullNameTextView).text = "Hi, $fullName"
             }
         }
-    }
 
+
+    }
 }
+

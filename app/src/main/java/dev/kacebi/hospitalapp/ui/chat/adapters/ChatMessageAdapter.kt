@@ -1,18 +1,14 @@
 package dev.kacebi.hospitalapp.ui.chat.adapters
 
-import android.app.Activity
 import android.graphics.Bitmap
-import android.graphics.BitmapFactory
-import android.graphics.drawable.BitmapDrawable
-import android.graphics.drawable.Drawable
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import androidx.swiperefreshlayout.widget.CircularProgressDrawable
 import com.google.firebase.storage.FirebaseStorage
 import dev.kacebi.hospitalapp.R
 import dev.kacebi.hospitalapp.file_size_constants.FileSizeConstants
+import dev.kacebi.hospitalapp.utils.Utils
 import dev.kacebi.hospitalapp.ui.ItemOnClickListener
 import dev.kacebi.hospitalapp.ui.chat.models.ChatMessageModel
 import kotlinx.android.synthetic.main.item_message_from_layout.view.*
@@ -42,7 +38,7 @@ class ChatMessageAdapter(
         const val TO_LAYOUT_MESSAGE = 2
         const val TO_LAYOUT_IMAGE = 3
 
-        val drawableMap = mutableMapOf<Int, Drawable>()
+        val bitmapMap = mutableMapOf<Int, Bitmap>()
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
@@ -111,8 +107,8 @@ class ChatMessageAdapter(
         fun onBind() {
             message = messages[adapterPosition]
 
-            if (drawableMap.containsKey(adapterPosition)) {
-                setData(drawableMap[adapterPosition]!!)
+            if (bitmapMap.containsKey(adapterPosition)) {
+                setData(bitmapMap[adapterPosition]!!)
                 return
             }
 
@@ -121,19 +117,17 @@ class ChatMessageAdapter(
                 val byteArray =
                     storageRef.child(message.imageUri).getBytes(FileSizeConstants.TWO_MEGABYTES)
                         .await()
-                val bitmapDrawable = BitmapDrawable(
-                    itemView.context.resources,
-                    BitmapFactory.decodeByteArray(byteArray, 0, byteArray.size)
-                )
-                drawableMap[adapterPosition] = bitmapDrawable
+                val bitmap = Utils.byteArrayToBitmap(byteArray)
+
+                bitmapMap[adapterPosition] = bitmap
                 withContext(Dispatchers.Main) {
-                    setData(bitmapDrawable)
+                    setData(bitmap)
                 }
             }
         }
 
-        private fun setData(drawable: Drawable) {
-            itemView.ivChatImageFrom.setImageDrawable(drawable)
+        private fun setData(bitmap: Bitmap) {
+            itemView.ivChatImageFrom.setImageBitmap(bitmap)
             itemView.ivChatImageFrom.setOnClickListener {
                 itemClick.onClick(adapterPosition)
             }
@@ -149,8 +143,8 @@ class ChatMessageAdapter(
             message = messages[adapterPosition]
 
 
-            if (drawableMap.containsKey(adapterPosition)) {
-                setData(drawableMap[adapterPosition]!!)
+            if (bitmapMap.containsKey(adapterPosition)) {
+                setData(bitmapMap[adapterPosition]!!)
                 return
             }
 
@@ -159,19 +153,16 @@ class ChatMessageAdapter(
                 val byteArray =
                     storageRef.child(message.imageUri).getBytes(FileSizeConstants.TWO_MEGABYTES)
                         .await()
-                val bitmapDrawable = BitmapDrawable(
-                    itemView.context.resources,
-                    BitmapFactory.decodeByteArray(byteArray, 0, byteArray.size)
-                )
-                drawableMap[adapterPosition] = bitmapDrawable
+                val bitmap = Utils.byteArrayToBitmap(byteArray)
+                bitmapMap[adapterPosition] = bitmap
                 withContext(Dispatchers.Main) {
-                    setData(bitmapDrawable)
+                    setData(bitmap)
                 }
             }
         }
 
-        private fun setData(drawable: Drawable) {
-            itemView.ivChatImageTo.setImageDrawable(drawable)
+        private fun setData(bitmap: Bitmap) {
+            itemView.ivChatImageTo.setImageBitmap(bitmap)
             itemView.ivChatImageTo.setOnClickListener {
                 itemClick.onClick(adapterPosition)
             }

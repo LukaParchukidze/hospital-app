@@ -81,7 +81,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="70dp"
-            android:background="@drawable/positive_button_background"
+            android:background="@drawable/button_positive_background"
             android:fontFamily="@font/nexa_light"
             android:text="@string/log_in"
             android:textAllCaps="false"

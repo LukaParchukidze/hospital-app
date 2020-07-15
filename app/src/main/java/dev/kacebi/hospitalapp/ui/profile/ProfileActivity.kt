@@ -3,8 +3,6 @@ package dev.kacebi.hospitalapp.ui.profile
 import android.app.Activity
 import android.content.Intent
 import android.graphics.Bitmap
-import android.graphics.BitmapFactory
-import android.graphics.drawable.BitmapDrawable
 import android.net.Uri
 import android.os.Bundle
 import android.provider.MediaStore
@@ -22,8 +20,9 @@ import dev.kacebi.hospitalapp.App
 import dev.kacebi.hospitalapp.R
 import dev.kacebi.hospitalapp.file_size_constants.FileSizeConstants
 import dev.kacebi.hospitalapp.tools.Tools
-import dev.kacebi.hospitalapp.tools.Utils.bitmapToByteArray
 import dev.kacebi.hospitalapp.ui.authentication.LoginActivity
+import dev.kacebi.hospitalapp.utils.Utils
+import dev.kacebi.hospitalapp.utils.Utils.bitmapToByteArray
 import kotlinx.android.synthetic.main.activity_profile.*
 import kotlinx.android.synthetic.main.spinkit_loader_layout.*
 import kotlinx.android.synthetic.main.toolbar_layout.*
@@ -138,13 +137,10 @@ class ProfileActivity : AppCompatActivity(), View.OnClickListener {
                 email = documentSnapshot["email"] as String
                 birthDate = documentSnapshot["birth_date"] as String
             }
-            val bitmapDrawable = BitmapDrawable(
-                resources,
-                BitmapFactory.decodeByteArray(byteArray, 0, byteArray.size)
-            )
+            val bitmap = Utils.byteArrayToBitmap(byteArray)
             withContext(Dispatchers.Main) {
                 spinKitContainerView.visibility = View.GONE
-                profileImageView.setImageDrawable(bitmapDrawable)
+                profileImageView.setImageBitmap(bitmap)
                 fullNameEditText.setText(fullName)
                 emailEditText.setText(email)
 

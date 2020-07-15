@@ -39,16 +39,13 @@ class NewsActivity : AppCompatActivity() {
                 NewsModel::class.java
             )
 //            val byteArray = App.storage.child(news!!.image_uri).getBytes(FileSizeConstants.THREE_MEGABYTES).await()
-//            val bitmapDrawable = BitmapDrawable(
-//                resources,
-//                BitmapFactory.decodeByteArray(byteArray, 0, byteArray.size)
-//            )
-//            news!!.drawable = bitmapDrawable
+//            val bitmap = Utils.byteArrayToBitmap(byteArray)
+//            news!!.bitmap = bitmap
 
 
             withContext(Dispatchers.Main) {
 //                Glide.with(this@NewsActivity)
-//                    .load(news!!.drawable)
+//                    .load(news!!.bitmap)
 //                    .into(newsImageView)
 
                 newsTitleTextView.text = news!!.title

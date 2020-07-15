@@ -37,7 +37,7 @@ class DoctorsAppointmentsAdapter(
 
         fun onBind() {
             appointment = appointments[adapterPosition]
-            itemView.doctorProfileImageView.setImageDrawable(appointment.drawable)
+            itemView.doctorProfileImageView.setImageBitmap(appointment.bitmap)
             itemView.appointmentStatusTextView.text = appointment.status
             itemView.doctorLastName.text = "Dr. " + appointment.last_name
             itemView.appointmentTimeTextView.text = appointment.time

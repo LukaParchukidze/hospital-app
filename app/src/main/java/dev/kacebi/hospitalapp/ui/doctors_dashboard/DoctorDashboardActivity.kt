@@ -1,33 +1,22 @@
 package dev.kacebi.hospitalapp.ui.doctors_dashboard
 
-import android.graphics.BitmapFactory
-import android.graphics.drawable.BitmapDrawable
 import android.os.Bundle
 import android.view.MenuItem
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.content.ContextCompat
 import androidx.core.view.GravityCompat
 import androidx.viewpager.widget.ViewPager
 import com.google.android.material.navigation.NavigationView
 import dev.kacebi.hospitalapp.App
 import dev.kacebi.hospitalapp.R
-import dev.kacebi.hospitalapp.file_size_constants.FileSizeConstants
 import dev.kacebi.hospitalapp.tools.Tools
-import dev.kacebi.hospitalapp.tools.Utils
 import dev.kacebi.hospitalapp.ui.authentication.LoginActivity
 import dev.kacebi.hospitalapp.ui.chat.activities.ChatsListActivity
 import dev.kacebi.hospitalapp.ui.doctors_dashboard.adapters.PatientsPagerAdapter
 import dev.kacebi.hospitalapp.ui.profile.ProfileActivity
 import kotlinx.android.synthetic.main.activity_doctor_dashboard.*
 import kotlinx.android.synthetic.main.activity_doctor_dashboard.drawerLayout
-import kotlinx.android.synthetic.main.nav_drawer_header.*
 import kotlinx.android.synthetic.main.toolbar_layout.*
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.tasks.await
-import kotlinx.coroutines.withContext
 
 class DoctorDashboardActivity : AppCompatActivity() {
 

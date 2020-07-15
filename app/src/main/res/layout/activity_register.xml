@@ -245,7 +245,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_marginTop="40dp"
-                android:background="@drawable/positive_button_background"
+                android:background="@drawable/button_positive_background"
                 android:fontFamily="@font/nexa_light"
                 android:text="@string/sign_up"
                 android:textAlignment="center"

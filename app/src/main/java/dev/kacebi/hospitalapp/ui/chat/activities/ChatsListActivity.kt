@@ -1,7 +1,5 @@
 package dev.kacebi.hospitalapp.ui.chat.activities
 
-import android.graphics.BitmapFactory
-import android.graphics.drawable.BitmapDrawable
 import android.os.Bundle
 import android.os.Handler
 import android.view.View
@@ -15,6 +13,7 @@ import dev.kacebi.hospitalapp.App
 import dev.kacebi.hospitalapp.R
 import dev.kacebi.hospitalapp.file_size_constants.FileSizeConstants
 import dev.kacebi.hospitalapp.tools.Tools
+import dev.kacebi.hospitalapp.utils.Utils
 import dev.kacebi.hospitalapp.ui.chat.adapters.ChatsListAdapter
 import dev.kacebi.hospitalapp.ui.chat.models.ChatsListItemModel
 import dev.kacebi.hospitalapp.ui.chat.models.LatestMessageModel
@@ -84,15 +83,12 @@ class ChatsListActivity : AppCompatActivity() {
                             byteArray = App.storage.child("/patient_photos/$id.png")
                                 .getBytes(FileSizeConstants.THREE_MEGABYTES).await()
                         }
-                        val bitmapDrawable = BitmapDrawable(
-                            resources,
-                            BitmapFactory.decodeByteArray(byteArray, 0, byteArray.size)
-                        )
+                        val bitmap = Utils.byteArrayToBitmap(byteArray)
                         val latestMessage =
                             snapshot.getValue(LatestMessageModel::class.java)!!.message
                         val chat = ChatsListItemModel(
                             id = id,
-                            drawable = bitmapDrawable,
+                            bitmap = bitmap,
                             name = name,
                             latestMessage = latestMessage
                         )
