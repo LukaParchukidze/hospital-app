@@ -25,7 +25,7 @@ import dev.kacebi.hospitalapp.extensions.setNewColor
 import dev.kacebi.hospitalapp.extensions.setSpannableText
 import dev.kacebi.hospitalapp.file_size_constants.FileSizeConstants
 import dev.kacebi.hospitalapp.tools.Tools
-import dev.kacebi.hospitalapp.tools.Utils.bitmapToByteArray
+import dev.kacebi.hospitalapp.utils.Utils.bitmapToByteArray
 import kotlinx.android.synthetic.main.activity_register.*
 import kotlinx.android.synthetic.main.spinkit_loader_layout.*
 import kotlinx.coroutines.*

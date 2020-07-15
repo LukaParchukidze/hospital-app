@@ -11,7 +11,7 @@ import dev.kacebi.hospitalapp.App
 import dev.kacebi.hospitalapp.R
 import dev.kacebi.hospitalapp.file_size_constants.FileSizeConstants
 import dev.kacebi.hospitalapp.tools.Tools
-import dev.kacebi.hospitalapp.tools.Utils
+import dev.kacebi.hospitalapp.utils.Utils
 import dev.kacebi.hospitalapp.ui.authentication.LoginActivity
 import dev.kacebi.hospitalapp.ui.chat.activities.ChatsListActivity
 import dev.kacebi.hospitalapp.ui.doctors_dashboard.adapters.PatientsPagerAdapter
@@ -62,13 +62,8 @@ class DoctorDashboardActivity : AppCompatActivity() {
             val bitmap = Utils.byteArrayToBitmap(byteArray)
             val fullName = App.dbDoctors.document(App.auth.uid!!).get().await()["full_name"] as String
             withContext(Dispatchers.Main) {
-
-                drawerPictureImageView.setImageBitmap(bitmap)
-                drawerFullNameTextView.text = fullName
-
                 drawerPictureImageView.setImageBitmap(bitmap)
                 drawerFullNameTextView.text = "Hi, $fullName"
-
             }
         }
     }

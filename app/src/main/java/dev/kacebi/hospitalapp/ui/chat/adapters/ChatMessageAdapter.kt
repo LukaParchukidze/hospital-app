@@ -8,7 +8,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.google.firebase.storage.FirebaseStorage
 import dev.kacebi.hospitalapp.R
 import dev.kacebi.hospitalapp.file_size_constants.FileSizeConstants
-import dev.kacebi.hospitalapp.tools.Utils
+import dev.kacebi.hospitalapp.utils.Utils
 import dev.kacebi.hospitalapp.ui.ItemOnClickListener
 import dev.kacebi.hospitalapp.ui.chat.models.ChatMessageModel
 import kotlinx.android.synthetic.main.item_message_from_layout.view.*

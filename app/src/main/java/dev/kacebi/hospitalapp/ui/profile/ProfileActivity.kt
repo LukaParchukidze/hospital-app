@@ -10,7 +10,7 @@ import dev.kacebi.hospitalapp.App
 import dev.kacebi.hospitalapp.R
 import dev.kacebi.hospitalapp.file_size_constants.FileSizeConstants
 import dev.kacebi.hospitalapp.tools.Tools
-import dev.kacebi.hospitalapp.tools.Utils
+import dev.kacebi.hospitalapp.utils.Utils
 import dev.kacebi.hospitalapp.ui.authentication.LoginActivity
 import kotlinx.android.synthetic.main.activity_profile.*
 import kotlinx.android.synthetic.main.spinkit_loader_layout.*

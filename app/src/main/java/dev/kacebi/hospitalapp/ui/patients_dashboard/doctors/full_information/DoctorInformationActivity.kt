@@ -1,13 +1,10 @@
 package dev.kacebi.hospitalapp.ui.patients_dashboard.doctors.full_information
 
-import android.app.Dialog
+import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log.d
 import android.view.View
-import android.view.ViewGroup
-import android.view.Window
-import android.view.WindowManager
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -15,7 +12,7 @@ import dev.kacebi.hospitalapp.App
 import dev.kacebi.hospitalapp.R
 import dev.kacebi.hospitalapp.file_size_constants.FileSizeConstants
 import dev.kacebi.hospitalapp.tools.Tools
-import dev.kacebi.hospitalapp.tools.Utils
+import dev.kacebi.hospitalapp.utils.Utils
 import dev.kacebi.hospitalapp.ui.chat.activities.ChatActivity
 import dev.kacebi.hospitalapp.ui.patients_dashboard.doctors.full_information.models.AppointmentTimeModel
 import dev.kacebi.hospitalapp.ui.patients_dashboard.doctors.full_information.models.DoctorModel
@@ -79,15 +76,8 @@ class DoctorInformationActivity : AppCompatActivity() {
         }
 
         //init dialog
-        val dialog = Dialog(this)
-        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
-        dialog.setCancelable(true)
-        dialog.setContentView(R.layout.dialog_appointment_layout)
-
-        val params: ViewGroup.LayoutParams = dialog.window!!.attributes
-        params.width = ViewGroup.LayoutParams.MATCH_PARENT
-        params.height = ViewGroup.LayoutParams.WRAP_CONTENT
-        dialog.window!!.attributes = params as WindowManager.LayoutParams
+        val dialog =
+            Tools.initDialog(this, layout = R.layout.dialog_appointment_layout, changeStatus = false)
 
         dialog.closeDialogButton.setOnClickListener {
             dialog.dismiss()
@@ -187,6 +177,7 @@ class DoctorInformationActivity : AppCompatActivity() {
     }
 
     // time formatting for appointment management
+    @SuppressLint("SimpleDateFormat")
     private fun getTimes(start_time: String, end_time: String, increment: Int) {
         if (start_time == end_time)
             return
@@ -205,6 +196,7 @@ class DoctorInformationActivity : AppCompatActivity() {
         getTimes(newTime, end_time, increment)
     }
 
+    @SuppressLint("SetTextI18n")
     private fun getDoctor(doctorId: String) {
         progressBar.visibility = View.VISIBLE
         scrollView.visibility = View.GONE

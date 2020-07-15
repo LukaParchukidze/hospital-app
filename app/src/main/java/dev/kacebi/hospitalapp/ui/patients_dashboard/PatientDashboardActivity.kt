@@ -11,7 +11,7 @@ import dev.kacebi.hospitalapp.App
 import dev.kacebi.hospitalapp.R
 import dev.kacebi.hospitalapp.file_size_constants.FileSizeConstants
 import dev.kacebi.hospitalapp.tools.Tools
-import dev.kacebi.hospitalapp.tools.Utils
+import dev.kacebi.hospitalapp.utils.Utils
 import dev.kacebi.hospitalapp.ui.authentication.LoginActivity
 import dev.kacebi.hospitalapp.ui.chat.activities.ChatsListActivity
 import dev.kacebi.hospitalapp.ui.patients_dashboard.appointments.DoctorsAppointmentsActivity
@@ -133,11 +133,7 @@ class PatientDashboardActivity : AppCompatActivity() {
             when (it.itemId) {
                 R.id.miHome -> goToFragment(homeFragment, doctorsFragment, searchDoctorsFragment)
                 R.id.miDoctors -> goToFragment(doctorsFragment, homeFragment, searchDoctorsFragment)
-                R.id.miSearchDoctors -> goToFragment(
-                    searchDoctorsFragment,
-                    homeFragment,
-                    doctorsFragment
-                )
+                R.id.miSearchDoctors -> goToFragment(searchDoctorsFragment, homeFragment, doctorsFragment)
             }
             true
         }
@@ -153,5 +149,19 @@ class PatientDashboardActivity : AppCompatActivity() {
     fun goToFragment(fragment1: Fragment, fragment2: Fragment, fragment3: Fragment) {
         supportFragmentManager.beginTransaction().show(fragment1).hide(fragment2).hide(fragment3)
             .commit()
+    }
+
+    override fun onBackPressed() {
+        when (bottomNavigation.selectedItemId) {
+            R.id.miHome -> super.onBackPressed()
+            R.id.miDoctors -> {
+                goToFragment(homeFragment, doctorsFragment, searchDoctorsFragment)
+                bottomNavigation.menu.getItem(0).isChecked = true
+            }
+            R.id.miSearchDoctors -> {
+                goToFragment(doctorsFragment, homeFragment, searchDoctorsFragment)
+                bottomNavigation.menu.getItem(1).isChecked = true
+            }
+        }
     }
 }

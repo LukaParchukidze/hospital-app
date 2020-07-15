@@ -1,10 +1,15 @@
 package dev.kacebi.hospitalapp.tools
 
 import android.app.Activity
+import android.app.Dialog
 import android.content.Context
 import android.content.Intent
 import android.util.Log.d
 import android.view.View
+import android.view.ViewGroup
+import android.view.Window
+import android.view.WindowManager
+import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
 import android.widget.Toast
@@ -12,7 +17,13 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import com.google.android.material.snackbar.Snackbar
 import de.hdodenhof.circleimageview.CircleImageView
+import dev.kacebi.hospitalapp.App
 import dev.kacebi.hospitalapp.R
+import kotlinx.android.synthetic.main.dialog_cancel_appointment_layout.*
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.tasks.await
 import java.util.regex.Pattern.compile
 
 object Tools {
@@ -143,6 +154,51 @@ object Tools {
 
         activity.supportActionBar!!.setDisplayShowTitleEnabled(false)
         activity.supportActionBar!!.setDisplayHomeAsUpEnabled(backEnabled)
+    }
+
+    fun initDialog(
+        activity: AppCompatActivity,
+        patientId: String = "",
+        doctorId: String = "",
+        layout: Int,
+        negativeButtonId: Int = 0,
+        positiveButtonId: Int = 0,
+        status: String = "",
+        changeStatus: Boolean
+    ): Dialog {
+        val dialog = Dialog(activity)
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        dialog.setCancelable(false)
+        dialog.setContentView(layout)
+
+        val params: ViewGroup.LayoutParams = dialog.window!!.attributes
+        params.width = ViewGroup.LayoutParams.MATCH_PARENT
+        params.height = ViewGroup.LayoutParams.WRAP_CONTENT
+        dialog.window!!.attributes = params as WindowManager.LayoutParams
+
+        if (changeStatus)
+            changeStatusDialog(dialog, patientId, doctorId, negativeButtonId, positiveButtonId, status)
+
+        return dialog
+    }
+
+    private fun changeStatusDialog(dialog: Dialog, patientId: String, doctorId: String, negativeButtonId: Int, positiveButtonId: Int, status: String) {
+        val negativeButton = dialog.findViewById<Button>(negativeButtonId)
+        val positiveButton = dialog.findViewById<Button>(positiveButtonId)
+
+        positiveButton.setOnClickListener {
+            dialog.dismiss()
+
+            CoroutineScope(Dispatchers.IO).launch {
+                App.dbDoctors.document(doctorId).collection("patients").document(patientId)
+                    .update("status", status).await()
+                App.dbUsers.document(patientId).collection("doctors").document(doctorId)
+                    .update("status", status).await()
+            }
+        }
+        negativeButton.setOnClickListener {
+            dialog.dismiss()
+        }
     }
 
 }

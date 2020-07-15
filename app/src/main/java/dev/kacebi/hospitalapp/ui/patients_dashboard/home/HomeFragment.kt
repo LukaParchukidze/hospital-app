@@ -11,8 +11,6 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import dev.kacebi.hospitalapp.App
 import dev.kacebi.hospitalapp.R
 import dev.kacebi.hospitalapp.extensions.autoScroll
-import dev.kacebi.hospitalapp.file_size_constants.FileSizeConstants
-import dev.kacebi.hospitalapp.tools.Utils
 import dev.kacebi.hospitalapp.ui.ItemOnClickListener
 import dev.kacebi.hospitalapp.ui.patients_dashboard.PatientDashboardActivity
 import dev.kacebi.hospitalapp.ui.patients_dashboard.home.news.NewsActivity

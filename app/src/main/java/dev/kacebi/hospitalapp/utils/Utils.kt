@@ -1,4 +1,4 @@
-package dev.kacebi.hospitalapp.tools
+package dev.kacebi.hospitalapp.utils
 
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
