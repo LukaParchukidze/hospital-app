@@ -13,6 +13,7 @@
         android:orientation="vertical">
 
         <ImageView
+            android:id="@+id/imageSplash"
             android:layout_width="180dp"
             android:layout_height="180dp"
             android:src="@mipmap/splash_screen_logo" />

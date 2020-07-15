@@ -5,10 +5,12 @@ import android.os.Bundle
 import android.os.Handler
 import dev.kacebi.hospitalapp.App
 import dev.kacebi.hospitalapp.R
+import dev.kacebi.hospitalapp.extensions.toggleVisibility
 import dev.kacebi.hospitalapp.tools.Tools
 import dev.kacebi.hospitalapp.ui.authentication.LoginActivity
 import dev.kacebi.hospitalapp.ui.doctors_dashboard.DoctorDashboardActivity
 import dev.kacebi.hospitalapp.ui.patients_dashboard.PatientDashboardActivity
+import kotlinx.android.synthetic.main.activity_splash.*
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -46,15 +48,17 @@ class SplashActivity : AppCompatActivity() {
 
                 withContext(Dispatchers.Main) {
                     if (userType != null) {
-                        Tools.startActivity(this@SplashActivity, PatientDashboardActivity(),true)
+                        Tools.startActivity(this@SplashActivity, PatientDashboardActivity(), true)
                     } else {
-                        Tools.startActivity(this@SplashActivity,
-                            DoctorDashboardActivity(),true)
+                        Tools.startActivity(
+                            this@SplashActivity,
+                            DoctorDashboardActivity(), true
+                        )
                     }
                 }
             }
         } else {
-            Tools.startActivity(this, LoginActivity(),true)
+            Tools.startActivity(this, LoginActivity(), true)
         }
 
     }
