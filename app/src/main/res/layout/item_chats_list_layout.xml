@@ -6,7 +6,7 @@
     android:layout_marginHorizontal="20dp"
     android:layout_marginVertical="10dp"
     app:cardElevation="5dp"
-    app:cardCornerRadius="12dp">
+    app:cardCornerRadius="7dp">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -14,34 +14,39 @@
         android:padding="5dp">
 
         <de.hdodenhof.circleimageview.CircleImageView
-            android:layout_width="70dp"
+            android:layout_width="60dp"
             app:civ_border_width="1dp"
-            app:civ_border_color="@android:color/black"
-            android:layout_height="70dp"
             android:id="@+id/profileImageView"
-            />
+            android:layout_height="60dp"
+            android:layout_marginStart="5dp"
+            android:background="@drawable/ic_confirmed"
+            app:civ_border_color="@color/edittexts_hint_color" />
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:paddingStart="10dp"
-            android:orientation="vertical"
-            android:paddingTop="10dp">
+            android:layout_gravity="center_vertical"
+            android:orientation="vertical">
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/nameTextView"
                 android:textColor="@android:color/black"
-                android:textSize="17sp"
-                />
+                android:ellipsize="end"
+                android:fontFamily="@font/nexa_light"
+                android:maxLines="1"
+                android:textSize="16sp" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/latestMessageTextView"
+                android:fontFamily="@font/nexa_light"
                 android:maxLines="1"
                 android:ellipsize="end"
+                android:textSize="16sp"
                 />
 
         </LinearLayout>
