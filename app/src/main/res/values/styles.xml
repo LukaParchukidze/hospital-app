@@ -28,4 +28,16 @@
         <item name="android:background">@android:color/transparent</item>
     </style>
 
+    <!-- Toolbar Arrow Color   -->
+    <style name="ToolbarTheme" parent="@style/ThemeOverlay.AppCompat.ActionBar">
+        <!-- Customize color of navigation drawer icon and back arrow -->
+        <item name="colorControlNormal">@android:color/white</item>
+    </style>
+
+    <!--    NavigationView Text Size    -->
+    <style name="NavigationViewStyle">
+        <item name="android:textSize">16sp</item>
+        <item name="android:listPreferredItemHeightSmall">50dp</item>
+    </style>
+
 </resources>

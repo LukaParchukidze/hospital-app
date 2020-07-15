@@ -6,13 +6,27 @@ import android.content.Intent
 import android.util.Log.d
 import android.view.View
 import android.widget.EditText
+import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
+import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.Toolbar
 import androidx.core.content.ContextCompat
+import androidx.drawerlayout.widget.DrawerLayout
 import com.google.android.material.snackbar.Snackbar
+import com.google.firebase.firestore.CollectionReference
 import de.hdodenhof.circleimageview.CircleImageView
+import dev.kacebi.hospitalapp.App
 import dev.kacebi.hospitalapp.R
+import dev.kacebi.hospitalapp.file_size_constants.FileSizeConstants
+import kotlinx.android.synthetic.main.nav_drawer_header.*
+import kotlinx.android.synthetic.main.toolbar_layout.*
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.tasks.await
+import kotlinx.coroutines.withContext
 import java.util.regex.Pattern.compile
 
 object Tools {
@@ -38,7 +52,7 @@ object Tools {
     }
 
     fun showToast(context: Context, text: String) {
-        return Toast.makeText(context, text, Toast.LENGTH_SHORT).show()
+        return Toast.makeText(context, text, Toast.LENGTH_LONG).show()
     }
 
     fun isFieldsNotEmpty(editTextArray: Array<EditText>): Boolean {
@@ -132,7 +146,12 @@ object Tools {
         snackbar.show()
     }
 
-    fun setSupportActionBar(activity: AppCompatActivity, title: String, isLastName: Boolean, backEnabled: Boolean){
+    fun setSupportActionBar(
+        activity: AppCompatActivity,
+        title: String,
+        isLastName: Boolean,
+        backEnabled: Boolean
+    ) {
         activity.setSupportActionBar(activity.findViewById(R.id.toolbar))
         d("toolbarYle", title)
         d("toolbarYle", isLastName.toString())
@@ -142,7 +161,37 @@ object Tools {
             activity.findViewById<TextView>(R.id.toolbarTitle).text = "Dr. $title"
 
         activity.supportActionBar!!.setDisplayShowTitleEnabled(false)
+
         activity.supportActionBar!!.setDisplayHomeAsUpEnabled(backEnabled)
+    }
+
+    fun toggleDrawer(
+        activity: Activity,
+        drawerLayout: DrawerLayout,
+        toolbar: Toolbar,
+        context: Context
+    ) {
+        val toggle = ActionBarDrawerToggle(
+            activity, drawerLayout,
+            toolbar, R.string.open_drawer, R.string.close_drawer
+        )
+        drawerLayout.addDrawerListener(toggle)
+        toggle.drawerArrowDrawable.color = ContextCompat.getColor(context, android.R.color.white)
+        toggle.syncState()
+    }
+
+    fun getUserIcon(path: String, reference: CollectionReference, activity: Activity) {
+        CoroutineScope(Dispatchers.IO).launch {
+            val byteArray = App.storage.child("$path${App.auth.uid!!}.png").getBytes(
+                FileSizeConstants.THREE_MEGABYTES
+            ).await()
+            val bitmap = Utils.byteArrayToBitmap(byteArray)
+            val fullName = reference.document(App.auth.uid!!).get().await()["full_name"] as String
+            withContext(Dispatchers.Main) {
+                activity.findViewById<ImageView>(R.id.drawerPictureImageView).setImageBitmap(bitmap)
+                activity.findViewById<TextView>(R.id.drawerFullNameTextView).text = "Hi, $fullName"
+            }
+        }
     }
 
 }

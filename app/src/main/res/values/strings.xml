@@ -34,4 +34,5 @@
     <string name="hospital_app">HOSPITAL APP</string>
     <string name="close">Close</string>
     <string name="apply">Apply</string>
+    <string name="birth_date">Birth Date</string>
 </resources>

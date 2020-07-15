@@ -2,10 +2,13 @@ package dev.kacebi.hospitalapp.ui.patients_dashboard
 
 import android.graphics.BitmapFactory
 import android.graphics.drawable.BitmapDrawable
+import android.os.Build
 import android.os.Bundle
 import android.view.MenuItem
+import androidx.annotation.RequiresApi
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
 import androidx.core.view.GravityCompat
 import androidx.fragment.app.Fragment
 import com.google.android.material.navigation.NavigationView
@@ -13,6 +16,7 @@ import dev.kacebi.hospitalapp.App
 import dev.kacebi.hospitalapp.R
 import dev.kacebi.hospitalapp.file_size_constants.FileSizeConstants
 import dev.kacebi.hospitalapp.tools.Tools
+import dev.kacebi.hospitalapp.tools.Utils
 import dev.kacebi.hospitalapp.ui.authentication.LoginActivity
 import dev.kacebi.hospitalapp.ui.chat.activities.ChatsListActivity
 import dev.kacebi.hospitalapp.ui.patients_dashboard.appointments.DoctorsAppointmentsActivity
@@ -49,20 +53,9 @@ class PatientDashboardActivity : AppCompatActivity() {
 
         addFragments()
 
-        //get user icon
-        CoroutineScope(Dispatchers.IO).launch {
-            val byteArray = App.storage.child("/patient_photos/${App.auth.uid!!}.png")
-                .getBytes(FileSizeConstants.THREE_MEGABYTES).await()
-            val bitmapDrawable = BitmapDrawable(
-                resources,
-                BitmapFactory.decodeByteArray(byteArray, 0, byteArray.size)
-            )
-            val fullName = App.dbUsers.document(App.auth.uid!!).get().await()["full_name"] as String
-            withContext(Dispatchers.Main) {
-                drawerPictureImageView.setImageDrawable(bitmapDrawable)
-                drawerFullNameTextView.text = "Hi, $fullName"
-            }
-        }
+        // Get user icon
+        Tools.getUserIcon("/patient_photos/", App.dbUsers, this)
+
     }
 
     private fun addFragments() {
@@ -85,12 +78,7 @@ class PatientDashboardActivity : AppCompatActivity() {
     }
 
     private fun setUpDrawerMenu() {
-        toggle = ActionBarDrawerToggle(
-            this, drawerLayout,
-            toolbar, R.string.open_drawer, R.string.close_drawer
-        )
-        drawerLayout.addDrawerListener(toggle)
-        toggle.syncState()
+        Tools.toggleDrawer(this, drawerLayout, toolbar, this)
     }
 
     private fun setUpNavigationView() {
@@ -134,6 +122,7 @@ class PatientDashboardActivity : AppCompatActivity() {
     }
 
     private fun setUpBottomNavigation() {
+
         bottomNavigation.setOnNavigationItemSelectedListener {
             when (it.itemId) {
                 R.id.miHome -> goToFragment(homeFragment, doctorsFragment, searchDoctorsFragment)

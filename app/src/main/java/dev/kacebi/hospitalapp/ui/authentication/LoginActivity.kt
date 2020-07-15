@@ -70,11 +70,11 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener {
                             } else {
                                 spinKitContainerView.visibility = View.VISIBLE
                                 delay(2000)
-                                spinKitContainerView.visibility = View.GONE
                                 Tools.startActivity(
                                     this@LoginActivity,
                                     DoctorDashboardActivity(), true
                                 )
+                                spinKitContainerView.visibility = View.GONE
                             }
                         }
                     } else {

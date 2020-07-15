@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <color name="colorPrimary">#43d3e8</color>
-    <color name="colorPrimaryDark">#438DE8</color>
+    <color name="colorPrimaryDark">#0E58AE</color>
     <color name="colorAccent">#03DAC5</color>
     <color name="edittexts_text_color">#373737</color>
     <color name="edittexts_hint_color">#878787</color>
@@ -9,4 +9,5 @@
     <color name="colorDivider">#ECECEC</color>
     <color name="errorColor">#FF0700</color>
     <color name="pinkColor">#E84372</color>
+    <color name="toolbarColor">#1E88E5</color>
 </resources>

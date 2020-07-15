@@ -16,7 +16,9 @@
         <activity
             android:name=".ui.profile.ProfileActivity"
             android:screenOrientation="portrait"
-            tools:ignore="LockedOrientationActivity" />
+            tools:ignore="LockedOrientationActivity">
+
+        </activity>
         <activity
             android:name=".ui.chat.activities.ChatsListActivity"
             android:screenOrientation="portrait"

@@ -2,6 +2,7 @@
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/profileRoot"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fillViewport="true">
@@ -13,6 +14,7 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="20dp"
             tools:context=".ui.profile.ProfileActivity">
 
 
@@ -28,24 +30,25 @@
 
             <ImageButton
                 android:id="@+id/editProfileImageButton"
-                android:layout_width="40dp"
-                android:layout_height="40dp"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_gravity="center_vertical"
                 android:layout_marginEnd="7dp"
-                android:layout_marginTop="7dp"
                 android:background="@drawable/ic_edit"
-                android:backgroundTint="@android:color/black"
+                android:backgroundTint="@android:color/white"
+                app:layout_constraintBottom_toBottomOf="@id/sample"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <ImageButton
                 android:id="@+id/cancelChangesButton"
-                android:layout_width="40dp"
-                android:layout_height="40dp"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
                 android:layout_marginEnd="7dp"
-                android:layout_marginTop="7dp"
                 android:background="@drawable/ic_cancel"
-                android:backgroundTint="@android:color/black"
+                android:backgroundTint="@android:color/white"
                 android:visibility="gone"
+                app:layout_constraintBottom_toBottomOf="@id/sample"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
@@ -53,7 +56,7 @@
                 android:id="@+id/backgroundImageView"
                 android:layout_width="match_parent"
                 android:layout_height="200dp"
-                android:background="@mipmap/profile_background_3"
+                android:background="@mipmap/image6"
                 app:layout_constraintTop_toBottomOf="@id/sample" />
 
 
@@ -66,6 +69,7 @@
                 android:background="@drawable/fields_background"
                 android:drawableStart="@drawable/ic_user"
                 android:drawablePadding="12dp"
+                android:drawableTint="@color/colorPrimary"
                 android:fontFamily="@font/nexa_light"
                 android:hint="Full Name"
                 android:maxLines="1"
@@ -85,6 +89,7 @@
                 android:background="@drawable/fields_background"
                 android:drawableStart="@drawable/ic_mail"
                 android:drawablePadding="12dp"
+                android:drawableTint="@color/colorPrimary"
                 android:fontFamily="@font/nexa_light"
                 android:hint="@string/email_edittext_hint"
                 android:maxLines="1"
@@ -96,6 +101,26 @@
                 app:layout_constraintTop_toBottomOf="@id/fullNameEditText" />
 
             <EditText
+                android:id="@+id/birthDateEditText"
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+                android:layout_marginHorizontal="20dp"
+                android:layout_marginTop="25dp"
+                android:background="@drawable/fields_background"
+                android:drawableStart="@drawable/ic_calendar"
+                android:drawablePadding="12dp"
+                android:drawableTint="@color/colorPrimary"
+                android:fontFamily="@font/nexa_light"
+                android:hint="@string/birth_date"
+                android:maxLines="1"
+                android:paddingStart="15dp"
+                android:paddingEnd="15dp"
+                android:textColor="@color/edittexts_text_color"
+                android:textColorHint="@color/edittexts_hint_color"
+                android:textSize="@dimen/edittexts_text_size"
+                app:layout_constraintTop_toBottomOf="@id/emailEditText" />
+
+            <EditText
                 android:id="@+id/passwordEditText"
                 android:layout_width="match_parent"
                 android:layout_height="45dp"
@@ -104,6 +129,7 @@
                 android:background="@drawable/fields_background"
                 android:drawableStart="@drawable/ic_password"
                 android:drawablePadding="12dp"
+                android:drawableTint="@color/colorPrimary"
                 android:fontFamily="@font/nexa_light"
                 android:hint="@string/password_edittext_hint"
                 android:maxLines="1"
@@ -111,7 +137,7 @@
                 android:paddingEnd="15dp"
                 android:textColor="@color/edittexts_text_color"
                 android:textColorHint="@color/edittexts_hint_color"
-                app:layout_constraintTop_toBottomOf="@id/emailEditText" />
+                app:layout_constraintTop_toBottomOf="@id/birthDateEditText" />
 
             <EditText
                 android:id="@+id/rePasswordEditText"
@@ -122,6 +148,7 @@
                 android:background="@drawable/fields_background"
                 android:drawableStart="@drawable/ic_password"
                 android:drawablePadding="12dp"
+                android:drawableTint="@color/colorPrimary"
                 android:fontFamily="@font/nexa_light"
                 android:hint="@string/repassword_edittext_hint"
                 android:maxLines="1"
@@ -135,9 +162,12 @@
                 android:id="@+id/saveChangesButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="25dp"
-                android:background="@color/colorPrimaryDark"
-                android:text="Save"
+                android:layout_marginTop="60dp"
+                android:layout_marginBottom="40dp"
+                android:background="@drawable/positive_button_background"
+                android:paddingStart="15dp"
+                android:paddingEnd="15dp"
+                android:text="Save Changes"
                 android:textAllCaps="false"
                 android:textColor="@android:color/white"
                 android:textSize="17sp"
@@ -151,10 +181,8 @@
                 android:layout_width="150dp"
                 android:layout_height="150dp"
                 android:layout_marginTop="125dp"
-                android:background="@drawable/drawer_menu_profile_background"
+                android:background="@drawable/drawer_menu_profile_background_no_border"
                 android:clickable="false"
-                app:civ_border_color="@android:color/black"
-                app:civ_border_width="1dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="@id/backgroundImageView" />

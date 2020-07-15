@@ -4,6 +4,7 @@ import android.app.Dialog
 import android.graphics.BitmapFactory
 import android.graphics.drawable.BitmapDrawable
 import android.os.Bundle
+import android.view.View
 import android.view.ViewGroup
 import android.view.Window
 import android.view.WindowManager
@@ -16,6 +17,7 @@ import dev.kacebi.hospitalapp.tools.Tools
 import dev.kacebi.hospitalapp.ui.ItemOnClickListener
 import kotlinx.android.synthetic.main.activity_doctors_appointments.*
 import kotlinx.android.synthetic.main.dialog_cancel_appointment_layout.*
+import kotlinx.android.synthetic.main.spinkit_loader_layout.*
 import kotlinx.android.synthetic.main.toolbar_layout.*
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -111,6 +113,7 @@ class DoctorsAppointmentsActivity : AppCompatActivity() {
                         }
                         withContext(Dispatchers.Main) {
                             adapter.notifyDataSetChanged()
+                            spinKitContainerView.visibility = View.GONE
                         }
                     }
                 }

@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.view.MenuItem
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
 import androidx.core.view.GravityCompat
 import androidx.viewpager.widget.ViewPager
 import com.google.android.material.navigation.NavigationView
@@ -13,6 +14,7 @@ import dev.kacebi.hospitalapp.App
 import dev.kacebi.hospitalapp.R
 import dev.kacebi.hospitalapp.file_size_constants.FileSizeConstants
 import dev.kacebi.hospitalapp.tools.Tools
+import dev.kacebi.hospitalapp.tools.Utils
 import dev.kacebi.hospitalapp.ui.authentication.LoginActivity
 import dev.kacebi.hospitalapp.ui.chat.activities.ChatsListActivity
 import dev.kacebi.hospitalapp.ui.doctors_dashboard.adapters.PatientsPagerAdapter
@@ -47,29 +49,15 @@ class DoctorDashboardActivity : AppCompatActivity() {
     }
 
     private fun setUpDrawerMenu() {
-        toggle = ActionBarDrawerToggle(
-            this, drawerLayout,
-            toolbar, R.string.open_drawer, R.string.close_drawer
-        )
-        drawerLayout.addDrawerListener(toggle)
-        toggle.syncState()
+        Tools.toggleDrawer(this, drawerLayout, toolbar, this)
 
         setUpNavigationView()
 
-        //get user icon
-        CoroutineScope(Dispatchers.IO).launch {
-            val byteArray = App.storage.child("/doctor_photos/${App.auth.uid!!}.png").getBytes(
-                FileSizeConstants.THREE_MEGABYTES).await()
-            val bitmapDrawable = BitmapDrawable(resources, BitmapFactory.decodeByteArray(byteArray, 0, byteArray.size))
-            val fullName = App.dbDoctors.document(App.auth.uid!!).get().await()["full_name"] as String
-            withContext(Dispatchers.Main) {
-                drawerPictureImageView.setImageDrawable(bitmapDrawable)
-                drawerFullNameTextView.text = "Hi, $fullName"
-            }
-        }
+        // Get User Icon
+        Tools.getUserIcon("/doctor_photos/", App.dbDoctors, this)
     }
 
-    private fun setUpNavigationView(){
+    private fun setUpNavigationView() {
         val navigationView = findViewById<NavigationView>(R.id.nav_view)
         navigationView.menu.findItem(R.id.miAppointments).isVisible = false
         navigationView.setNavigationItemSelectedListener {

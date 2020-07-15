@@ -36,9 +36,6 @@ class ChatsListActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_chats_list)
 
-        Handler().postDelayed({
-            spinKitContainerView.visibility = View.GONE
-        }, 2000)
         init()
         Tools.setSupportActionBar(this, "Messages", isLastName = false, backEnabled = true)
         toolbar!!.setNavigationOnClickListener {
@@ -80,11 +77,12 @@ class ChatsListActivity : AppCompatActivity() {
                         var byteArray: ByteArray? = null
                         if (name == null) {
                             name = App.dbDoctors.document(id).get().await()["last_name"] as String
-                            byteArray = App.storage.child("/doctor_photos/$id.png").getBytes(FileSizeConstants.THREE_MEGABYTES).await()
-                        }
-                        else {
+                            byteArray = App.storage.child("/doctor_photos/$id.png")
+                                .getBytes(FileSizeConstants.THREE_MEGABYTES).await()
+                        } else {
                             name = name as String
-                            byteArray = App.storage.child("/patient_photos/$id.png").getBytes(FileSizeConstants.THREE_MEGABYTES).await()
+                            byteArray = App.storage.child("/patient_photos/$id.png")
+                                .getBytes(FileSizeConstants.THREE_MEGABYTES).await()
                         }
                         val bitmapDrawable = BitmapDrawable(
                             resources,
@@ -101,6 +99,7 @@ class ChatsListActivity : AppCompatActivity() {
                         chatsList.add(chat)
                         withContext(Dispatchers.Main) {
                             adapter.notifyItemInserted(chatsList.size - 1)
+                            spinKitContainerView.visibility = View.GONE
                         }
                     }
                 }
