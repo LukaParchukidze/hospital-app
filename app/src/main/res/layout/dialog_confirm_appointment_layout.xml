@@ -3,6 +3,8 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:gravity="center"
+    android:background="#425867"
+
     android:orientation="vertical">
 
     <TextView
@@ -14,6 +16,22 @@
         android:textSize="20sp"
         android:textStyle="bold" />
 
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@android:color/holo_green_dark"
+        />
+
+    <TextView
+        android:textColor="@android:color/white"
+        android:id="@+id/nameTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:fontFamily="@font/nexa_bold"
+        android:text="Johann Bach"
+        android:textSize="15sp" />
+
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -21,7 +39,7 @@
         android:fontFamily="@font/nexa_light"
         android:gravity="center"
         android:text="@string/confirm_appointment_text"
-        android:textColor="@android:color/black" />
+        android:textColor="@android:color/white" />
 
     <View
         android:layout_width="match_parent"

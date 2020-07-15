@@ -163,18 +163,21 @@ object Tools {
 
     fun initDialog(
         activity: AppCompatActivity,
+        name: String = "",
         patientId: String = "",
         doctorId: String = "",
         layout: Int,
         negativeButtonId: Int = 0,
         positiveButtonId: Int = 0,
         status: String = "",
+        previousStatus: String = "",
         changeStatus: Boolean
     ): Dialog {
         val dialog = Dialog(activity)
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
         dialog.setCancelable(false)
         dialog.setContentView(layout)
+
 
         val params: ViewGroup.LayoutParams = dialog.window!!.attributes
         params.width = ViewGroup.LayoutParams.MATCH_PARENT
@@ -184,11 +187,13 @@ object Tools {
         if (changeStatus)
             changeStatusDialog(
                 dialog,
+                name,
                 patientId,
                 doctorId,
                 negativeButtonId,
                 positiveButtonId,
-                status
+                status,
+                previousStatus
             )
 
         return dialog
@@ -196,23 +201,36 @@ object Tools {
 
     private fun changeStatusDialog(
         dialog: Dialog,
+        name: String,
         patientId: String,
         doctorId: String,
         negativeButtonId: Int,
         positiveButtonId: Int,
-        status: String
+        status: String,
+        previousStatus: String
     ) {
         val negativeButton = dialog.findViewById<Button>(negativeButtonId)
         val positiveButton = dialog.findViewById<Button>(positiveButtonId)
 
+        dialog.findViewById<TextView>(R.id.nameTextView).text = name
+
         positiveButton.setOnClickListener {
             dialog.dismiss()
 
-            CoroutineScope(Dispatchers.IO).launch {
-                App.dbDoctors.document(doctorId).collection("patients").document(patientId)
-                    .update("status", status).await()
-                App.dbUsers.document(patientId).collection("doctors").document(doctorId)
-                    .update("status", status).await()
+            if (previousStatus == "Unconfirmed" && status == "Cancelled") {
+                CoroutineScope(Dispatchers.IO).launch {
+                    App.dbDoctors.document(doctorId).collection("patients").document(patientId)
+                        .delete().await()
+                    App.dbUsers.document(patientId).collection("doctors").document(doctorId)
+                        .delete().await()
+                }
+            } else {
+                CoroutineScope(Dispatchers.IO).launch {
+                    App.dbDoctors.document(doctorId).collection("patients").document(patientId)
+                        .update("status", status).await()
+                    App.dbUsers.document(patientId).collection("doctors").document(doctorId)
+                        .update("status", status).await()
+                }
             }
         }
         negativeButton.setOnClickListener {
