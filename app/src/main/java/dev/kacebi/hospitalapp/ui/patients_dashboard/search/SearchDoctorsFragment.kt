@@ -16,11 +16,13 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import dev.kacebi.hospitalapp.App
 import dev.kacebi.hospitalapp.R
 import dev.kacebi.hospitalapp.file_size_constants.FileSizeConstants
+import dev.kacebi.hospitalapp.tools.Tools
 import dev.kacebi.hospitalapp.ui.ItemOnClickListener
 import dev.kacebi.hospitalapp.ui.patients_dashboard.doctors.full_information.DoctorInformationActivity
 import dev.kacebi.hospitalapp.ui.patients_dashboard.PatientDashboardActivity
 import dev.kacebi.hospitalapp.ui.patients_dashboard.DoctorOverviewModel
 import dev.kacebi.hospitalapp.ui.patients_dashboard.doctors.list.adapters.DoctorsOverviewsAdapter
+import dev.kacebi.hospitalapp.utils.Utils
 import kotlinx.android.synthetic.main.fragment_search_doctors.*
 import kotlinx.coroutines.*
 import kotlinx.coroutines.tasks.await
@@ -84,7 +86,6 @@ class SearchDoctorsFragment : Fragment() {
 
             jobDoctors = CoroutineScope(Dispatchers.IO).launch {
                 val querySnapshot = App.dbDoctors.get().await()
-                d("outsideXXX", "YES")
                 for (document in querySnapshot.documents) {
                     if (jobDoctors!!.isActive) {
                         if (document.get("full_name").toString().contains(search)) {
@@ -93,13 +94,14 @@ class SearchDoctorsFragment : Fragment() {
                                     doctorId = document.id,
                                     full_name = document["full_name"] as String,
                                     last_name = document["last_name"] as String,
-                                    specialty = document["specialty"] as String
+                                    specialty = document["specialty"] as String,
+                                    working_experience = document["working_experience"] as Long
                                 )
-                            val byteArray =
-                                App.storage.child("/doctor_photos/${document.id}").getBytes(FileSizeConstants.THREE_MEGABYTES)
-                                    .await()
-                            val bitmap = BitmapFactory.decodeByteArray(byteArray, 0, byteArray.size)
-                            doctorOverview.bitmap = bitmap
+//                            val byteArray =
+//                                App.storage.child("/doctor_photos/${document.id}.png").getBytes(FileSizeConstants.THREE_MEGABYTES)
+//                                    .await()
+//                            val bitmap = Utils.byteArrayToBitmap(byteArray)
+//                            doctorOverview.bitmap = bitmap
                             doctorsOverviews.add(doctorOverview)
                         }
                     }

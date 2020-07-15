@@ -41,7 +41,7 @@ class DoctorsOverviewsAdapter(
 //            itemView.doctorOverviewImage.setImageBitmap(doctorOverview.bitmap)
             itemView.doctorOverviewFullName.text = doctorOverview.full_name
             itemView.doctorOverviewSpecialty.text = doctorOverview.specialty
-            itemView.doctorOverviewWorkingExperience.text = "Working Experience: ${doctorOverview.working_experience}"
+            itemView.doctorOverviewWorkingExperience.text = "Working Years: ${doctorOverview.working_experience}"
 
             itemView.setOnClickListener {
                 itemClick.onClick(adapterPosition)

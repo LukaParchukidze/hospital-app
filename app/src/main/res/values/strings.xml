@@ -34,9 +34,7 @@
     <string name="hospital_app">HOSPITAL APP</string>
     <string name="close">Close</string>
     <string name="apply">Apply</string>
-<<<<<<< HEAD
     <string name="birth_date">Birth Date</string>
-=======
     <string name="don_t_cancel">Don\'t Cancel</string>
     <string name="cancel">Cancel</string>
     <string name="cancel_appointment_text">Cancelling the appointment will keep it as a record if it\'s confirmed. Otherwise, it\'ll just be deleted.</string>
@@ -45,5 +43,4 @@
     <string name="confirm_appointment_text">Confirming the appointment will also allow for message transactions.</string>
     <string name="don_t_confirm">Don\'t Confirm</string>
     <string name="confirm">Confirm</string>
->>>>>>> 18ea6fc7c07a7dbaf40b69b3e01187f82ce70461
 </resources>

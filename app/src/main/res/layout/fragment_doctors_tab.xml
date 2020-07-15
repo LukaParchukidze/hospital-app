@@ -10,4 +10,13 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 
+    <ProgressBar
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:id="@+id/progressBar"
+        android:layout_gravity="center"
+        android:indeterminateTint="@color/toolbarColor"
+        android:visibility="gone"
+        />
+
 </FrameLayout>

@@ -9,23 +9,17 @@
     <com.google.android.material.tabs.TabLayout
         android:id="@+id/specialtiesTabLayout"
         app:tabMode="scrollable"
+        android:background="@color/toolbarColor"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:tabIndicatorColor="@android:color/holo_orange_dark"
-        app:layout_constraintTop_toTopOf="parent" >
-        <com.google.android.material.tabs.TabItem
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="TEST"
-            />
-        <com.google.android.material.tabs.TabItem
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="TEST"
-            />
-    </com.google.android.material.tabs.TabLayout>
+        app:tabIndicatorColor="#F4511E"
+        app:layout_constraintTop_toTopOf="parent"
+        app:tabTextColor="@android:color/white"
+        app:tabTextAppearance="@style/TabLayoutTextAppearance"
+        app:tabSelectedTextColor="@android:color/white"
+        />
 
     <androidx.viewpager.widget.ViewPager
         android:id="@+id/doctorsOverviewsViewPager"

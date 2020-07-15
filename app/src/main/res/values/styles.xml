@@ -40,4 +40,12 @@
         <item name="android:listPreferredItemHeightSmall">50dp</item>
     </style>
 
+<!--  TabLayout Text  -->
+    <style name="TabLayoutTextAppearance" parent="TextAppearance.Design.Tab">
+        <item name="textAllCaps">false</item>
+        <item name="android:textAllCaps">false</item>
+        <item name="android:textSize">17sp</item>
+        <item name="android:fontFamily">@font/nexa_light</item>
+    </style>
+
 </resources>

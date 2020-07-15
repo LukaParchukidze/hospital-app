@@ -39,6 +39,7 @@ class DoctorsTabFragment(private val specialty: String) : Fragment() {
     }
 
     private fun setUpDoctorsRecyclerView(itemView: View) {
+        itemView.progressBar.visibility = View.VISIBLE
         itemView.doctorsOverviewsRecyclerView.layoutManager = LinearLayoutManager(context)
         CoroutineScope(Dispatchers.IO).launch {
             val querySnapshot =
@@ -77,6 +78,7 @@ class DoctorsTabFragment(private val specialty: String) : Fragment() {
                     }
                 })
                 itemView.doctorsOverviewsRecyclerView.adapter = adapter
+                itemView.progressBar.visibility = View.GONE
             }
         }
     }
