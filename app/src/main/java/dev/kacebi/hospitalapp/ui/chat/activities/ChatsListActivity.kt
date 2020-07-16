@@ -2,6 +2,7 @@ package dev.kacebi.hospitalapp.ui.chat.activities
 
 import android.os.Bundle
 import android.os.Handler
+import android.util.Log.d
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -17,6 +18,7 @@ import dev.kacebi.hospitalapp.utils.Utils
 import dev.kacebi.hospitalapp.ui.chat.adapters.ChatsListAdapter
 import dev.kacebi.hospitalapp.ui.chat.models.ChatsListItemModel
 import dev.kacebi.hospitalapp.ui.chat.models.LatestMessageModel
+import kotlinx.android.synthetic.main.activity_chat.*
 import kotlinx.android.synthetic.main.activity_chats_list.*
 import kotlinx.android.synthetic.main.spinkit_loader_layout.*
 import kotlinx.android.synthetic.main.toolbar_layout.*
@@ -40,6 +42,11 @@ class ChatsListActivity : AppCompatActivity() {
         toolbar!!.setNavigationOnClickListener {
             onBackPressed()
         }
+        Handler().postDelayed({
+            spinKitContainerView.visibility = View.GONE
+            if (chatsList.isEmpty())
+                isListEmptyTextView.visibility = View.VISIBLE
+        }, 3000)
     }
 
     private fun init() {
@@ -70,6 +77,7 @@ class ChatsListActivity : AppCompatActivity() {
                 }
 
                 override fun onChildAdded(snapshot: DataSnapshot, previousChildName: String?) {
+                    d("snapshotAdded", snapshot.key.toString())
                     CoroutineScope(Dispatchers.IO).launch {
                         val id = snapshot.key!!
                         var name = App.dbUsers.document(id).get().await()["full_name"]
@@ -95,7 +103,6 @@ class ChatsListActivity : AppCompatActivity() {
                         chatsList.add(chat)
                         withContext(Dispatchers.Main) {
                             adapter.notifyItemInserted(chatsList.size - 1)
-                            spinKitContainerView.visibility = View.GONE
                         }
                     }
                 }

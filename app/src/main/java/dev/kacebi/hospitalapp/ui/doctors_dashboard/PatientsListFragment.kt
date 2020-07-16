@@ -94,6 +94,7 @@ class PatientsListFragment : Fragment() {
                 if (querySnapshot == null || querySnapshot.documents.size == 0) {
                     appointments.clear()
                     adapter.notifyDataSetChanged()
+                    itemView!!.isListEmptyTextView.visibility = View.VISIBLE
                 } else {
                     CoroutineScope(Dispatchers.IO).launch {
                         for (document in querySnapshot.documents) {

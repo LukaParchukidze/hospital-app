@@ -9,6 +9,7 @@ import dev.kacebi.hospitalapp.R
 import dev.kacebi.hospitalapp.extensions.setNewColor
 import dev.kacebi.hospitalapp.ui.ItemOnClickListener
 import dev.kacebi.hospitalapp.ui.chat.activities.ChatActivity
+import dev.kacebi.hospitalapp.ui.patients_dashboard.doctors.full_information.DoctorInformationActivity
 import kotlinx.android.synthetic.main.item_doctor_appointment_layout.view.*
 
 class DoctorsAppointmentsAdapter(
@@ -77,6 +78,13 @@ class DoctorsAppointmentsAdapter(
                 val intent = Intent(itemView.context, ChatActivity::class.java).apply {
                     putExtra("id", appointment.doctorId)
                     putExtra("name", appointment.last_name)
+                }
+                itemView.context.startActivity(intent)
+            }
+            itemView.setOnClickListener {
+                val intent = Intent(itemView.context, DoctorInformationActivity::class.java).apply {
+                    putExtra("doctorId", appointment.doctorId)
+                    putExtra("lastName", appointment.last_name)
                 }
                 itemView.context.startActivity(intent)
             }

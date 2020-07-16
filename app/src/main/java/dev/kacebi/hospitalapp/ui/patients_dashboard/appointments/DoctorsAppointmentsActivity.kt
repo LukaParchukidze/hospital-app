@@ -68,6 +68,8 @@ class DoctorsAppointmentsActivity : AppCompatActivity() {
                 if (querySnapshot == null || querySnapshot.documents.size == 0) {
                     appointments.clear()
                     adapter.notifyDataSetChanged()
+                    spinKitContainerView.visibility = View.GONE
+                    isListEmptyTextView.visibility = View.VISIBLE
                 } else {
                     appointments.clear()
                     CoroutineScope(Dispatchers.IO).launch {

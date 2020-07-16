@@ -26,4 +26,16 @@
         layout="@layout/spinkit_loader_layout"
         android:visibility="visible" />
 
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/isListEmptyTextView"
+        android:layout_gravity="center"
+        android:textColor="@android:color/black"
+        android:textSize="17sp"
+        android:visibility="gone"
+        android:text="@string/there_are_no_appointments"
+        android:fontFamily="@font/nexa_bold"
+        />
+
 </FrameLayout>

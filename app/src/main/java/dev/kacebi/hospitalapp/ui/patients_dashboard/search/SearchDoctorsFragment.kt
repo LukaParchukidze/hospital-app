@@ -24,6 +24,7 @@ import dev.kacebi.hospitalapp.ui.patients_dashboard.DoctorOverviewModel
 import dev.kacebi.hospitalapp.ui.patients_dashboard.doctors.list.adapters.DoctorsOverviewsAdapter
 import dev.kacebi.hospitalapp.utils.Utils
 import kotlinx.android.synthetic.main.fragment_search_doctors.*
+import kotlinx.android.synthetic.main.fragment_search_doctors.view.*
 import kotlinx.coroutines.*
 import kotlinx.coroutines.tasks.await
 import java.lang.Runnable
@@ -47,8 +48,8 @@ class SearchDoctorsFragment : Fragment() {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        searchDoctorsEditText.addTextChangedListener(textWatcher)
-        searchDoctorsRecyclerView.layoutManager = LinearLayoutManager(context)
+        view.searchDoctorsEditText.addTextChangedListener(textWatcher)
+        view.searchDoctorsRecyclerView.layoutManager = LinearLayoutManager(context)
         adapter =
             DoctorsOverviewsAdapter(
                 doctorsOverviews,
@@ -88,7 +89,8 @@ class SearchDoctorsFragment : Fragment() {
                 val querySnapshot = App.dbDoctors.get().await()
                 for (document in querySnapshot.documents) {
                     if (jobDoctors!!.isActive) {
-                        if (document.get("full_name").toString().contains(search)) {
+                        val fullName = document.get("full_name").toString()
+                        if (fullName.contains(search, true)) {
                             val doctorOverview =
                                 DoctorOverviewModel(
                                     doctorId = document.id,
@@ -121,7 +123,7 @@ class SearchDoctorsFragment : Fragment() {
             if (workRunnable != null)
                 handler.removeCallbacks(workRunnable!!)
             workRunnable = Runnable { getSearchDoctors(s.toString()) }
-            handler.postDelayed(workRunnable!!, 500)
+            handler.postDelayed(workRunnable!!, 1000)
         }
 
         override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {

@@ -66,5 +66,7 @@
     <string name="news">News</string>
     <string name="specialties">Specialties</string>
     <string name="search_doctor">Search doctor...</string>
+    <string name="there_are_no_messages">There are no messages.</string>
+    <string name="there_are_no_appointments">There are no appointments.</string>
 
 </resources>
