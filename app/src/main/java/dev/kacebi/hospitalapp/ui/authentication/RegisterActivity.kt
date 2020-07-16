@@ -150,7 +150,6 @@ class RegisterActivity : AppCompatActivity(), View.OnClickListener {
         val sdf = SimpleDateFormat(dateFormat, Locale.US)
         selectedDateTextView.text = sdf.format(calendar.time)
         birthDate = selectedDateTextView.text.toString()
-        d("dateTest", birthDate)
     }
 
     private fun register() {

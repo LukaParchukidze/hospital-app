@@ -64,8 +64,6 @@ class ChatActivity : AppCompatActivity() {
 
         name = intent.extras!!.getString("name")!!
 
-        d("activitiyName", name.contains(" ").toString())
-
         Tools.setSupportActionBar(this, name, isLastName = !name.contains(" "), backEnabled = true)
 
         setUpAdapter()

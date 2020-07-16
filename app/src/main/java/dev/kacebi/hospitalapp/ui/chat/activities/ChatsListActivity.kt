@@ -45,8 +45,8 @@ class ChatsListActivity : AppCompatActivity() {
         Handler().postDelayed({
             spinKitContainerView.visibility = View.GONE
             if (chatsList.isEmpty())
-                isListEmptyTextView.visibility = View.VISIBLE
-        }, 3000)
+                isChatListEmptyTextView.visibility = View.VISIBLE
+        }, 5000)
     }
 
     private fun init() {
@@ -77,7 +77,6 @@ class ChatsListActivity : AppCompatActivity() {
                 }
 
                 override fun onChildAdded(snapshot: DataSnapshot, previousChildName: String?) {
-                    d("snapshotAdded", snapshot.key.toString())
                     CoroutineScope(Dispatchers.IO).launch {
                         val id = snapshot.key!!
                         var name = App.dbUsers.document(id).get().await()["full_name"]
@@ -103,6 +102,7 @@ class ChatsListActivity : AppCompatActivity() {
                         chatsList.add(chat)
                         withContext(Dispatchers.Main) {
                             adapter.notifyItemInserted(chatsList.size - 1)
+                            isChatListEmptyTextView.visibility = View.GONE
                         }
                     }
                 }

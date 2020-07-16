@@ -22,9 +22,9 @@ class NewsViewPagerAdapter(private val news: MutableList<NewsModel>,private val 
             .inflate(R.layout.item_news_layout, container, false)
         val model = news[position]
 
-//        Glide.with(itemView.context)
-//            .load(model.bitmap)
-//            .into(itemView!!.newsAdapterImageView)
+        Glide.with(itemView.context)
+            .load(model.bitmap)
+            .into(itemView!!.newsAdapterImageView)
 
         itemView.newsAdapterTitleTextView.text = model.title
         itemView.newsAdapterDescriptionTextView.text = model.description

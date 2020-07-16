@@ -1,6 +1,7 @@
 package dev.kacebi.hospitalapp.ui.patients_dashboard.doctors.list.fragments
 
 import android.content.Intent
+import android.graphics.BitmapFactory
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -9,6 +10,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
 import dev.kacebi.hospitalapp.App
 import dev.kacebi.hospitalapp.R
+import dev.kacebi.hospitalapp.file_size_constants.FileSizeConstants
 import dev.kacebi.hospitalapp.ui.ItemOnClickListener
 import dev.kacebi.hospitalapp.ui.patients_dashboard.DoctorOverviewModel
 import dev.kacebi.hospitalapp.ui.patients_dashboard.PatientDashboardActivity
@@ -53,12 +55,12 @@ class DoctorsTabFragment(private val specialty: String) : Fragment() {
                         specialty = document["specialty"] as String,
                         working_experience = document["working_experience"] as Long
                     )
-//                val byteArray =
-//                    App.storage.child("/doctor_photos/${document.id}.png").getBytes(
-//                        FileSizeConstants.THREE_MEGABYTES
-//                    ).await()
-//                val bitmap = BitmapFactory.decodeByteArray(byteArray, 0, byteArray.size)
-//                doctorOverview.bitmap = bitmap
+                val byteArray =
+                    App.storage.child("/doctor_photos/${document.id}.png").getBytes(
+                        FileSizeConstants.THREE_MEGABYTES
+                    ).await()
+                val bitmap = BitmapFactory.decodeByteArray(byteArray, 0, byteArray.size)
+                doctorOverview.bitmap = bitmap
                 doctorsOverviews.add(doctorOverview)
             }
             withContext(Dispatchers.Main) {

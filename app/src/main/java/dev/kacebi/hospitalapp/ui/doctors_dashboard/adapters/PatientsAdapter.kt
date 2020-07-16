@@ -1,5 +1,6 @@
 package dev.kacebi.hospitalapp.ui.doctors_dashboard.adapters
 
+import android.annotation.SuppressLint
 import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
@@ -41,6 +42,7 @@ class PatientsAdapter(
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         private lateinit var appointment: PatientAppointmentModel
 
+        @SuppressLint("SetTextI18n")
         fun onBind() {
             appointment = appointments[adapterPosition]
 

@@ -20,8 +20,6 @@ import kotlinx.android.synthetic.main.toolbar_layout.*
 
 class DoctorDashboardActivity : AppCompatActivity() {
 
-    private lateinit var toggle: ActionBarDrawerToggle
-
     private lateinit var adapter: PatientsPagerAdapter
     private val fragments = mutableListOf<PatientsListFragment>()
     var currentItem = 0

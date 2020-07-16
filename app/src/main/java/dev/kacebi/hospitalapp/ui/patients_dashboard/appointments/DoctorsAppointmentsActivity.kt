@@ -10,6 +10,7 @@ import dev.kacebi.hospitalapp.file_size_constants.FileSizeConstants
 import dev.kacebi.hospitalapp.tools.Tools
 import dev.kacebi.hospitalapp.utils.Utils
 import dev.kacebi.hospitalapp.ui.ItemOnClickListener
+import kotlinx.android.synthetic.main.activity_chats_list.*
 import kotlinx.android.synthetic.main.activity_doctors_appointments.*
 import kotlinx.android.synthetic.main.spinkit_loader_layout.*
 import kotlinx.android.synthetic.main.toolbar_layout.*
@@ -69,7 +70,7 @@ class DoctorsAppointmentsActivity : AppCompatActivity() {
                     appointments.clear()
                     adapter.notifyDataSetChanged()
                     spinKitContainerView.visibility = View.GONE
-                    isListEmptyTextView.visibility = View.VISIBLE
+                    isDoctorsListEmptyTextView.visibility = View.VISIBLE
                 } else {
                     appointments.clear()
                     CoroutineScope(Dispatchers.IO).launch {
@@ -92,6 +93,7 @@ class DoctorsAppointmentsActivity : AppCompatActivity() {
                         withContext(Dispatchers.Main) {
                             adapter.notifyDataSetChanged()
                             spinKitContainerView.visibility = View.GONE
+                            isDoctorsListEmptyTextView.visibility = View.GONE
                         }
                     }
                 }

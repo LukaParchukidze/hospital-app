@@ -1,5 +1,6 @@
 package dev.kacebi.hospitalapp.ui.patients_dashboard.appointments
 
+import android.annotation.SuppressLint
 import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
@@ -37,6 +38,7 @@ class DoctorsAppointmentsAdapter(
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         private lateinit var appointment: DoctorAppointmentModel
 
+        @SuppressLint("SetTextI18n")
         fun onBind() {
             appointment = appointments[adapterPosition]
             itemView.doctorProfileImageView.setImageBitmap(appointment.bitmap)

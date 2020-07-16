@@ -9,7 +9,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:alpha="0.75"
-        android:background="@mipmap/image6"
+        android:background="@mipmap/navigation_background"
         android:orientation="vertical"
         android:paddingStart="20dp"
         android:paddingTop="10dp">

@@ -239,8 +239,6 @@ class DoctorInformationActivity : AppCompatActivity() {
                 experienceTextView.text = "Experience: " + doctor.working_experience + " Years"
                 phoneNumber1.text = doctor.phone_numbers?.get(0) ?: "NOT AVAILABLE"
                 phoneNumber2.text = doctor.phone_numbers?.get(1) ?: "NOT AVAILABLE"
-
-                d("doctorModel", doctor.toString())
             }
         }
 

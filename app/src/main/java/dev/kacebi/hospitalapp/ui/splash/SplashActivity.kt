@@ -5,7 +5,6 @@ import android.os.Bundle
 import android.os.Handler
 import dev.kacebi.hospitalapp.App
 import dev.kacebi.hospitalapp.R
-import dev.kacebi.hospitalapp.extensions.toggleVisibility
 import dev.kacebi.hospitalapp.tools.Tools
 import dev.kacebi.hospitalapp.ui.authentication.LoginActivity
 import dev.kacebi.hospitalapp.ui.doctors_dashboard.DoctorDashboardActivity

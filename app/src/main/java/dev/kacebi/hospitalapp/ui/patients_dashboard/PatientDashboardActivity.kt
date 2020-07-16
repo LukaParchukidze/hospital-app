@@ -22,8 +22,6 @@ import kotlinx.android.synthetic.main.toolbar_layout.*
 
 class PatientDashboardActivity : AppCompatActivity() {
 
-    private lateinit var toggle: ActionBarDrawerToggle
-
     val homeFragment = HomeFragment()
     val doctorsFragment =
         DoctorsFragment()
@@ -39,6 +37,10 @@ class PatientDashboardActivity : AppCompatActivity() {
         setUpNavigationView()
 
         addFragments()
+    }
+
+    override fun onStart() {
+        super.onStart()
 
         // Get user icon
         Tools.getUserIcon("/patient_photos/", App.dbUsers, this)
@@ -117,13 +119,6 @@ class PatientDashboardActivity : AppCompatActivity() {
             }
             true
         }
-    }
-
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-//        if (toggle.onOptionsItemSelected(item))
-//            return true
-
-        return super.onOptionsItemSelected(item)
     }
 
     fun goToFragment(fragment1: Fragment, fragment2: Fragment, fragment3: Fragment) {

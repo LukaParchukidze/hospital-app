@@ -1,5 +1,6 @@
 package dev.kacebi.hospitalapp.ui.patients_dashboard.doctors.list.adapters
 
+import android.annotation.SuppressLint
 import android.util.Log.d
 import android.view.LayoutInflater
 import android.view.View
@@ -35,10 +36,11 @@ class DoctorsOverviewsAdapter(
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         private lateinit var doctorOverview: DoctorOverviewModel
 
+        @SuppressLint("SetTextI18n")
         fun onBind() {
             doctorOverview = doctorsOverviews[adapterPosition]
 
-//            itemView.doctorOverviewImage.setImageBitmap(doctorOverview.bitmap)
+            itemView.doctorOverviewImage.setImageBitmap(doctorOverview.bitmap)
             itemView.doctorOverviewFullName.text = doctorOverview.full_name
             itemView.doctorOverviewSpecialty.text = doctorOverview.specialty
             itemView.doctorOverviewWorkingExperience.text = "Working Years: ${doctorOverview.working_experience}"

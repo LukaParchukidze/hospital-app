@@ -24,7 +24,6 @@ import dev.kacebi.hospitalapp.ui.patients_dashboard.DoctorOverviewModel
 import dev.kacebi.hospitalapp.ui.patients_dashboard.doctors.list.adapters.DoctorsOverviewsAdapter
 import dev.kacebi.hospitalapp.utils.Utils
 import kotlinx.android.synthetic.main.fragment_search_doctors.*
-import kotlinx.android.synthetic.main.fragment_search_doctors.view.*
 import kotlinx.coroutines.*
 import kotlinx.coroutines.tasks.await
 import java.lang.Runnable
@@ -35,6 +34,8 @@ class SearchDoctorsFragment : Fragment() {
     var itemView: View? = null
     private lateinit var adapter: DoctorsOverviewsAdapter
     private val doctorsOverviews = mutableListOf<DoctorOverviewModel>()
+
+
     private var jobDoctors: Job? = null
 
     override fun onCreateView(
@@ -48,8 +49,8 @@ class SearchDoctorsFragment : Fragment() {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        view.searchDoctorsEditText.addTextChangedListener(textWatcher)
-        view.searchDoctorsRecyclerView.layoutManager = LinearLayoutManager(context)
+        searchDoctorsEditText.addTextChangedListener(textWatcher)
+        searchDoctorsRecyclerView.layoutManager = LinearLayoutManager(context)
         adapter =
             DoctorsOverviewsAdapter(
                 doctorsOverviews,
@@ -89,8 +90,7 @@ class SearchDoctorsFragment : Fragment() {
                 val querySnapshot = App.dbDoctors.get().await()
                 for (document in querySnapshot.documents) {
                     if (jobDoctors!!.isActive) {
-                        val fullName = document.get("full_name").toString()
-                        if (fullName.contains(search, true)) {
+                        if (document.get("full_name").toString().contains(search, true)) {
                             val doctorOverview =
                                 DoctorOverviewModel(
                                     doctorId = document.id,
@@ -99,11 +99,12 @@ class SearchDoctorsFragment : Fragment() {
                                     specialty = document["specialty"] as String,
                                     working_experience = document["working_experience"] as Long
                                 )
-//                            val byteArray =
-//                                App.storage.child("/doctor_photos/${document.id}.png").getBytes(FileSizeConstants.THREE_MEGABYTES)
-//                                    .await()
-//                            val bitmap = Utils.byteArrayToBitmap(byteArray)
-//                            doctorOverview.bitmap = bitmap
+                            val byteArray =
+                                App.storage.child("/doctor_photos/${document.id}.png")
+                                    .getBytes(FileSizeConstants.THREE_MEGABYTES)
+                                    .await()
+                            val bitmap = Utils.byteArrayToBitmap(byteArray)
+                            doctorOverview.bitmap = bitmap
                             doctorsOverviews.add(doctorOverview)
                         }
                     }

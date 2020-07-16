@@ -27,15 +27,14 @@
         android:visibility="visible" />
 
     <TextView
+        android:id="@+id/isDoctorsListEmptyTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/isListEmptyTextView"
         android:layout_gravity="center"
+        android:fontFamily="@font/nexa_light"
+        android:text="@string/there_are_no_appointments"
         android:textColor="@android:color/black"
         android:textSize="17sp"
-        android:visibility="gone"
-        android:text="@string/there_are_no_appointments"
-        android:fontFamily="@font/nexa_bold"
-        />
+        android:visibility="gone" />
 
 </FrameLayout>

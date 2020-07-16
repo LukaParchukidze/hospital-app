@@ -35,7 +35,6 @@
                 android:ellipsize="end"
                 android:fontFamily="@font/nexa_light"
                 android:maxLines="1"
-                android:text="Mr. Right"
                 android:textColor="@android:color/black"
                 android:textSize="16sp" />
 
@@ -47,7 +46,6 @@
                 android:ellipsize="end"
                 android:fontFamily="@font/nexa_light"
                 android:maxLines="1"
-                android:text="Right Light Night Knight Sight "
                 android:textSize="16sp" />
 
         </LinearLayout>

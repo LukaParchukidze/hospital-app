@@ -27,7 +27,6 @@
             android:background="@drawable/message_to_background"
             android:maxWidth="280dp"
             android:padding="10dp"
-            android:text="ანდროიდის ბუთქემფი"
             android:textColor="@android:color/black"
             android:textSize="18sp" />
 

@@ -13,7 +13,9 @@ import dev.kacebi.hospitalapp.tools.Tools
 import dev.kacebi.hospitalapp.utils.Utils
 import dev.kacebi.hospitalapp.ui.ItemOnClickListener
 import dev.kacebi.hospitalapp.ui.doctors_dashboard.adapters.PatientsAdapter
+import kotlinx.android.synthetic.main.fragment_patients_list.*
 import kotlinx.android.synthetic.main.fragment_patients_list.view.*
+import kotlinx.android.synthetic.main.fragment_patients_list.view.isPatientsListEmptyTextView
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -94,7 +96,7 @@ class PatientsListFragment : Fragment() {
                 if (querySnapshot == null || querySnapshot.documents.size == 0) {
                     appointments.clear()
                     adapter.notifyDataSetChanged()
-                    itemView!!.isListEmptyTextView.visibility = View.VISIBLE
+                    itemView!!.isPatientsListEmptyTextView.visibility = View.VISIBLE
                 } else {
                     CoroutineScope(Dispatchers.IO).launch {
                         for (document in querySnapshot.documents) {
@@ -114,6 +116,7 @@ class PatientsListFragment : Fragment() {
                             appointments.add(appointment)
                             withContext(Dispatchers.Main) {
                                 adapter.notifyDataSetChanged()
+                                isPatientsListEmptyTextView.visibility = View.GONE
                             }
                         }
                     }

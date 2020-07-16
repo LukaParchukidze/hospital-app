@@ -11,11 +11,13 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import dev.kacebi.hospitalapp.App
 import dev.kacebi.hospitalapp.R
 import dev.kacebi.hospitalapp.extensions.autoScroll
+import dev.kacebi.hospitalapp.file_size_constants.FileSizeConstants
 import dev.kacebi.hospitalapp.ui.ItemOnClickListener
 import dev.kacebi.hospitalapp.ui.patients_dashboard.PatientDashboardActivity
 import dev.kacebi.hospitalapp.ui.patients_dashboard.home.news.NewsActivity
 import dev.kacebi.hospitalapp.ui.patients_dashboard.home.news.NewsModel
 import dev.kacebi.hospitalapp.ui.patients_dashboard.home.news.NewsViewPagerAdapter
+import dev.kacebi.hospitalapp.utils.Utils
 import kotlinx.android.synthetic.main.activity_patient_dashboard.*
 import kotlinx.android.synthetic.main.fragment_doctors.*
 import kotlinx.android.synthetic.main.fragment_home.*
@@ -58,15 +60,14 @@ class HomeFragment : Fragment() {
                 val news = App.dbNews.document(item.id).get().await().toObject(
                     NewsModel::class.java
                 )
-//                val byteArray = App.storage.child(news!!.image_uri).getBytes(FileSizeConstants.THREE_MEGABYTES).await()
-//                val bitmap = Utils.byteArrayToBitmap(byteArray)
-//                news.bitmap = bitmap
+                val byteArray = App.storage.child(news!!.image_uri).getBytes(FileSizeConstants.THREE_MEGABYTES).await()
+                val bitmap = Utils.byteArrayToBitmap(byteArray)
+                news.bitmap = bitmap
                 if (news != null) {
                     newsModel.add(news)
                 }
             }
 
-            d("newsModel", "$newsModel")
             newsAdapter =
                 NewsViewPagerAdapter(
                     newsModel, this@HomeFragment
@@ -87,7 +88,6 @@ class HomeFragment : Fragment() {
 
     fun startNewsActivity(position: Int) {
         val intent = Intent((activity as PatientDashboardActivity), NewsActivity::class.java)
-        d("position","Start position: $position")
         intent.putExtra("position",position)
         activity!!.startActivity(intent)
     }
@@ -102,9 +102,9 @@ class HomeFragment : Fragment() {
                 val specialty = App.dbSpecialties.document(specialtyQDS.id).get().await().toObject(
                     SpecialtyModel::class.java
                 )!!
-//                val byteArray = App.storage.child(specialty.uri).getBytes(FileSizeConstants.THREE_MEGABYTES).await()
-//                val bitmap = Utils.byteArrayToBitmap(byteArray)
-//                specialty.bitmap = bitmap
+                val byteArray = App.storage.child(specialty.uri).getBytes(FileSizeConstants.THREE_MEGABYTES).await()
+                val bitmap = Utils.byteArrayToBitmap(byteArray)
+                specialty.bitmap = bitmap
                 specialties.add(specialty)
             }
             adapter =
