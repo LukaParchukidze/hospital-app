@@ -7,8 +7,7 @@
     android:orientation="vertical"
     tools:context=".ui.patients_dashboard.home.news.NewsActivity">
 
-    <include
-        layout="@layout/toolbar_layout" />
+    <include layout="@layout/toolbar_layout" />
 
     <FrameLayout
         android:id="@+id/loader"
@@ -45,9 +44,10 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_marginTop="10dp"
-                android:fontFamily="@font/nexa_bold"
+                android:fontFamily="@font/nexa_light"
                 android:gravity="center"
                 android:lineSpacingExtra="1dp"
+                android:textColor="@android:color/black"
                 android:textSize="20sp" />
 
             <FrameLayout
@@ -73,9 +73,10 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
                 android:fontFamily="@font/nexa_light"
-                android:lineSpacingExtra="1dp"
+                android:lineSpacingExtra="1.2dp"
                 android:paddingStart="40dp"
                 android:paddingEnd="40dp"
+                android:textColor="@android:color/black"
                 android:textSize="16sp" />
 
             <FrameLayout
@@ -88,9 +89,11 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="30dp"
+                    android:fontFamily="@font/nexa_light"
                     android:gravity="start"
                     android:paddingStart="40dp"
                     android:paddingEnd="40dp"
+                    android:textColor="@android:color/black"
                     android:textSize="16sp"
                     android:textStyle="bold|italic" />
 

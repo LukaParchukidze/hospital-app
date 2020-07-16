@@ -22,7 +22,9 @@
         <activity
             android:name=".ui.chat.activities.ChatsListActivity"
             android:screenOrientation="portrait"
-            tools:ignore="LockedOrientationActivity" />
+            tools:ignore="LockedOrientationActivity">
+
+        </activity>
         <activity
             android:name=".ui.patients_dashboard.appointments.DoctorsAppointmentsActivity"
             android:screenOrientation="portrait"
@@ -62,7 +64,9 @@
         <activity
             android:name=".ui.chat.activities.ChatActivity"
             android:screenOrientation="portrait"
-            tools:ignore="LockedOrientationActivity" />
+            tools:ignore="LockedOrientationActivity">
+
+        </activity>
         <activity
             android:name=".ui.patients_dashboard.PatientDashboardActivity"
             android:windowSoftInputMode="adjustPan">

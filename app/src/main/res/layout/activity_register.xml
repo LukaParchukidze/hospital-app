@@ -59,7 +59,7 @@
                     android:layout_marginTop="15dp"
                     android:fontFamily="@font/nexa_bold"
                     android:gravity="center"
-                    android:text="Upload Image"
+                    android:text="@string/upload_image"
                     android:textSize="13sp"
                     android:textStyle="bold" />
 
@@ -81,8 +81,8 @@
                 android:maxLines="1"
                 android:paddingStart="15dp"
                 android:paddingEnd="15dp"
-                android:textColor="@color/edittexts_text_color"
-                android:textColorHint="@color/edittexts_hint_color"
+                android:textColor="@color/editTextTextColor"
+                android:textColorHint="@color/editTextHintColor"
                 android:textSize="@dimen/edittexts_text_size" />
 
             <EditText
@@ -100,8 +100,8 @@
                 android:maxLines="1"
                 android:paddingStart="15dp"
                 android:paddingEnd="15dp"
-                android:textColor="@color/edittexts_text_color"
-                android:textColorHint="@color/edittexts_hint_color"
+                android:textColor="@color/editTextTextColor"
+                android:textColorHint="@color/editTextHintColor"
                 android:textSize="@dimen/edittexts_text_size" />
 
             <EditText
@@ -119,8 +119,8 @@
                 android:maxLines="1"
                 android:paddingStart="15dp"
                 android:paddingEnd="15dp"
-                android:textColor="@color/edittexts_text_color"
-                android:textColorHint="@color/edittexts_hint_color"
+                android:textColor="@color/editTextTextColor"
+                android:textColorHint="@color/editTextHintColor"
                 android:textSize="@dimen/edittexts_text_size" />
 
             <EditText
@@ -138,8 +138,8 @@
                 android:maxLines="1"
                 android:paddingStart="15dp"
                 android:paddingEnd="15dp"
-                android:textColor="@color/edittexts_text_color"
-                android:textColorHint="@color/edittexts_hint_color" />
+                android:textColor="@color/editTextTextColor"
+                android:textColorHint="@color/editTextHintColor" />
 
             <EditText
                 android:id="@+id/rePasswordRegisterEditText"
@@ -156,8 +156,8 @@
                 android:maxLines="1"
                 android:paddingStart="15dp"
                 android:paddingEnd="15dp"
-                android:textColor="@color/edittexts_text_color"
-                android:textColorHint="@color/edittexts_hint_color" />
+                android:textColor="@color/editTextTextColor"
+                android:textColorHint="@color/editTextHintColor" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -177,7 +177,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginStart="15dp"
                         android:fontFamily="@font/nexa_light"
-                        android:text="Birth Date"
+                        android:text="@string/birth_date"
                         android:textSize="16sp" />
 
                     <TextView
@@ -205,7 +205,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginStart="6dp"
                         android:fontFamily="@font/nexa_light"
-                        android:text="Gender"
+                        android:text="@string/gender"
                         android:textSize="16sp" />
 
                     <RadioGroup
@@ -221,7 +221,7 @@
                             android:layout_height="wrap_content"
                             android:buttonTint="@color/colorPrimary"
                             android:fontFamily="@font/nexa_light"
-                            android:text="Male"
+                            android:text="@string/male"
                             android:textSize="15sp" />
 
                         <RadioButton
@@ -230,7 +230,7 @@
                             android:layout_height="wrap_content"
                             android:buttonTint="@color/colorPrimary"
                             android:fontFamily="@font/nexa_light"
-                            android:text="Female"
+                            android:text="@string/female"
                             android:textSize="15sp" />
 
                     </RadioGroup>

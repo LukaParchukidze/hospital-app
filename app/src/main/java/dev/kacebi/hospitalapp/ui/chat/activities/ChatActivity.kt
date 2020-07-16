@@ -11,12 +11,10 @@ import android.view.View
 import android.view.animation.AnimationUtils
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.net.toFile
 import androidx.documentfile.provider.DocumentFile
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.*
-import com.google.firebase.storage.FirebaseStorage
 import dev.kacebi.hospitalapp.App
 import dev.kacebi.hospitalapp.R
 import dev.kacebi.hospitalapp.file_size_constants.FileSizeConstants
@@ -32,8 +30,6 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.tasks.await
 import kotlinx.coroutines.withContext
-import java.io.File
-import java.net.URI
 
 class ChatActivity : AppCompatActivity() {
 
@@ -220,7 +216,7 @@ class ChatActivity : AppCompatActivity() {
                     toLatestMessagesDatabase.setValue(chatMessage)
                 }
             } else {
-                Toast.makeText(this, "The file size limit is 2 MB", Toast.LENGTH_LONG).show()
+                Tools.showToast(this,"The file size limit is 2 MB")
             }
         }
     }

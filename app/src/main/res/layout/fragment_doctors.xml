@@ -8,18 +8,17 @@
 
     <com.google.android.material.tabs.TabLayout
         android:id="@+id/specialtiesTabLayout"
-        app:tabMode="scrollable"
-        android:background="@color/toolbarColor"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="@color/toolbarColor"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:tabIndicatorColor="#F4511E"
         app:layout_constraintTop_toTopOf="parent"
-        app:tabTextColor="@android:color/white"
-        app:tabTextAppearance="@style/TabLayoutTextAppearance"
+        app:tabIndicatorColor="#F4511E"
+        app:tabMode="scrollable"
         app:tabSelectedTextColor="@android:color/white"
-        />
+        app:tabTextAppearance="@style/TabLayoutTextAppearance"
+        app:tabTextColor="@android:color/white" />
 
     <androidx.viewpager.widget.ViewPager
         android:id="@+id/doctorsOverviewsViewPager"
@@ -31,14 +30,13 @@
         app:layout_constraintTop_toBottomOf="@id/specialtiesTabLayout" />
 
     <ProgressBar
+        android:id="@+id/doctorsOverviewsProgressBar"
         android:layout_width="50dp"
         android:layout_height="50dp"
-        android:id="@+id/doctorsOverviewsProgressBar"
-        app:layout_constraintTop_toTopOf="@id/doctorsOverviewsViewPager"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
         android:visibility="gone"
-        />
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@id/doctorsOverviewsViewPager" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

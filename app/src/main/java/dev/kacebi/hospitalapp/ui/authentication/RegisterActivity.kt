@@ -117,7 +117,7 @@ class RegisterActivity : AppCompatActivity(), View.OnClickListener {
         chooserImageView.visibility = View.GONE
         uploadedImageCircleImageView.visibility = View.VISIBLE
         uploadImageTextView.text = getString(R.string.change_image)
-        uploadImageTextView.setNewColor(this, R.color.edittexts_hint_color)
+        uploadImageTextView.setNewColor(this, R.color.editTextHintColor)
         uploadImageTextView.error = null
     }
 
@@ -299,11 +299,10 @@ class RegisterActivity : AppCompatActivity(), View.OnClickListener {
                 Glide.with(this).load(imageUri).into(uploadedImageCircleImageView)
                 changeUIAfterImageUpload()
             } else {
-                Toast.makeText(
+                Tools.showToast(
                     this@RegisterActivity,
-                    "The file size limit is 3 MB",
-                    Toast.LENGTH_LONG
-                ).show()
+                    "The file size limit is 3 MB"
+                )
                 imageUri = null
             }
             takenImage = null

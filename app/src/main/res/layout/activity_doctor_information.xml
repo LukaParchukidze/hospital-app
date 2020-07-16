@@ -2,29 +2,27 @@
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/doctorInformationRoot"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:id="@+id/doctorInformationRoot"
     android:orientation="vertical"
     tools:context=".ui.patients_dashboard.doctors.full_information.DoctorInformationActivity">
 
-    <include
-        layout="@layout/toolbar_layout" />
+    <include layout="@layout/toolbar_layout" />
 
     <ProgressBar
+        android:id="@+id/progressBar"
         android:layout_width="50dp"
         android:layout_height="50dp"
-        android:id="@+id/progressBar"
         android:layout_gravity="center"
-        android:visibility="gone"
-        android:indeterminateTint="@color/colorPrimary"
-        />
+        android:indeterminateTint="@color/messagePrimaryColor"
+        android:visibility="gone" />
 
     <ScrollView
         android:id="@+id/scrollView"
         android:layout_width="match_parent"
-        android:layout_marginTop="?attr/actionBarSize"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:layout_marginTop="?attr/actionBarSize">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -42,27 +40,27 @@
                     android:layout_width="200dp"
                     android:layout_height="200dp"
                     android:layout_gravity="center_horizontal"
-                    app:civ_border_color="@android:color/black"
-                    app:civ_border_width="2dp" />
+                    app:civ_border_color="@color/dialogCancelGray"
+                    app:civ_border_width="1dp" />
 
                 <TextView
                     android:id="@+id/fullNameTextView"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal"
-                    android:fontFamily="@font/nexa_light"
                     android:layout_marginTop="10dp"
                     android:layout_marginBottom="5dp"
+                    android:fontFamily="@font/nexa_light"
                     android:textColor="@android:color/black"
                     android:textSize="20sp" />
 
                 <TextView
-                    android:fontFamily="@font/nexa_light"
                     android:id="@+id/specialtyTextView"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal"
                     android:layout_marginBottom="20dp"
+                    android:fontFamily="@font/nexa_light"
                     android:textSize="14sp" />
 
                 <LinearLayout
@@ -80,10 +78,13 @@
                         android:drawableTint="@android:color/white"
                         android:fontFamily="@font/nexa_light"
                         android:paddingHorizontal="20dp"
-                        android:text="Book"
+                        android:text="@string/book"
                         android:textAllCaps="false"
                         android:textColor="@android:color/white"
                         android:textSize="20sp" />
+
+                    <!--                   android:background="@drawable/button_positive_background"
+                     android:background="@drawable/button_message_doctor_information_background" -->
 
                     <Button
                         android:id="@+id/messageDoctorButton"
@@ -92,12 +93,12 @@
                         android:layout_gravity="center_horizontal"
                         android:layout_marginStart="20dp"
                         android:layout_weight="50"
-                        android:background="@drawable/button_positive_background"
+                        android:background="@drawable/button_message_doctor_information_background"
                         android:drawableStart="@drawable/ic_messages"
                         android:drawableTint="@android:color/white"
                         android:fontFamily="@font/nexa_light"
                         android:paddingHorizontal="20dp"
-                        android:text="Message"
+                        android:text="@string/message"
                         android:textAllCaps="false"
                         android:textColor="@android:color/white"
                         android:textSize="20sp" />
@@ -118,37 +119,38 @@
                         android:padding="20dp">
 
                         <TextView
-                            android:fontFamily="@font/nexa_light"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginBottom="15dp"
-                            android:text="Personal Information"
+                            android:fontFamily="@font/nexa_light"
+                            android:text="@string/personal_information"
                             android:textColor="@android:color/black"
-                            android:textSize="20sp" />
+                            android:textSize="20sp"
+                            android:textStyle="bold" />
 
                         <TextView
                             android:id="@+id/experienceTextView"
-                            android:textColor="@android:color/black"
-                            android:fontFamily="@font/nexa_light"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:fontFamily="@font/nexa_light"
+                            android:textColor="@android:color/black"
                             android:textSize="15sp" />
 
                         <TextView
-                            android:textColor="@android:color/black"
-                            android:fontFamily="@font/nexa_light"
                             android:id="@+id/ageTextView"
-                            android:layout_marginVertical="5dp"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:layout_marginVertical="5dp"
+                            android:fontFamily="@font/nexa_light"
+                            android:textColor="@android:color/black"
                             android:textSize="15sp" />
 
                         <TextView
-                            android:textColor="@android:color/black"
-                            android:fontFamily="@font/nexa_light"
                             android:id="@+id/emailTextView"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:fontFamily="@font/nexa_light"
+                            android:textColor="@android:color/black"
                             android:textSize="15sp" />
 
                     </LinearLayout>
@@ -170,20 +172,21 @@
                         android:padding="20dp">
 
                         <TextView
-                            android:fontFamily="@font/nexa_light"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginBottom="15dp"
-                            android:text="Timing"
+                            android:fontFamily="@font/nexa_light"
+                            android:text="@string/timing"
                             android:textColor="@android:color/black"
-                            android:textSize="20sp" />
+                            android:textSize="20sp"
+                            android:textStyle="bold" />
 
                         <TextView
-                            android:textColor="@android:color/black"
-                            android:fontFamily="@font/nexa_light"
                             android:id="@+id/workingHoursTextView"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:fontFamily="@font/nexa_light"
+                            android:textColor="@android:color/black"
                             android:textSize="15sp" />
 
                     </LinearLayout>
@@ -204,20 +207,21 @@
                         android:padding="20dp">
 
                         <TextView
-                            android:fontFamily="@font/nexa_light"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginBottom="15dp"
-                            android:text="About"
+                            android:fontFamily="@font/nexa_light"
+                            android:text="@string/about"
                             android:textColor="@android:color/black"
-                            android:textSize="20sp" />
+                            android:textSize="20sp"
+                            android:textStyle="bold" />
 
                         <TextView
-                            android:textColor="@android:color/black"
-                            android:fontFamily="@font/nexa_light"
                             android:id="@+id/aboutTextView"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:fontFamily="@font/nexa_light"
+                            android:textColor="@android:color/black"
                             android:textSize="15sp" />
 
                     </LinearLayout>
@@ -239,31 +243,32 @@
                         android:padding="20dp">
 
                         <TextView
-                            android:fontFamily="@font/nexa_light"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginBottom="15dp"
-                            android:text="Phone"
+                            android:fontFamily="@font/nexa_light"
+                            android:text="@string/phone"
                             android:textColor="@android:color/black"
-                            android:textSize="20sp" />
+                            android:textSize="20sp"
+                            android:textStyle="bold" />
 
                         <TextView
                             android:id="@+id/phoneNumber1"
-                            android:textColor="@android:color/black"
-                            android:fontFamily="@font/nexa_light"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginBottom="15dp"
-                            android:text="+012 345 6789"
+                            android:fontFamily="@font/nexa_light"
+                            android:text="@string/phone_example"
+                            android:textColor="@android:color/black"
                             android:textSize="15sp" />
 
                         <TextView
                             android:id="@+id/phoneNumber2"
-                            android:textColor="@android:color/black"
-                            android:fontFamily="@font/nexa_light"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="+012 345 6789"
+                            android:fontFamily="@font/nexa_light"
+                            android:text="@string/phone_example"
+                            android:textColor="@android:color/black"
                             android:textSize="15sp" />
 
                     </LinearLayout>

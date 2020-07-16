@@ -46,4 +46,25 @@
     <string name="confirm">Confirm</string>
     <string name="agree">Agree</string>
     <string name="disagree">Disagree</string>
+    <string name="personal_information">Personal Information</string>
+    <string name="timing">Timing</string>
+    <string name="about">About</string>
+    <string name="phone">Phone</string>
+    <string name="book">Book</string>
+    <string name="phone_example">+012 345 6789</string>
+    <string name="aa">Aa</string>
+    <string name="full_name">Full Name</string>
+    <string name="save_changes">Save Changes</string>
+    <string name="upload_image">Upload Image</string>
+    <string name="gender">Gender</string>
+    <string name="male">Male</string>
+    <string name="female">Female</string>
+    <string name="be_healthy">Be healthy</string>
+    <string name="choose_option">Choose Option</string>
+    <string name="take_photo">Take Photo</string>
+    <string name="choose_image_from_gallery">Choose image from gallery</string>
+    <string name="news">News</string>
+    <string name="specialties">Specialties</string>
+    <string name="search_doctor">Search doctor...</string>
+
 </resources>

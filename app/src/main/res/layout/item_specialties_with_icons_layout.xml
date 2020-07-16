@@ -25,9 +25,9 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="15dp"
             android:fontFamily="@font/nexa_light"
+            android:text="Audiologist"
             android:textColor="@android:color/black"
-            android:textSize="17sp"
-            android:text="Audiologist"/>
+            android:textSize="17sp" />
 
     </LinearLayout>
 

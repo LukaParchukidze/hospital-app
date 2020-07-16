@@ -13,18 +13,17 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="@drawable/message_from_background"
-        android:textIsSelectable="true"
-        android:padding="10dp"
         android:maxWidth="280dp"
+        android:padding="10dp"
         android:textColor="@android:color/white"
+        android:textIsSelectable="true"
         android:textSize="18sp" />
 
     <TextView
         android:id="@+id/tvDateFrom"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="5dp"
-        />
+        android:layout_marginTop="5dp" />
 
 
 </LinearLayout>

@@ -29,7 +29,7 @@
             android:id="@+id/chatContainer"
             android:layout_width="match_parent"
             android:layout_height="50dp"
-            android:layout_marginHorizontal="20dp"
+            android:layout_marginHorizontal="10dp"
             android:layout_marginBottom="10dp"
             android:background="@drawable/fields_background"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -38,36 +38,37 @@
 
             <EditText
                 android:id="@+id/etChat"
-                android:layout_width="250dp"
+                android:layout_width="220dp"
                 android:layout_height="50dp"
                 android:background="@android:color/transparent"
-                android:hint="Aa"
-                android:paddingHorizontal="10dp"
+                android:hint="@string/aa"
                 android:paddingVertical="3dp"
+                android:paddingStart="15dp"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toStartOf="@+id/btnChatImage"
-                app:layout_constraintStart_toStartOf="parent" />
-            
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
             <ImageButton
                 android:id="@+id/btnChatImage"
-                android:layout_width="50dp"
+                android:layout_width="30dp"
                 android:layout_height="50dp"
+                android:layout_marginEnd="15dp"
                 android:background="@android:color/transparent"
-                android:tint="@color/dialogPositiveColor"
+                android:tint="@color/messagePrimaryColor"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@+id/btnChat"
-                app:layout_constraintStart_toEndOf="@id/etChat"
                 app:srcCompat="@drawable/ic_insert_photo" />
 
             <ImageButton
                 android:id="@+id/btnChat"
-                android:layout_width="50dp"
+                android:layout_width="30dp"
                 android:layout_height="50dp"
+                android:layout_marginEnd="15dp"
                 android:background="@android:color/transparent"
-                android:tint="@color/dialogPositiveColor"
+                android:tint="@color/messagePrimaryColor"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@id/btnChatImage"
+                app:layout_constraintTop_toTopOf="parent"
                 app:srcCompat="@drawable/ic_send" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
@@ -82,7 +83,7 @@
         android:layout_height="50dp"
         android:layout_gravity="center"
         android:indeterminate="true"
-        android:indeterminateTint="@color/colorPrimaryDark"
+        android:indeterminateTint="@color/messagePrimaryColor"
         android:visibility="visible" />
 
 </FrameLayout>

@@ -38,7 +38,7 @@
         android:layout_gravity="center|bottom"
         android:layout_marginBottom="30dp"
         android:fontFamily="@font/nexa_light"
-        android:text="Be healthy"
+        android:text="@string/be_healthy"
         android:textColor="#00c4cc"
         android:textSize="20sp" />
 

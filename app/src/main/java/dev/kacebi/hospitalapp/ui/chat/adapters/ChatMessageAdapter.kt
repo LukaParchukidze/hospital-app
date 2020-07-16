@@ -112,7 +112,7 @@ class ChatMessageAdapter(
                 return
             }
 
-            itemView.ivChatImageFrom.setImageResource(R.drawable.ic_launcher_background)
+            itemView.ivChatImageFrom.setImageResource(R.mipmap.loader)
             CoroutineScope(Dispatchers.IO).launch {
                 val byteArray =
                     storageRef.child(message.imageUri).getBytes(FileSizeConstants.TWO_MEGABYTES)
@@ -148,7 +148,7 @@ class ChatMessageAdapter(
                 return
             }
 
-            itemView.ivChatImageTo.setImageResource(R.drawable.ic_launcher_background)
+            itemView.ivChatImageTo.setImageResource(R.mipmap.loader)
             CoroutineScope(Dispatchers.IO).launch {
                 val byteArray =
                     storageRef.child(message.imageUri).getBytes(FileSizeConstants.TWO_MEGABYTES)

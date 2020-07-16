@@ -13,7 +13,7 @@
         android:layout_marginStart="20dp"
         android:layout_marginTop="10dp"
         android:fontFamily="@font/nexa_light"
-        android:text="News"
+        android:text="@string/news"
         android:textColor="@android:color/black"
         android:textSize="16sp"
         app:layout_constraintStart_toStartOf="parent"
@@ -32,7 +32,7 @@
             android:layout_width="50dp"
             android:layout_height="50dp"
             android:layout_gravity="center"
-            android:indeterminateTint="@color/toolbarColor"
+            android:indeterminateTint="@color/messagePrimaryColor"
             android:visibility="gone" />
 
         <androidx.viewpager.widget.ViewPager
@@ -59,7 +59,7 @@
         android:layout_marginStart="20dp"
         android:layout_marginTop="10dp"
         android:fontFamily="@font/nexa_light"
-        android:text="Specialties"
+        android:text="@string/specialties"
         android:textColor="@android:color/black"
         android:textSize="16sp"
         app:layout_constraintStart_toStartOf="parent"
@@ -77,7 +77,7 @@
             android:layout_width="50dp"
             android:layout_height="50dp"
             android:layout_gravity="center"
-            android:indeterminateTint="@color/toolbarColor"
+            android:indeterminateTint="@color/messagePrimaryColor"
             android:visibility="gone" />
 
         <androidx.recyclerview.widget.RecyclerView

@@ -138,7 +138,7 @@ object Tools {
         snackbar.setActionTextColor(
             ContextCompat.getColor(
                 context,
-                R.color.snackbar_action_text_color
+                R.color.snackbarActionTextColor
             )
         )
 

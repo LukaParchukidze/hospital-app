@@ -15,7 +15,6 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
         android:padding="10dp"
-        android:text="10:00 - 15: 00"
         android:textColor="@android:color/black"
         android:textSize="15sp" />
 

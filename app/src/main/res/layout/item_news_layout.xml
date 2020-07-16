@@ -44,15 +44,15 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="end"
-            android:gravity="center_vertical"
             android:layout_marginBottom="10dp"
             android:background="@drawable/read_more_background"
+            android:gravity="center_vertical"
             android:paddingStart="10dp"
             android:paddingEnd="10dp"
             android:paddingBottom="2dp"
-            android:textSize="12sp"
             android:text="@string/read_more"
-            android:textColor="#FFFFFF" />
+            android:textColor="#FFFFFF"
+            android:textSize="12sp" />
 
     </LinearLayout>
 

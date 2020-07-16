@@ -3,9 +3,9 @@
     <color name="colorPrimary">#43d3e8</color>
     <color name="colorPrimaryDark">#0E58AE</color>
     <color name="colorAccent">#03DAC5</color>
-    <color name="edittexts_text_color">#373737</color>
-    <color name="edittexts_hint_color">#878787</color>
-    <color name="snackbar_action_text_color">#FF0700</color>
+    <color name="editTextTextColor">#373737</color>
+    <color name="editTextHintColor">#878787</color>
+    <color name="snackbarActionTextColor">#FF0700</color>
     <color name="colorDivider">#ECECEC</color>
     <color name="errorColor">#FF0700</color>
     <color name="pinkColor">#E84372</color>
@@ -18,4 +18,6 @@
     <color name="statusCancelled">#FF443F</color>
     <color name="navigationViewColor">#265275</color>
     <color name="dialogCancelGray">#FFBEBEBE</color>
+    <color name="messagePrimaryColor">#2795F6</color>
+    <color name="messageSecondaryColor">#E8E8E8</color>
 </resources>
