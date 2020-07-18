@@ -46,6 +46,6 @@
 აპლიკაციაში გამოყენებული ბიბლიოთეკების სრული ჩამონათვალი შეგიძლიათ იხილოთ **build.gradle** ფაილში.
 
 ## ლიცენზია
-აპლიკაცია ექვემდებარება MIT-ის ლიცენზიის წესებს:
+აპლიკაცია ექვემდებარება ქვემოთ მოცემულ ლიცენზიის წესებს:
 
-* MIT ლიცენზია ([LICENSE](https://github.com/LukaParchukidze/hospital-app/blob/master/LICENSE "Copy of the MIT license"))
+* ლიცენზია ([LICENSE](https://github.com/LukaParchukidze/hospital-app/blob/master/LICENSE "Copy of the Custom Proprietary License"))
